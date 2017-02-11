@@ -22,8 +22,7 @@ export class HeroView implements OnInit {
 		HeroService.getHeroes().then( heroes => this.heroes = heroes );
 	}
 	
-	public updateCurrentHero( hero ) {
-		console.log( 'Handled', hero );
+	public updateCurrentHero( hero: Hero ) {
 		this.currentHero = hero;
 	}
 }

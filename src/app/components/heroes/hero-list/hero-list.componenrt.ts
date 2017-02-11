@@ -16,10 +16,9 @@ export class HeroListComponent {
 	public heroes: Hero[];
 	
 	@Output()
-	public heroChanged: EventEmitter<Hero> = new EventEmitter();
+	public onSelectHero = new EventEmitter<Hero>();
 	
 	public changeHero( hero: Hero ) {
-		this.heroChanged.emit( hero );
-		console.log( 'Emitted' );
+		this.onSelectHero.emit( hero );
 	}
 }
