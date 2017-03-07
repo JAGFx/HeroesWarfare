@@ -21,4 +21,5 @@ export class HeroListComponent {
 	public changeHero( hero: Hero ) {
 		this.onSelectHero.emit( hero );
 	}
+	
 }

@@ -1,0 +1,25 @@
+<h2 >My Heroes</h2 >
+<form [formGroup]="form" name="formHero" (ngSubmit)="validate()" >
+	<div *ngIf="feedback.asError" >
+		<h5 >{{ feedback.type }}</h5 >
+		<p >{{ feedback.message }}</p >
+	</div >
+	
+	<label for="hero_name" >Nom: </label >
+	<input type="text" name="nom" id="hero_name" formControlName="name" >
+	
+	<label for="hero_attack" ></label >
+	<input type="number" step="1" min="0" name="attack" id="hero_attack" formControlName="attack" >
+	
+	<label for="hero_dodge" ></label >
+	<input type="number" step="1" min="0" name="dodge" id="hero_dodge" formControlName="dodge" >
+	
+	<label for="hero_damage" ></label >
+	<input type="number" step="1" min="0" name="damage" id="hero_damage" formControlName="damage" >
+	
+	<label for="hero_hp" ></label >
+	<input type="number" step="1" min="0" name="hp" id="hero_hp" formControlName="hp" >
+	
+	<button type="button" (click)="reset()" >Annuler</button >
+	<button type="submit" >Valider</button >
+</form >

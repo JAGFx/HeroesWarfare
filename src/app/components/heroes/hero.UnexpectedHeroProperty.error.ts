@@ -5,7 +5,11 @@ import { Hero } from './hero';
 
 export class UnexpectedHeroProperty extends Error {
 	
-	public static readonly ERR_NAME: string = "UnexpectedHeroProperty";
+	public static readonly ERR_NAME: string = "Unexpected Hero Property";
+	public static readonly MESSAGES         = {
+		MIN_VALUE: ': Min value of properties ( Attack, Dodge, Damage & HP ) must be > ',
+		MAX_SUM:   ': Max sum of properties ( Attack, Dodge, Damage & HP ) must be <= ',
+	};
 	public static readonly PROPERTIES       = {
 		ATTACK: 'Attack',
 		DODGE:  'Dodge',
@@ -13,9 +17,12 @@ export class UnexpectedHeroProperty extends Error {
 		HP:     'HP'
 	};
 	
-	constructor( property: string ) {
+	constructor( property: string, message: string = UnexpectedHeroProperty.MESSAGES.MAX_SUM ) {
 		super( UnexpectedHeroProperty.ERR_NAME );
 		this.name    = UnexpectedHeroProperty.ERR_NAME;
-		this.message = UnexpectedHeroProperty.ERR_NAME + ' for ' + property + ': Max sum of properties ( Attack, Dodge, Damage & HP ) must be <= ' + Hero.MAX_SUM;
+		this.message = UnexpectedHeroProperty.ERR_NAME + ' for ' + property + message;
+		this.message += ( message === UnexpectedHeroProperty.MESSAGES.MIN_VALUE )
+			? Hero.MIN_VALUE.toString()
+			: Hero.MAX_SUM.toString();
 	}
 }

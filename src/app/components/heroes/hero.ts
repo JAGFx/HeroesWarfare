@@ -4,26 +4,29 @@ import { UnexpectedHeroProperty as HeroException } from './hero.UnexpectedHeroPr
  */
 
 export class Hero {
-	static readonly MAX_SUM: number = 40;
+	public static readonly MIN_VALUE: number      = 1;
+	public static readonly MAX_SUM: number        = 40;
+	private static readonly NB_PROPERTIES: number = 4;
 	
 	private _id: number;
 	private _name: string;
-	private _attack: number = Hero.MAX_SUM / 4;
-	private _dodge: number  = Hero.MAX_SUM / 4;
-	private _damage: number = Hero.MAX_SUM / 4;
-	private _hp: number     = Hero.MAX_SUM / 4;
+	private _attack: number                       = Hero.MAX_SUM / Hero.NB_PROPERTIES;
+	private _dodge: number                        = Hero.MAX_SUM / Hero.NB_PROPERTIES;
+	private _damage: number                       = Hero.MAX_SUM / Hero.NB_PROPERTIES;
+	private _hp: number                           = Hero.MAX_SUM / Hero.NB_PROPERTIES;
 	
 	constructor( id: number, name: string, attack?: number, dodge?: number, damage?: number, hp?: number ) {
 		this._id    = id;
 		this._name  = name;
-		this.attack = attack;
-		this.dodge  = dodge;
-		this.damage = damage;
-		this.hp     = hp;
+		this.attack = attack || Hero.MAX_SUM / Hero.NB_PROPERTIES;
+		this.dodge  = dodge || Hero.MAX_SUM / Hero.NB_PROPERTIES;
+		this.damage = damage || Hero.MAX_SUM / Hero.NB_PROPERTIES;
+		this.hp     = hp || Hero.MAX_SUM / Hero.NB_PROPERTIES;
 	}
 	
 	private validateCharacteristics(): boolean {
-		console.log( this.name, this.attack, this.dodge, this.damage, this.hp );
+		//console.log( this );
+		//console.log( this.name, this.attack, this.dodge, this.damage, this.hp );
 		return ( this._attack + this._dodge + this._damage + this._hp ) <= Hero.MAX_SUM;
 	}
 	
@@ -64,30 +67,74 @@ export class Hero {
 	}
 	
 	public set attack( value: number ) {
-		this._attack = value;
+		const oldValue: number = this._attack;
+		this._attack           = value;
 		
-		if ( !this.validateCharacteristics() )
+		if ( this._attack < Hero.MIN_VALUE ) {
+			this._attack = oldValue;
+			throw new HeroException(
+				HeroException.PROPERTIES.ATTACK,
+				HeroException.MESSAGES.MIN_VALUE
+			);
+		}
+		
+		if ( !this.validateCharacteristics() ) {
+			this._attack = oldValue;
 			throw new HeroException( HeroException.PROPERTIES.ATTACK );
+		}
 	}
 	
 	public set dodge( value: number ) {
-		this._dodge = value;
+		const oldValue: number = this._dodge;
+		this._dodge            = value;
 		
-		if ( !this.validateCharacteristics() )
+		if ( this._dodge < Hero.MIN_VALUE ) {
+			this._dodge = oldValue;
+			throw new HeroException(
+				HeroException.PROPERTIES.DODGE,
+				HeroException.MESSAGES.MIN_VALUE
+			);
+		}
+		
+		if ( !this.validateCharacteristics() ) {
+			this._dodge = oldValue;
 			throw new HeroException( HeroException.PROPERTIES.DODGE );
+		}
 	}
 	
 	public set damage( value: number ) {
-		this._damage = value;
+		const oldValue: number = this._damage;
+		this._damage           = value;
 		
-		if ( !this.validateCharacteristics() )
+		if ( this._damage < Hero.MIN_VALUE ) {
+			this._damage = oldValue;
+			throw new HeroException(
+				HeroException.PROPERTIES.DAMAGE,
+				HeroException.MESSAGES.MIN_VALUE
+			);
+		}
+		
+		if ( !this.validateCharacteristics() ) {
+			this._damage = oldValue;
 			throw new HeroException( HeroException.PROPERTIES.DAMAGE );
+		}
 	}
 	
 	public set hp( value: number ) {
-		this._hp = value;
+		const oldValue: number = this._hp;
+		this._hp               = value;
 		
-		if ( !this.validateCharacteristics() )
+		if ( this._hp < Hero.MIN_VALUE ) {
+			this._hp = oldValue;
+			throw new HeroException(
+				HeroException.PROPERTIES.HP,
+				HeroException.MESSAGES.MIN_VALUE
+			);
+		}
+		
+		if ( !this.validateCharacteristics() ) {
+			this._hp = oldValue;
 			throw new HeroException( HeroException.PROPERTIES.HP );
+		}
 	}
 }
