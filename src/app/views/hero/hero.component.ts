@@ -14,12 +14,17 @@ export class HeroView implements OnInit {
 	public heroes: Hero[];
 	public currentHero: Hero;
 	
+	constructor( private _heroesService: HeroService ) {
+	}
+	
 	public ngOnInit(): void {
 		this.getHeroes();
 	}
 	
 	public getHeroes(): void {
-		HeroService.getHeroes().then( heroes => this.heroes = heroes );
+		this._heroesService
+		    .getHeroes()
+		    .then( heroes => this.heroes = heroes );
 	}
 	
 	public updateCurrentHero( hero: Hero ) {

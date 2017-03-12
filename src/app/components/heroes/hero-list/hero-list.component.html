@@ -1,9 +1,9 @@
 <h2 >My Heroes</h2 >
-<button (click)="changeHero( currentHero )" >Ajouter</button >
+<a uiSref="heroes_new" >New</a >
 <ul class="heroes" >
 	<li *ngFor="let hero of heroes"  >
 		<span class="badge" >{{hero.id}}</span > {{hero.name}}
-		<button (click)="changeHero( hero )" >Détail</button>
-		<a href="#/heroes/{{ hero.id }}/edit" >Edit</a >
+		<button (click)="changeHero( hero )" >Show</button >
+		<a uiSref="heroes_edit" [uiParams]="{ id: hero.id }" >Edit</a >
 	</li >
 </ul >

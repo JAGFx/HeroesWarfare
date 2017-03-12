@@ -1,24 +1,93 @@
 import { Hero } from '../components/heroes/hero';
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+
 /**
  * Created by SMITHE on 10-Feb-17.
  */
 
-
 @Injectable()
 export class HeroService {
-	static getHeroes(): Promise<Hero[]> {
-		return Promise.resolve( [
-			{ id: 11, name: 'Mr. Nice', attack: 9, dodge: 20, damage: 1, hp: 10 },
-			{ id: 12, name: 'Narco', attack: 8, dodge: 19, damage: 2, hp: 9 },
-			{ id: 13, name: 'Bombasto', attack: 7, dodge: 18, damage: 3, hp: 8 },
-			{ id: 14, name: 'Celeritas', attack: 6, dodge: 17, damage: 4, hp: 7 },
-			{ id: 15, name: 'Magneta', attack: 5, dodge: 16, damage: 5, hp: 6 },
-			{ id: 16, name: 'RubberMan', attack: 4, dodge: 15, damage: 6, hp: 5 },
-			{ id: 17, name: 'Dynama', attack: 3, dodge: 14, damage: 7, hp: 4 },
-			{ id: 18, name: 'Dr IQ', attack: 2, dodge: 13, damage: 8, hp: 3 },
-			{ id: 19, name: 'Magma', attack: 1, dodge: 12, damage: 9, hp: 2 },
-			{ id: 20, name: 'Tornado', attack: 0, dodge: 11, damage: 10, hp: 1 }
-		] );
+	private static readonly BASE_PATH = 'api/heroes';
+	
+	private _headers = new Headers( { 'Content-Type': 'application/json' } );
+	/*private _http;*/
+	
+	/**
+	 *
+	 * @param _http
+	 */
+	constructor( private _http: Http ) {
+	}
+	
+	/**
+	 *
+	 * @returns {Promise<Hero[]>}
+	 */
+	public getHeroes(): Promise<Hero[]> {
+		return this._http.get( HeroService.BASE_PATH )
+		           .toPromise()
+		           .then( response => response.json().data as Hero[] )
+		           .catch( this.handleError );
+	}
+	
+	/**
+	 *
+	 * @param id
+	 * @returns {Promise<Hero>}
+	 */
+	public getHero( id: number ): Promise<Hero> {
+		return this._http.get( HeroService.BASE_PATH + '/' + id )
+		           .toPromise()
+		           .then( response => response.json().data as Hero )
+		           .catch( this.handleError );
+	}
+	
+	/**
+	 *
+	 * @param hero
+	 * @returns {Promise<Hero>}
+	 */
+	public putHero( hero: Hero ): Promise<Hero> {
+		console.log( hero.serialize() );
+		return this._http.put( HeroService.BASE_PATH + '/' + hero.id, hero.serialize(), { headers: this._headers } )
+		           .toPromise()
+		           .then( () => hero )
+		           .catch( this.handleError );
+	}
+	
+	/**
+	 *
+	 * @param hero
+	 * @returns {Promise<Hero>}
+	 */
+	public postHero( hero: Hero ): Promise<Hero> {
+		return this._http.post( HeroService.BASE_PATH + '/' + hero.id, hero.serialize(), { headers: this._headers } )
+		           .toPromise()
+		           .then( res => res.json().data )
+		           .catch( this.handleError );
+	}
+	
+	/**
+	 *
+	 * @param hero
+	 * @returns {Promise<void>}
+	 */
+	public deleteHero( hero: Hero ): Promise<void> {
+		return this._http.delete( HeroService.BASE_PATH + '/' + hero.id, { headers: this._headers } )
+		           .toPromise()
+		           .then( () => null )
+		           .catch( this.handleError );
+	}
+	
+	/**
+	 *
+	 * @param error
+	 * @returns {Promise<never>}
+	 */
+	private handleError( error: any ): Promise<any> {
+		console.error( 'An error occurred', error ); // for demo purposes only
+		return Promise.reject( error.message || error );
 	}
 }

@@ -8,20 +8,45 @@ export class Hero {
 	public static readonly MAX_SUM: number        = 40;
 	private static readonly NB_PROPERTIES: number = 4;
 	
-	private _id: number;
+	private _id: string;
 	private _name: string;
-	private _attack: number                       = Hero.MAX_SUM / Hero.NB_PROPERTIES;
-	private _dodge: number                        = Hero.MAX_SUM / Hero.NB_PROPERTIES;
-	private _damage: number                       = Hero.MAX_SUM / Hero.NB_PROPERTIES;
-	private _hp: number                           = Hero.MAX_SUM / Hero.NB_PROPERTIES;
+	private _attack: number = Hero.MAX_SUM / Hero.NB_PROPERTIES;
+	private _dodge: number  = Hero.MAX_SUM / Hero.NB_PROPERTIES;
+	private _damage: number = Hero.MAX_SUM / Hero.NB_PROPERTIES;
+	private _hp: number     = Hero.MAX_SUM / Hero.NB_PROPERTIES;
 	
-	constructor( id: number, name: string, attack?: number, dodge?: number, damage?: number, hp?: number ) {
-		this._id    = id;
-		this._name  = name;
+	constructor( id?: string, name?: string, attack?: number, dodge?: number, damage?: number, hp?: number ) {
+		this._id    = id || Hero.generateUUID();
+		this._name  = name || '';
 		this.attack = attack || Hero.MAX_SUM / Hero.NB_PROPERTIES;
 		this.dodge  = dodge || Hero.MAX_SUM / Hero.NB_PROPERTIES;
 		this.damage = damage || Hero.MAX_SUM / Hero.NB_PROPERTIES;
 		this.hp     = hp || Hero.MAX_SUM / Hero.NB_PROPERTIES;
+	}
+	
+	public copyFrom( hero: Hero ) {
+		this._attack = 0;
+		this._dodge  = 0;
+		this._damage = 0;
+		this._hp     = 0;
+		
+		this.id     = hero.id;
+		this.name   = hero.name;
+		this.attack = hero.attack;
+		this.dodge  = hero.dodge;
+		this.damage = hero.damage;
+		this.hp     = hero.hp;
+	}
+	
+	public serialize(): any {
+		return {
+			id:     this.id,
+			name:   this.name,
+			attack: this.attack,
+			dodge:  this.dodge,
+			damage: this.damage,
+			hp:     this.hp
+		};
 	}
 	
 	private validateCharacteristics(): boolean {
@@ -30,9 +55,14 @@ export class Hero {
 		return ( this._attack + this._dodge + this._damage + this._hp ) <= Hero.MAX_SUM;
 	}
 	
+	public static generateUUID(): string {
+		return Math.random().toString( 16 ).substring( 2, 15 ) +
+			Math.random().toString( 16 ).substring( 2, 15 );
+	}
+	
 	// ----------------------------------------------------------------------- GETTERS
 	
-	public get id(): number {
+	public get id(): string {
 		return this._id;
 	}
 	
@@ -58,7 +88,7 @@ export class Hero {
 	
 	// ----------------------------------------------------------------------- SETTERS
 	
-	public set id( value: number ) {
+	public set id( value: string ) {
 		this._id = value;
 	}
 	
