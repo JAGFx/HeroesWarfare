@@ -52,6 +52,7 @@ export class HeroFormComponent extends BaseFormComponent {
 	}
 	
 	protected updateForm() {
+		console.log( 'Update', this.hero.attack );
 		this.form.patchValue( {
 			name:   this.hero.name,
 			attack: this.hero.attack,

@@ -1,5 +1,4 @@
 import { BaseEntity } from './base-entity';
-import { UnexpectedWarfareEntityProperty } from './base-entity-warfare-exception';
 /**
  * Created by SMITHE on 13-Mar-17.
  */
@@ -12,13 +11,6 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 	protected _dodge: number;
 	protected _damage: number;
 	protected _hp: number;
-	
-	constructor( id?: string, name?: string ) {
-		super();
-		
-		this._id   = id || BaseEntityWarfare.generateUUID();
-		this._name = name || '';
-	}
 	
 	public copyFrom( entity: BaseEntityWarfare ) {
 		this._attack = 0;
@@ -60,39 +52,33 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 		return this._attack + this._dodge + this._damage + this._hp;
 	}
 	
+	public abstract getMaxValue(): number;
+	
+	public abstract getMinValue(): number;
+	
+	public abstract getMaxSum(): number;
+	
 	// ----------------------------------------------------------------------- GETTERS
 	
-	public get name(): string {
-		return this._name;
-	}
+	public abstract get name(): string ;
 	
-	abstract get attack(): number {
-		return this._attack;
-	}
+	public abstract get attack(): number ;
 	
-	abstract get dodge(): number {
-		return this._dodge;
-	}
+	public abstract get dodge(): number ;
 	
-	abstract get damage(): number {
-		return this._damage;
-	}
+	public abstract get damage(): number ;
 	
-	abstract get hp(): number {
-		return this._hp;
-	}
+	public abstract get hp(): number;
 	
 	// ----------------------------------------------------------------------- SETTERS
 	
-	public set name( value: string ) {
-		this._name = value;
-	}
+	public abstract set name( value: string ) ;
 	
-	abstract set attack( value: number );
+	public abstract set attack( value: number ) ;
 	
-	abstract set dodge( value: number );
+	public abstract set dodge( value: number );
 	
-	abstract set damage( value: number );
+	public abstract set damage( value: number ) ;
 	
-	abstract set hp( value: number );
+	public abstract set hp( value: number );
 }
