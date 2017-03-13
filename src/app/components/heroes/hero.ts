@@ -58,10 +58,14 @@ export class Hero {
 			this.hp === hero.hp
 	}
 	
-	private validateCharacteristics(): boolean {
+	private validateProperties(): boolean {
 		//console.log( this );
 		//console.log( this.name, this.attack, this.dodge, this.damage, this.hp );
-		return ( this._attack + this._dodge + this._damage + this._hp ) <= Hero.MAX_SUM;
+		return ( this.sumProperties() ) <= Hero.MAX_SUM;
+	}
+	
+	public sumProperties(): number {
+		return this._attack + this._dodge + this._damage + this._hp;
 	}
 	
 	public static generateUUID(): string {
@@ -117,7 +121,7 @@ export class Hero {
 			);
 		}
 		
-		if ( !this.validateCharacteristics() ) {
+		if ( !this.validateProperties() ) {
 			this._attack = oldValue;
 			throw new HeroException( HeroException.PROPERTIES.ATTACK );
 		}
@@ -135,7 +139,7 @@ export class Hero {
 			);
 		}
 		
-		if ( !this.validateCharacteristics() ) {
+		if ( !this.validateProperties() ) {
 			this._dodge = oldValue;
 			throw new HeroException( HeroException.PROPERTIES.DODGE );
 		}
@@ -153,7 +157,7 @@ export class Hero {
 			);
 		}
 		
-		if ( !this.validateCharacteristics() ) {
+		if ( !this.validateProperties() ) {
 			this._damage = oldValue;
 			throw new HeroException( HeroException.PROPERTIES.DAMAGE );
 		}
@@ -171,7 +175,7 @@ export class Hero {
 			);
 		}
 		
-		if ( !this.validateCharacteristics() ) {
+		if ( !this.validateProperties() ) {
 			this._hp = oldValue;
 			throw new HeroException( HeroException.PROPERTIES.HP );
 		}

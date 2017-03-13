@@ -2,9 +2,9 @@
  * Created by emsm on 12/03/2017.
  */
 
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { Hero } from '../hero';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { UnexpectedHeroProperty as HeroException } from '../hero.UnexpectedHeroProperty.error';
 import { BaseFormComponent } from '../../commons/base-form';
 
@@ -14,6 +14,7 @@ import { BaseFormComponent } from '../../commons/base-form';
 } )
 
 export class HeroFormComponent extends BaseFormComponent {
+	public HERO_MAX_SUM = Hero.MAX_SUM;
 		
 	constructor( fb: FormBuilder ) {
 		super();
