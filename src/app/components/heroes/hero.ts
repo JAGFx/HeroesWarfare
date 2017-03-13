@@ -1,113 +1,35 @@
-import { UnexpectedHeroProperty as HeroException } from './hero.UnexpectedHeroProperty.error';
+import { BaseEntityWarfare } from '../commons/base-entity-warfare';
+import { UnexpectedWarfareEntityProperty } from '../commons/base-entity-warfare-exception';
 /**
  * Created by SMITHE on 10-Feb-17.
  */
 
-export class Hero {
+export class Hero extends BaseEntityWarfare {
 	public static readonly MIN_VALUE: number      = 1;
 	public static readonly MAX_SUM: number        = 40;
-	private static readonly NB_PROPERTIES: number = 4;
 	
-	private _id: string;
-	private _name: string;
-	private _attack: number = Hero.MAX_SUM / Hero.NB_PROPERTIES;
-	private _dodge: number  = Hero.MAX_SUM / Hero.NB_PROPERTIES;
-	private _damage: number = Hero.MAX_SUM / Hero.NB_PROPERTIES;
-	private _hp: number     = Hero.MAX_SUM / Hero.NB_PROPERTIES;
+	protected _id: string;
+	protected _attack: number = Hero.MAX_SUM / Hero.NB_PROPERTIES;
+	protected _dodge: number  = Hero.MAX_SUM / Hero.NB_PROPERTIES;
+	protected _damage: number = Hero.MAX_SUM / Hero.NB_PROPERTIES;
+	protected _hp: number     = Hero.MAX_SUM / Hero.NB_PROPERTIES;
 	
 	constructor( id?: string, name?: string, attack?: number, dodge?: number, damage?: number, hp?: number ) {
-		this._id    = id || Hero.generateUUID();
-		this._name  = name || '';
+		super( id, name );
+		
 		this.attack = attack || Hero.MAX_SUM / Hero.NB_PROPERTIES;
 		this.dodge  = dodge || Hero.MAX_SUM / Hero.NB_PROPERTIES;
 		this.damage = damage || Hero.MAX_SUM / Hero.NB_PROPERTIES;
 		this.hp     = hp || Hero.MAX_SUM / Hero.NB_PROPERTIES;
 	}
 	
-	public copyFrom( hero: Hero ) {
-		this._attack = 0;
-		this._dodge  = 0;
-		this._damage = 0;
-		this._hp     = 0;
-		
-		this.id     = hero.id;
-		this.name   = hero.name;
-		this.attack = hero.attack;
-		this.dodge  = hero.dodge;
-		this.damage = hero.damage;
-		this.hp     = hero.hp;
-	}
-	
-	public serialize(): any {
-		return {
-			id:     this.id,
-			name:   this.name,
-			attack: this.attack,
-			dodge:  this.dodge,
-			damage: this.damage,
-			hp:     this.hp
-		};
-	}
-	
-	public equal( hero: Hero ): boolean {
-		return this.id === hero.id &&
-			this.name === hero.name &&
-			this.attack === hero.attack &&
-			this.dodge === hero.dodge &&
-			this.damage === hero.damage &&
-			this.hp === hero.hp
-	}
-	
-	private validateProperties(): boolean {
+	protected validateProperties(): boolean {
 		//console.log( this );
 		//console.log( this.name, this.attack, this.dodge, this.damage, this.hp );
 		return ( this.sumProperties() ) <= Hero.MAX_SUM;
 	}
 	
-	public sumProperties(): number {
-		return this._attack + this._dodge + this._damage + this._hp;
-	}
-	
-	public static generateUUID(): string {
-		return Math.random().toString( 16 ).substring( 2, 15 ) +
-			Math.random().toString( 16 ).substring( 2, 15 );
-	}
-	
-	// ----------------------------------------------------------------------- GETTERS
-	
-	public get id(): string {
-		return this._id;
-	}
-	
-	public get name(): string {
-		return this._name;
-	}
-	
-	public get attack(): number {
-		return this._attack;
-	}
-	
-	public get dodge(): number {
-		return this._dodge;
-	}
-	
-	public get damage(): number {
-		return this._damage;
-	}
-	
-	public get hp(): number {
-		return this._hp;
-	}
-	
 	// ----------------------------------------------------------------------- SETTERS
-	
-	public set id( value: string ) {
-		this._id = value;
-	}
-	
-	public set name( value: string ) {
-		this._name = value;
-	}
 	
 	public set attack( value: number ) {
 		const oldValue: number = this._attack;
@@ -115,15 +37,15 @@ export class Hero {
 		
 		if ( this._attack < Hero.MIN_VALUE ) {
 			this._attack = oldValue;
-			throw new HeroException(
-				HeroException.PROPERTIES.ATTACK,
-				HeroException.MESSAGES.MIN_VALUE
+			throw new UnexpectedWarfareEntityProperty<Hero>(
+				UnexpectedWarfareEntityProperty.PROPERTIES.DODGE,
+				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
 			);
 		}
 		
 		if ( !this.validateProperties() ) {
 			this._attack = oldValue;
-			throw new HeroException( HeroException.PROPERTIES.ATTACK );
+			throw new UnexpectedWarfareEntityProperty<Hero>( UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK );
 		}
 	}
 	
@@ -133,15 +55,15 @@ export class Hero {
 		
 		if ( this._dodge < Hero.MIN_VALUE ) {
 			this._dodge = oldValue;
-			throw new HeroException(
-				HeroException.PROPERTIES.DODGE,
-				HeroException.MESSAGES.MIN_VALUE
+			throw new UnexpectedWarfareEntityProperty<Hero>(
+				UnexpectedWarfareEntityProperty.PROPERTIES.DODGE,
+				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
 			);
 		}
 		
 		if ( !this.validateProperties() ) {
 			this._dodge = oldValue;
-			throw new HeroException( HeroException.PROPERTIES.DODGE );
+			throw new UnexpectedWarfareEntityProperty<Hero>( UnexpectedWarfareEntityProperty.PROPERTIES.DODGE );
 		}
 	}
 	
@@ -151,15 +73,15 @@ export class Hero {
 		
 		if ( this._damage < Hero.MIN_VALUE ) {
 			this._damage = oldValue;
-			throw new HeroException(
-				HeroException.PROPERTIES.DAMAGE,
-				HeroException.MESSAGES.MIN_VALUE
+			throw new UnexpectedWarfareEntityProperty<Hero>(
+				UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE,
+				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
 			);
 		}
 		
 		if ( !this.validateProperties() ) {
 			this._damage = oldValue;
-			throw new HeroException( HeroException.PROPERTIES.DAMAGE );
+			throw new UnexpectedWarfareEntityProperty<Hero>( UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE );
 		}
 	}
 	
@@ -169,15 +91,15 @@ export class Hero {
 		
 		if ( this._hp < Hero.MIN_VALUE ) {
 			this._hp = oldValue;
-			throw new HeroException(
-				HeroException.PROPERTIES.HP,
-				HeroException.MESSAGES.MIN_VALUE
+			throw new UnexpectedWarfareEntityProperty<Hero>(
+				UnexpectedWarfareEntityProperty.PROPERTIES.HP,
+				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
 			);
 		}
 		
 		if ( !this.validateProperties() ) {
 			this._hp = oldValue;
-			throw new HeroException( HeroException.PROPERTIES.HP );
+			throw new UnexpectedWarfareEntityProperty<Hero>( UnexpectedWarfareEntityProperty.PROPERTIES.HP );
 		}
 	}
 }

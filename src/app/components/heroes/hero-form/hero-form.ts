@@ -5,7 +5,7 @@
 import { Component } from '@angular/core';
 import { Hero } from '../hero';
 import { FormBuilder, Validators } from '@angular/forms';
-import { UnexpectedHeroProperty as HeroException } from '../hero.UnexpectedHeroProperty.error';
+import { UnexpectedWarfareEntityProperty as HeroException } from '../../commons/base-entity-warfare-exception'
 import { BaseFormComponent } from '../../commons/base-form';
 
 @Component( {
