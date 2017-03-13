@@ -1,49 +1,38 @@
 import { BaseEntityWarfare } from '../commons/base-entity-warfare';
 import { UnexpectedWarfareEntityProperty } from '../commons/base-entity-warfare-exception';
 /**
- * Created by SMITHE on 10-Feb-17.
+ * Created by emsm on 13/03/2017.
  */
 
-export class Hero extends BaseEntityWarfare {
-	public static readonly MIN_VALUE: number      = 1;
-	public static readonly MAX_SUM: number        = 40;
+export class Weapons extends BaseEntityWarfare {
+	public static readonly MIN_VALUE: number = -5;
+	public static readonly MAX_VALUE: number = 5;
+	public static readonly MAX_SUM: number   = 0;
 	
 	protected _name: string;
-	protected _attack: number = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
-	protected _dodge: number  = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
-	protected _damage: number = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
-	protected _hp: number     = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
+	protected _attack: number = Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
+	protected _dodge: number  = Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
+	protected _damage: number = Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
+	protected _hp: number     = Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
 	
 	constructor( id?: string, name?: string, attack?: number, dodge?: number, damage?: number, hp?: number ) {
 		super();
 		
-		this._id    = id || Hero.generateUUID();
+		this._id    = id || Weapons.generateUUID();
 		this._name  = name || '';
-		this.attack = attack || Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
-		this.dodge  = dodge || Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
-		this.damage = damage || Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
-		this.hp     = hp || Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
+		this.attack = attack || Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
+		this.dodge  = dodge || Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
+		this.damage = damage || Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
+		this.hp     = hp || Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
 	}
 	
 	protected validateProperties(): boolean {
-		//console.log( this );
-		//console.log( this.name, this.attack, this.dodge, this.damage, this.hp );
-		return ( this.sumProperties() ) <= Hero.MAX_SUM;
+		return this.sumProperties() === Weapons.MAX_SUM;
 	}
 	
+	
 	protected checkProperty( current, nextValue, property: string ): any {
-		if ( nextValue < Hero.MIN_VALUE ) {
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				property,
-				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
-			);
-		}
-		
-		if ( !this.validateProperties() )
-			throw new UnexpectedWarfareEntityProperty( this, property );
-		
-		return nextValue;
+		return null;
 	}
 	
 	public getMaxValue(): number {
@@ -51,35 +40,35 @@ export class Hero extends BaseEntityWarfare {
 	}
 	
 	public getMinValue(): number {
-		return Hero.MIN_VALUE;
+		return null;
 	}
 	
 	public getMaxSum(): number {
-		return Hero.MAX_SUM;
+		return null;
 	}
 	
 	// ----------------------------------------------------------------------- GETTERS
 	
 	public get name(): string {
-		return this._name;
+		return null;
 	}
 	
 	public get attack(): number {
-		return this._attack;
+		return null;
 	}
 	
 	public get dodge(): number {
-		return this._dodge;
+		return null;
 	}
 	
 	public get damage(): number {
-		return this._damage;
+		return null;
 	}
 	
 	public get hp(): number {
-		return this._hp;
+		return null;
 	}
-
+	
 	// ----------------------------------------------------------------------- SETTERS
 	
 	public set name( value: string ) {
@@ -88,10 +77,9 @@ export class Hero extends BaseEntityWarfare {
 	
 	public set attack( value: number ) {
 		const oldValue: number = this._attack;
-		//this._attack           = this.checkProperty( this._attack, value, UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK );
 		this._attack           = value;
 		
-		if ( this._attack < Hero.MIN_VALUE ) {
+		if ( this._attack < Weapons.MIN_VALUE ) {
 			this._attack = oldValue;
 			throw new UnexpectedWarfareEntityProperty(
 				this,
@@ -100,24 +88,40 @@ export class Hero extends BaseEntityWarfare {
 			);
 		}
 		
+		if ( this._attack > Weapons.MAX_VALUE ) {
+			this._attack = oldValue;
+			throw new UnexpectedWarfareEntityProperty(
+				this,
+				UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK,
+				UnexpectedWarfareEntityProperty.MESSAGES.MAX_VALUE
+			);
+		}
+		
 		if ( !this.validateProperties() ) {
 			this._attack = oldValue;
 			throw new UnexpectedWarfareEntityProperty( this, UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK );
 		}
-		
 	}
 	
 	public set dodge( value: number ) {
 		const oldValue: number = this._dodge;
-		//this._dodge            = this.checkProperty( this._dodge, value, UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK );
 		this._dodge            = value;
 		
-		if ( this._dodge < Hero.MIN_VALUE ) {
+		if ( this._dodge < Weapons.MIN_VALUE ) {
 			this._dodge = oldValue;
 			throw new UnexpectedWarfareEntityProperty(
 				this,
 				UnexpectedWarfareEntityProperty.PROPERTIES.DODGE,
 				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
+			);
+		}
+		
+		if ( this._dodge > Weapons.MAX_VALUE ) {
+			this._dodge = oldValue;
+			throw new UnexpectedWarfareEntityProperty(
+				this,
+				UnexpectedWarfareEntityProperty.PROPERTIES.DODGE,
+				UnexpectedWarfareEntityProperty.MESSAGES.MAX_VALUE
 			);
 		}
 		
@@ -129,15 +133,23 @@ export class Hero extends BaseEntityWarfare {
 	
 	public set damage( value: number ) {
 		const oldValue: number = this._damage;
-		//this._damage           = this.checkProperty( this._damage, value, UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE );
 		this._damage           = value;
 		
-		if ( this._damage < Hero.MIN_VALUE ) {
+		if ( this._damage < Weapons.MIN_VALUE ) {
 			this._damage = oldValue;
 			throw new UnexpectedWarfareEntityProperty(
 				this,
 				UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE,
 				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
+			);
+		}
+		
+		if ( this._damage > Weapons.MAX_VALUE ) {
+			this._damage = oldValue;
+			throw new UnexpectedWarfareEntityProperty(
+				this,
+				UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE,
+				UnexpectedWarfareEntityProperty.MESSAGES.MAX_VALUE
 			);
 		}
 		
@@ -149,15 +161,23 @@ export class Hero extends BaseEntityWarfare {
 	
 	public set hp( value: number ) {
 		const oldValue: number = this._hp;
-		//this._hp               = this.checkProperty( this._hp, value, UnexpectedWarfareEntityProperty.PROPERTIES.HP);
 		this._hp               = value;
 		
-		if ( this._hp < Hero.MIN_VALUE ) {
+		if ( this._hp < Weapons.MIN_VALUE ) {
 			this._hp = oldValue;
 			throw new UnexpectedWarfareEntityProperty(
 				this,
 				UnexpectedWarfareEntityProperty.PROPERTIES.HP,
 				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
+			);
+		}
+		
+		if ( this._hp > Weapons.MAX_VALUE ) {
+			this._hp = oldValue;
+			throw new UnexpectedWarfareEntityProperty(
+				this,
+				UnexpectedWarfareEntityProperty.PROPERTIES.HP,
+				UnexpectedWarfareEntityProperty.MESSAGES.MAX_VALUE
 			);
 		}
 		

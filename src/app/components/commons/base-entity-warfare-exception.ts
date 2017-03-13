@@ -8,6 +8,7 @@ export class UnexpectedWarfareEntityProperty extends Error {
 	public static readonly ERR_NAME: string = "Unexpected Entity Property";
 	public static readonly MESSAGES         = {
 		MIN_VALUE: ': Min value of properties ( Attack, Dodge, Damage & HP ) must be > ',
+		MAX_VALUE: ': Max value of properties ( Attack, Dodge, Damage & HP ) must be <= ',
 		MAX_SUM:   ': Max sum of properties ( Attack, Dodge, Damage & HP ) must be <= ',
 	};
 	public static readonly PROPERTIES       = {
