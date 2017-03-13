@@ -25,7 +25,10 @@ const routes = [
 	{ name: 'heroes_new', url: '/heroes/new', component: HeroNewComponent },
 	
 	// HeroEdit:  /heroes/{:id}/edit
-	{ name: 'heroes_edit', url: '/heroes/:id/edit', component: HeroEditComponent }
+	{ name: 'heroes_edit', url: '/heroes/:id/edit', component: HeroEditComponent },
+	
+	// HeroShow:  /heroes/{:id}
+	{ name: 'heroes_show', url: '/heroes/:id/show', component: HeroDetailsComponent }
 ];
 
 @NgModule( {

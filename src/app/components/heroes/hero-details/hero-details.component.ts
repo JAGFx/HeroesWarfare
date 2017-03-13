@@ -4,6 +4,8 @@
 
 import { Component, Input } from '@angular/core';
 import { Hero } from '../hero';
+import { HeroService } from '../../../services/hero.service';
+import { Transition } from "ui-router-ng2";
 
 @Component( {
 	selector:    'hero-details',
@@ -13,4 +15,12 @@ import { Hero } from '../hero';
 export class HeroDetailsComponent {
 	@Input()
 	public hero: Hero;
+	
+	constructor( private _heroesService: HeroService, trans: Transition ) {
+		this._heroesService
+			.getHero( trans.params().id )
+			.then( hero => {
+				this.hero = hero;
+			} );
+	}
 }

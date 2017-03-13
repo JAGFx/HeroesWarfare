@@ -15,11 +15,11 @@ export class HeroListComponent {
 	@Input()
 	public heroes: Hero[];
 	
-	@Output()
+	/*@Output()
 	public onSelectHero = new EventEmitter<Hero>();
 	
 	public changeHero( hero: Hero ) {
 		this.onSelectHero.emit( hero );
-	}
+	 }*/
 	
 }
