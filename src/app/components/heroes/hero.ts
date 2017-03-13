@@ -49,6 +49,15 @@ export class Hero {
 		};
 	}
 	
+	public equal( hero: Hero ): boolean {
+		return this.id === hero.id &&
+			this.name === hero.name &&
+			this.attack === hero.attack &&
+			this.dodge === hero.dodge &&
+			this.damage === hero.damage &&
+			this.hp === hero.hp
+	}
+	
 	private validateCharacteristics(): boolean {
 		//console.log( this );
 		//console.log( this.name, this.attack, this.dodge, this.damage, this.hp );

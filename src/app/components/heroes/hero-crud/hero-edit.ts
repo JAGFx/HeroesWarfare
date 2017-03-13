@@ -35,7 +35,7 @@ export class HeroEditComponent {
 		this._heroesService
 		    .putHero( hero )
 		    .then( _hero => {
-			    if ( _hero === this.form.hero ) {
+			    if ( this.form.hero.equal( _hero ) ) {
 				    this.form.feedback = {
 					    asError: true,
 					    type:    'success',

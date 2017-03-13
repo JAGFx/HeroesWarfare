@@ -32,13 +32,13 @@ export class HeroNewComponent implements AfterViewInit {
 		this._heroesService
 		    .postHero( hero )
 		    .then( _hero => {
-			    console.log( _hero );
+			    console.log( _hero, hero );
 			
-			    if ( _hero === this.form.hero ) {
+			    if ( this.form.hero.equal( _hero ) ) {
 				    this.form.feedback = {
 					    asError: true,
 					    type:    'success',
-					    message: 'Modification effectué avec succès'
+					    message: 'Ajout effectuée avec succès'
 				    };
 				    this.form.init( _hero );
 				
