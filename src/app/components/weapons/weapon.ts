@@ -31,8 +31,26 @@ export class Weapons extends BaseEntityWarfare {
 	}
 	
 	
-	protected checkProperty( current, nextValue, property: string ): any {
-		return null;
+	protected checkProperty( nextValue, property: string ): any {
+		if ( nextValue < Weapons.MIN_VALUE ) {
+			throw new UnexpectedWarfareEntityProperty(
+				this,
+				property,
+				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
+			);
+		}
+		
+		if ( nextValue > Weapons.MAX_VALUE ) {
+			throw new UnexpectedWarfareEntityProperty(
+				this,
+				property,
+				UnexpectedWarfareEntityProperty.MESSAGES.MAX_VALUE
+			);
+		}
+		
+		if ( !this.validateProperties() ) {
+			throw new UnexpectedWarfareEntityProperty( this, property );
+		}
 	}
 	
 	public getMaxValue(): number {
@@ -77,29 +95,13 @@ export class Weapons extends BaseEntityWarfare {
 	
 	public set attack( value: number ) {
 		const oldValue: number = this._attack;
-		this._attack           = value;
+		this._attack = value;
 		
-		if ( this._attack < Weapons.MIN_VALUE ) {
+		try {
+			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK );
+		} catch ( e ) {
 			this._attack = oldValue;
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK,
-				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
-			);
-		}
-		
-		if ( this._attack > Weapons.MAX_VALUE ) {
-			this._attack = oldValue;
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK,
-				UnexpectedWarfareEntityProperty.MESSAGES.MAX_VALUE
-			);
-		}
-		
-		if ( !this.validateProperties() ) {
-			this._attack = oldValue;
-			throw new UnexpectedWarfareEntityProperty( this, UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK );
+			throw e;
 		}
 	}
 	
@@ -107,27 +109,11 @@ export class Weapons extends BaseEntityWarfare {
 		const oldValue: number = this._dodge;
 		this._dodge            = value;
 		
-		if ( this._dodge < Weapons.MIN_VALUE ) {
+		try {
+			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.DODGE );
+		} catch ( e ) {
 			this._dodge = oldValue;
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				UnexpectedWarfareEntityProperty.PROPERTIES.DODGE,
-				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
-			);
-		}
-		
-		if ( this._dodge > Weapons.MAX_VALUE ) {
-			this._dodge = oldValue;
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				UnexpectedWarfareEntityProperty.PROPERTIES.DODGE,
-				UnexpectedWarfareEntityProperty.MESSAGES.MAX_VALUE
-			);
-		}
-		
-		if ( !this.validateProperties() ) {
-			this._dodge = oldValue;
-			throw new UnexpectedWarfareEntityProperty( this, UnexpectedWarfareEntityProperty.PROPERTIES.DODGE );
+			throw e;
 		}
 	}
 	
@@ -135,27 +121,11 @@ export class Weapons extends BaseEntityWarfare {
 		const oldValue: number = this._damage;
 		this._damage           = value;
 		
-		if ( this._damage < Weapons.MIN_VALUE ) {
+		try {
+			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE );
+		} catch ( e ) {
 			this._damage = oldValue;
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE,
-				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
-			);
-		}
-		
-		if ( this._damage > Weapons.MAX_VALUE ) {
-			this._damage = oldValue;
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE,
-				UnexpectedWarfareEntityProperty.MESSAGES.MAX_VALUE
-			);
-		}
-		
-		if ( !this.validateProperties() ) {
-			this._damage = oldValue;
-			throw new UnexpectedWarfareEntityProperty( this, UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE );
+			throw e;
 		}
 	}
 	
@@ -163,27 +133,11 @@ export class Weapons extends BaseEntityWarfare {
 		const oldValue: number = this._hp;
 		this._hp               = value;
 		
-		if ( this._hp < Weapons.MIN_VALUE ) {
+		try {
+			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.HP );
+		} catch ( e ) {
 			this._hp = oldValue;
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				UnexpectedWarfareEntityProperty.PROPERTIES.HP,
-				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
-			);
-		}
-		
-		if ( this._hp > Weapons.MAX_VALUE ) {
-			this._hp = oldValue;
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				UnexpectedWarfareEntityProperty.PROPERTIES.HP,
-				UnexpectedWarfareEntityProperty.MESSAGES.MAX_VALUE
-			);
-		}
-		
-		if ( !this.validateProperties() ) {
-			this._hp = oldValue;
-			throw new UnexpectedWarfareEntityProperty( this, UnexpectedWarfareEntityProperty.PROPERTIES.HP );
+			throw e;
 		}
 	}
 }

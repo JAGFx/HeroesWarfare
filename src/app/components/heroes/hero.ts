@@ -5,8 +5,8 @@ import { UnexpectedWarfareEntityProperty } from '../commons/base-entity-warfare-
  */
 
 export class Hero extends BaseEntityWarfare {
-	public static readonly MIN_VALUE: number      = 1;
-	public static readonly MAX_SUM: number        = 40;
+	public static readonly MIN_VALUE: number = 1;
+	public static readonly MAX_SUM: number   = 40;
 	
 	protected _name: string;
 	protected _attack: number = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
@@ -31,8 +31,9 @@ export class Hero extends BaseEntityWarfare {
 		return ( this.sumProperties() ) <= Hero.MAX_SUM;
 	}
 	
-	protected checkProperty( current, nextValue, property: string ): any {
+	protected checkProperty( nextValue, property: string ): any {
 		if ( nextValue < Hero.MIN_VALUE ) {
+			//(<any>currentEntity)[objectProperty] = current;
 			throw new UnexpectedWarfareEntityProperty(
 				this,
 				property,
@@ -40,10 +41,11 @@ export class Hero extends BaseEntityWarfare {
 			);
 		}
 		
-		if ( !this.validateProperties() )
+		if ( !this.validateProperties() ) {
+			//console.log( this.sumProperties(), (<any>this)[ objectProperty ]  );
+			//(<any>currentEntity)[objectProperty]  = current;
 			throw new UnexpectedWarfareEntityProperty( this, property );
-		
-		return nextValue;
+		}
 	}
 	
 	public getMaxValue(): number {
@@ -79,7 +81,7 @@ export class Hero extends BaseEntityWarfare {
 	public get hp(): number {
 		return this._hp;
 	}
-
+	
 	// ----------------------------------------------------------------------- SETTERS
 	
 	public set name( value: string ) {
@@ -88,82 +90,50 @@ export class Hero extends BaseEntityWarfare {
 	
 	public set attack( value: number ) {
 		const oldValue: number = this._attack;
-		//this._attack           = this.checkProperty( this._attack, value, UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK );
-		this._attack           = value;
+		this._attack = value;
 		
-		if ( this._attack < Hero.MIN_VALUE ) {
+		try {
+			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK );
+		} catch ( e ) {
 			this._attack = oldValue;
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK,
-				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
-			);
-		}
-		
-		if ( !this.validateProperties() ) {
-			this._attack = oldValue;
-			throw new UnexpectedWarfareEntityProperty( this, UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK );
+			throw e;
 		}
 		
 	}
 	
 	public set dodge( value: number ) {
 		const oldValue: number = this._dodge;
-		//this._dodge            = this.checkProperty( this._dodge, value, UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK );
 		this._dodge            = value;
 		
-		if ( this._dodge < Hero.MIN_VALUE ) {
+		try {
+			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.DODGE );
+		} catch ( e ) {
 			this._dodge = oldValue;
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				UnexpectedWarfareEntityProperty.PROPERTIES.DODGE,
-				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
-			);
-		}
-		
-		if ( !this.validateProperties() ) {
-			this._dodge = oldValue;
-			throw new UnexpectedWarfareEntityProperty( this, UnexpectedWarfareEntityProperty.PROPERTIES.DODGE );
+			throw e;
 		}
 	}
 	
 	public set damage( value: number ) {
 		const oldValue: number = this._damage;
-		//this._damage           = this.checkProperty( this._damage, value, UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE );
 		this._damage           = value;
 		
-		if ( this._damage < Hero.MIN_VALUE ) {
+		try {
+			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE );
+		} catch ( e ) {
 			this._damage = oldValue;
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE,
-				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
-			);
-		}
-		
-		if ( !this.validateProperties() ) {
-			this._damage = oldValue;
-			throw new UnexpectedWarfareEntityProperty( this, UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE );
+			throw e;
 		}
 	}
 	
 	public set hp( value: number ) {
 		const oldValue: number = this._hp;
-		//this._hp               = this.checkProperty( this._hp, value, UnexpectedWarfareEntityProperty.PROPERTIES.HP);
 		this._hp               = value;
 		
-		if ( this._hp < Hero.MIN_VALUE ) {
+		try {
+			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.HP );
+		} catch ( e ) {
 			this._hp = oldValue;
-			throw new UnexpectedWarfareEntityProperty(
-				this,
-				UnexpectedWarfareEntityProperty.PROPERTIES.HP,
-				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
-			);
-		}
-		
-		if ( !this.validateProperties() ) {
-			this._hp = oldValue;
-			throw new UnexpectedWarfareEntityProperty( this, UnexpectedWarfareEntityProperty.PROPERTIES.HP );
+			throw e;
 		}
 	}
 }

@@ -23,7 +23,7 @@ export class UnexpectedWarfareEntityProperty extends Error {
 	             message: string = UnexpectedWarfareEntityProperty.MESSAGES.MAX_SUM ) {
 		super( UnexpectedWarfareEntityProperty.ERR_NAME );
 		this.name    = UnexpectedWarfareEntityProperty.ERR_NAME;
-		this.message = UnexpectedWarfareEntityProperty.ERR_NAME + ' for ' + property + message;
+		this.message = UnexpectedWarfareEntityProperty.ERR_NAME + ' for (' + property + ') ' + message;
 		this.message += ( message === UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE )
 			? entity.getMinValue().toString()
 			: entity.getMaxSum().toString();

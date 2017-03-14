@@ -48,7 +48,7 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 	
 	protected abstract validateProperties(): boolean;
 	
-	protected abstract checkProperty( current, nextValue, property: string ): any;
+	protected abstract checkProperty( nextValue, property: string ): any;
 	
 	public sumProperties(): number {
 		return this._attack + this._dodge + this._damage + this._hp;
