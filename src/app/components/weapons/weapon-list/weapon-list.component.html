@@ -1,9 +1,0 @@
-<h2 >My Weapons</h2 >
-<a uiSref="heroes_new" >New</a >
-<ul class="weapons" >
-	<li *ngFor="let weapon of weapons" >
-		{{weapon.name}}
-		<a uiSref="heroes_show" [uiParams]="{ id: weapon.id }" >Show</a >
-		<a uiSref="heroes_edit" [uiParams]="{ id: weapon.id }" >Edit</a >
-	</li >
-</ul >

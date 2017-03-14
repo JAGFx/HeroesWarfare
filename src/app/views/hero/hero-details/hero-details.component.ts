@@ -3,24 +3,23 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { Hero } from '../hero';
+import { Hero } from '../../../components/heroes/hero';
 import { HeroService } from '../../../services/hero.service';
 import { Transition } from "ui-router-ng2";
 
 @Component( {
 	selector:    'hero-details',
-	templateUrl: 'hero-details.component.html',
+	templateUrl: 'hero-details.view.html',
 } )
 
 export class HeroDetailsComponent {
-	@Input()
 	public hero: Hero;
 	
-	constructor( private _heroesService: HeroService, trans: Transition ) {
-		this._heroesService
-			.getHero( trans.params().id )
-			.then( hero => {
-				this.hero = hero;
-			} );
+	constructor( private _heroService: HeroService, trans: Transition ) {
+		this._heroService
+		    .getHero( trans.params().id )
+		    .then( hero => {
+			    this.hero = hero;
+		    } );
 	}
 }

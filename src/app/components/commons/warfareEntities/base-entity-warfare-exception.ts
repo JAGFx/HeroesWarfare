@@ -24,8 +24,10 @@ export class UnexpectedWarfareEntityProperty extends Error {
 		super( UnexpectedWarfareEntityProperty.ERR_NAME );
 		this.name    = UnexpectedWarfareEntityProperty.ERR_NAME;
 		this.message = UnexpectedWarfareEntityProperty.ERR_NAME + ' for (' + property + ') ' + message;
+		
+		// TODO Improve feedback => Check error message
 		this.message += ( message === UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE )
 			? entity.getMinValue().toString()
-			: entity.getMaxSum().toString();
+			: entity.getMaxValue().toString();
 	}
 }

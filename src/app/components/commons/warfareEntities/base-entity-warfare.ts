@@ -1,10 +1,10 @@
-import { BaseEntity } from './base-entity';
+import { BaseEntity } from '../base-entity';
 /**
  * Created by SMITHE on 13-Mar-17.
  */
 
 export abstract class BaseEntityWarfare extends BaseEntity {
-	protected static readonly NB_PROPERTIES: number = 4;
+	public static readonly NB_PROPERTIES: number = 4;
 	
 	protected _name: string;
 	protected _attack: number;

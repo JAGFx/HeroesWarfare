@@ -5,19 +5,19 @@
 import { Component } from '@angular/core';
 import { Hero } from '../hero';
 import { FormBuilder, Validators } from '@angular/forms';
-import { UnexpectedWarfareEntityProperty as HeroException } from '../../commons/base-entity-warfare-exception'
+import { UnexpectedWarfareEntityProperty as HeroException } from '../../commons/warfareEntities/base-entity-warfare-exception'
 import { BaseFormComponent } from '../../commons/base-form';
 
 @Component( {
 	selector:    'hero-form',
-	templateUrl: 'hero-form.component.html',
+	templateUrl: '../../commons/warfareEntities/base-warfare-form.component.html',
 } )
 
-export class HeroFormComponent extends BaseFormComponent {
-	public HERO_MAX_SUM = Hero.MAX_SUM;
+export class HeroFormComponent extends BaseFormComponent<Hero> {
 		
 	constructor( fb: FormBuilder ) {
 		super();
+		this.entity = new Hero();
 		
 		this.buildForm( fb );
 		this.form
@@ -31,44 +31,48 @@ export class HeroFormComponent extends BaseFormComponent {
 		    } );
 	}
 	
+	public remainingPoints(): number {
+		return Hero.MAX_SUM - this.entity.sumProperties();
+	}
+	
 	public init( hero: Hero ) {
-		this.hero = new Hero();
-		this.hero.copyFrom( hero );
+		this.entity = new Hero();
+		this.entity.copyFrom( hero );
 		
-		this.heroBack = new Hero();
-		this.heroBack.copyFrom( hero );
+		this.entityBack = new Hero();
+		this.entity.copyFrom( hero );
 		
 		this.updateForm();
 	}
 	
 	protected buildForm( fb: FormBuilder ) {
 		this.form = fb.group( {
-			name:   [ this.hero.name, Validators.required ],
-			attack: [ this.hero.attack, Validators.required ],
-			dodge:  [ this.hero.dodge, Validators.required ],
-			damage: [ this.hero.damage, Validators.required ],
-			hp:     [ this.hero.hp, Validators.required ],
+			name:   [ this.entity.name, Validators.required ],
+			attack: [ this.entity.attack, Validators.required ],
+			dodge:  [ this.entity.dodge, Validators.required ],
+			damage: [ this.entity.damage, Validators.required ],
+			hp:     [ this.entity.hp, Validators.required ],
 		} );
 	}
 	
 	protected updateForm() {
-		console.log( 'Update', this.hero.attack, this.hero.dodge, this.hero.damage, this.hero.hp );
+		console.log( 'Update', this.entity.attack, this.entity.dodge, this.entity.damage, this.entity.hp );
 		this.form.patchValue( {
-			name:   this.hero.name,
-			attack: this.hero.attack,
-			dodge:  this.hero.dodge,
-			damage: this.hero.damage,
-			hp:     this.hero.hp
+			name:   this.entity.name,
+			attack: this.entity.attack,
+			dodge:  this.entity.dodge,
+			damage: this.entity.damage,
+			hp:     this.entity.hp
 		} );
 	}
 	
 	protected onChangeEntity( value ) {
 		try {
-			this.hero.name   = value.name;
-			this.hero.attack = value.attack;
-			this.hero.dodge  = value.dodge;
-			this.hero.damage = value.damage;
-			this.hero.hp     = value.hp;
+			this.entity.name   = value.name;
+			this.entity.attack = value.attack;
+			this.entity.dodge  = value.dodge;
+			this.entity.damage = value.damage;
+			this.entity.hp     = value.hp;
 			
 		} catch ( e ) {
 			

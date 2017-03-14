@@ -5,8 +5,8 @@ import { EventEmitter, Output } from '@angular/core';
  * Created by SMITHE on 13-Mar-17.
  */
 
-export abstract class BaseFormComponent {
-	public hero: Hero = new Hero();
+export abstract class BaseFormComponent<T> {
+	public entity: T;
 	public feedback   = {
 		asError: false,
 		type:    'error',
@@ -14,12 +14,12 @@ export abstract class BaseFormComponent {
 	};
 	
 	@Output()
-	public onValidate: EventEmitter<Hero> = new EventEmitter();
+	public onValidate: EventEmitter<T> = new EventEmitter();
 	
-	protected heroBack: Hero;
+	protected entityBack: T;
 	protected form: FormGroup;
 	
-	public abstract init( hero: Hero ): void;
+	public abstract init( entity: T ): void;
 	
 	protected abstract updateForm(): void;
 	
@@ -28,10 +28,10 @@ export abstract class BaseFormComponent {
 	protected abstract buildForm( fb: FormBuilder ): void;
 	
 	public reset(): void {
-		this.init( this.heroBack );
+		this.init( this.entityBack );
 	}
 	
 	public validate(): void {
-		this.onValidate.emit( this.hero );
+		this.onValidate.emit( this.entity );
 	}
 }

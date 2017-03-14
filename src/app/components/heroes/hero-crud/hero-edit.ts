@@ -2,27 +2,28 @@
  * Created by SMITHE on 02-Mar-17.
  */
 
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Hero } from '../hero';
 import { Transition } from "ui-router-ng2";
 import { HeroService } from '../../../services/hero.service';
 import { BaseFormController } from '../../commons/base-form-controller';
+import { HeroFormComponent } from '../hero-form/hero-form';
 
 @Component( {
 	selector:    'hero-edit',
-	templateUrl: '../hero-form-view.html',
+	templateUrl: '../hero-form/hero-form.component.html',
 } )
 
-export class HeroEditComponent extends BaseFormController {
+export class HeroEditComponent implements BaseFormController<Hero> {
+	@ViewChild( HeroFormComponent )
+	public form: HeroFormComponent;
 	
 	/**
 	 *
 	 * @param _heroesService
 	 * @param trans
 	 */
-	constructor( _heroesService: HeroService, trans: Transition ) {
-		super( _heroesService );
-		
+	constructor( private _heroesService: HeroService, trans: Transition ) {
 		this._heroesService
 			.getHero( trans.params().id )
 			.then( hero => {
@@ -35,7 +36,7 @@ export class HeroEditComponent extends BaseFormController {
 		this._heroesService
 			.putHero( hero )
 			.then( _hero => {
-				if ( this.form.hero.equal( _hero ) ) {
+				if ( this.form.entity.equal( _hero ) ) {
 					this.form.feedback = {
 						asError: true,
 						type:    'success',

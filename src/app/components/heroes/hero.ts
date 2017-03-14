@@ -1,5 +1,5 @@
-import { BaseEntityWarfare } from '../commons/base-entity-warfare';
-import { UnexpectedWarfareEntityProperty as HeroException } from '../commons/base-entity-warfare-exception';
+import { BaseEntityWarfare } from '../commons/warfareEntities/base-entity-warfare';
+import { UnexpectedWarfareEntityProperty as HeroException } from '../commons/warfareEntities/base-entity-warfare-exception';
 /**
  * Created by SMITHE on 10-Feb-17.
  */
@@ -26,8 +26,6 @@ export class Hero extends BaseEntityWarfare {
 	}
 	
 	protected validateProperties(): boolean {
-		//console.log( this );
-		//console.log( this.name, this.attack, this.dodge, this.damage, this.hp );
 		return ( this.sumProperties() ) <= Hero.MAX_SUM;
 	}
 	
