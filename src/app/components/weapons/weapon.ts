@@ -4,41 +4,41 @@ import { UnexpectedWarfareEntityProperty as WeaponException } from '../commons/b
  * Created by emsm on 13/03/2017.
  */
 
-export class Weapons extends BaseEntityWarfare {
+export class Weapon extends BaseEntityWarfare {
 	public static readonly MIN_VALUE: number = -5;
 	public static readonly MAX_VALUE: number = 5;
 	public static readonly MAX_SUM: number   = 0;
 	
 	protected _name: string;
-	protected _attack: number = Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
-	protected _dodge: number  = Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
-	protected _damage: number = Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
-	protected _hp: number     = Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
+	protected _attack: number = Weapon.MIN_VALUE + Weapon.MAX_SUM / 2;
+	protected _dodge: number  = Weapon.MIN_VALUE + Weapon.MAX_SUM / 2;
+	protected _damage: number = Weapon.MIN_VALUE + Weapon.MAX_SUM / 2;
+	protected _hp: number     = Weapon.MIN_VALUE + Weapon.MAX_SUM / 2;
 	
 	constructor( id?: string, name?: string, attack?: number, dodge?: number, damage?: number, hp?: number ) {
 		super();
 		
-		this._id    = id || Weapons.generateUUID();
+		this._id    = id || Weapon.generateUUID();
 		this._name  = name || '';
-		this.attack = attack || Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
-		this.dodge  = dodge || Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
-		this.damage = damage || Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
-		this.hp     = hp || Weapons.MIN_VALUE + Weapons.MAX_SUM / 2;
+		this.attack = attack || Weapon.MIN_VALUE + Weapon.MAX_SUM / 2;
+		this.dodge  = dodge || Weapon.MIN_VALUE + Weapon.MAX_SUM / 2;
+		this.damage = damage || Weapon.MIN_VALUE + Weapon.MAX_SUM / 2;
+		this.hp     = hp || Weapon.MIN_VALUE + Weapon.MAX_SUM / 2;
 	}
 	
 	protected validateProperties(): boolean {
-		return this.sumProperties() === Weapons.MAX_SUM;
+		return this.sumProperties() === Weapon.MAX_SUM;
 	}
 	
 	protected checkProperty( nextValue, property: string ): any {
-		if ( nextValue < Weapons.MIN_VALUE )
+		if ( nextValue < Weapon.MIN_VALUE )
 			throw new WeaponException(
 				this,
 				property,
 				WeaponException.MESSAGES.MIN_VALUE
 			);
 		
-		if ( nextValue > Weapons.MAX_VALUE )
+		if ( nextValue > Weapon.MAX_VALUE )
 			throw new WeaponException(
 				this,
 				property,

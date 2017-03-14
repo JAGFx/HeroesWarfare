@@ -13,13 +13,17 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/InMemoryDbService.service';
 import { HeroFormComponent } from './components/heroes/hero-form/hero-form';
 import { HeroNewComponent } from './components/heroes/hero-crud/hero-new';
+import { WeaponService } from './services/weapon.service';
+import { WeaponListComponent } from './components/weapons/weapon-list/weapon-list.componenrt';
+import { WeaponView } from './views/weapon/weapon.component';
 
 const routes = [
 	// App : /
 	{ name: 'app', url: '/', component: AppComponent },
+	// --------------------------------------------------------------------------
 	
 	// HeroHome:  /heroes/list
-	{ name: 'heroes', url: '/heroes/list', component: HeroView },
+	{ name: 'heroes', url: '/heroes', component: HeroView },
 	
 	// HeroNew:  /heroes/new
 	{ name: 'heroes_new', url: '/heroes/new', component: HeroNewComponent },
@@ -28,7 +32,11 @@ const routes = [
 	{ name: 'heroes_edit', url: '/heroes/:id/edit', component: HeroEditComponent },
 	
 	// HeroShow:  /heroes/{:id}
-	{ name: 'heroes_show', url: '/heroes/:id/show', component: HeroDetailsComponent }
+	{ name: 'heroes_show', url: '/heroes/:id/show', component: HeroDetailsComponent },
+	// --------------------------------------------------------------------------
+	
+	// WeaponHome: /weapons
+	{ name: 'weapons', url: '/weapons', component: WeaponView }
 ];
 
 @NgModule( {
@@ -39,7 +47,9 @@ const routes = [
 		HeroDetailsComponent,
 		HeroEditComponent,
 		HeroNewComponent,
-		HeroFormComponent
+		HeroFormComponent,
+		WeaponListComponent,
+		WeaponView
 	],
 	imports:      [
 		BrowserModule,
@@ -49,7 +59,7 @@ const routes = [
 		UIRouterModule.forRoot( { states: routes, useHash: true } ),
 		InMemoryWebApiModule.forRoot( InMemoryDataService )
 	],
-	providers:    [ HeroService ],
+	providers:    [ HeroService, WeaponService ],
 	bootstrap:    [ AppComponent ]
 } )
 
