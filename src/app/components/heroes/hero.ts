@@ -1,5 +1,5 @@
 import { BaseEntityWarfare } from '../commons/base-entity-warfare';
-import { UnexpectedWarfareEntityProperty } from '../commons/base-entity-warfare-exception';
+import { UnexpectedWarfareEntityProperty as HeroException } from '../commons/base-entity-warfare-exception';
 /**
  * Created by SMITHE on 10-Feb-17.
  */
@@ -32,20 +32,16 @@ export class Hero extends BaseEntityWarfare {
 	}
 	
 	protected checkProperty( nextValue, property: string ): any {
-		if ( nextValue < Hero.MIN_VALUE ) {
-			//(<any>currentEntity)[objectProperty] = current;
-			throw new UnexpectedWarfareEntityProperty(
+		if ( nextValue < Hero.MIN_VALUE )
+			throw new HeroException(
 				this,
 				property,
-				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
+				HeroException.MESSAGES.MIN_VALUE
 			);
-		}
 		
-		if ( !this.validateProperties() ) {
-			//console.log( this.sumProperties(), (<any>this)[ objectProperty ]  );
-			//(<any>currentEntity)[objectProperty]  = current;
-			throw new UnexpectedWarfareEntityProperty( this, property );
-		}
+		if ( !this.validateProperties() )
+			throw new HeroException( this, property );
+		
 	}
 	
 	public getMaxValue(): number {
@@ -93,7 +89,7 @@ export class Hero extends BaseEntityWarfare {
 		this._attack = value;
 		
 		try {
-			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK );
+			this.checkProperty( value, HeroException.PROPERTIES.ATTACK );
 		} catch ( e ) {
 			this._attack = oldValue;
 			throw e;
@@ -106,7 +102,7 @@ export class Hero extends BaseEntityWarfare {
 		this._dodge            = value;
 		
 		try {
-			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.DODGE );
+			this.checkProperty( value, HeroException.PROPERTIES.DODGE );
 		} catch ( e ) {
 			this._dodge = oldValue;
 			throw e;
@@ -118,7 +114,7 @@ export class Hero extends BaseEntityWarfare {
 		this._damage           = value;
 		
 		try {
-			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE );
+			this.checkProperty( value, HeroException.PROPERTIES.DAMAGE );
 		} catch ( e ) {
 			this._damage = oldValue;
 			throw e;
@@ -130,7 +126,7 @@ export class Hero extends BaseEntityWarfare {
 		this._hp               = value;
 		
 		try {
-			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.HP );
+			this.checkProperty( value, HeroException.PROPERTIES.HP );
 		} catch ( e ) {
 			this._hp = oldValue;
 			throw e;

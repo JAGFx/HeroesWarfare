@@ -1,5 +1,5 @@
 import { BaseEntityWarfare } from '../commons/base-entity-warfare';
-import { UnexpectedWarfareEntityProperty } from '../commons/base-entity-warfare-exception';
+import { UnexpectedWarfareEntityProperty as WeaponException } from '../commons/base-entity-warfare-exception';
 /**
  * Created by emsm on 13/03/2017.
  */
@@ -30,27 +30,24 @@ export class Weapons extends BaseEntityWarfare {
 		return this.sumProperties() === Weapons.MAX_SUM;
 	}
 	
-	
 	protected checkProperty( nextValue, property: string ): any {
-		if ( nextValue < Weapons.MIN_VALUE ) {
-			throw new UnexpectedWarfareEntityProperty(
+		if ( nextValue < Weapons.MIN_VALUE )
+			throw new WeaponException(
 				this,
 				property,
-				UnexpectedWarfareEntityProperty.MESSAGES.MIN_VALUE
+				WeaponException.MESSAGES.MIN_VALUE
 			);
-		}
 		
-		if ( nextValue > Weapons.MAX_VALUE ) {
-			throw new UnexpectedWarfareEntityProperty(
+		if ( nextValue > Weapons.MAX_VALUE )
+			throw new WeaponException(
 				this,
 				property,
-				UnexpectedWarfareEntityProperty.MESSAGES.MAX_VALUE
+				WeaponException.MESSAGES.MAX_VALUE
 			);
-		}
 		
-		if ( !this.validateProperties() ) {
-			throw new UnexpectedWarfareEntityProperty( this, property );
-		}
+		if ( !this.validateProperties() )
+			throw new WeaponException( this, property );
+		
 	}
 	
 	public getMaxValue(): number {
@@ -98,7 +95,7 @@ export class Weapons extends BaseEntityWarfare {
 		this._attack = value;
 		
 		try {
-			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.ATTACK );
+			this.checkProperty( value, WeaponException.PROPERTIES.ATTACK );
 		} catch ( e ) {
 			this._attack = oldValue;
 			throw e;
@@ -110,7 +107,7 @@ export class Weapons extends BaseEntityWarfare {
 		this._dodge            = value;
 		
 		try {
-			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.DODGE );
+			this.checkProperty( value, WeaponException.PROPERTIES.DODGE );
 		} catch ( e ) {
 			this._dodge = oldValue;
 			throw e;
@@ -122,7 +119,7 @@ export class Weapons extends BaseEntityWarfare {
 		this._damage           = value;
 		
 		try {
-			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.DAMAGE );
+			this.checkProperty( value, WeaponException.PROPERTIES.DAMAGE );
 		} catch ( e ) {
 			this._damage = oldValue;
 			throw e;
@@ -134,7 +131,7 @@ export class Weapons extends BaseEntityWarfare {
 		this._hp               = value;
 		
 		try {
-			this.checkProperty( value, UnexpectedWarfareEntityProperty.PROPERTIES.HP );
+			this.checkProperty( value, WeaponException.PROPERTIES.HP );
 		} catch ( e ) {
 			this._hp = oldValue;
 			throw e;
