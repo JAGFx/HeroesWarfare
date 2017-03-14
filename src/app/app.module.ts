@@ -5,25 +5,28 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HeroService } from './services/hero.service';
 import { UIRouterModule } from 'ui-router-ng2';
-import { HeroListComponent } from './components/heroes/hero-list/hero-list.componenrt';
-import { HeroView } from './views/hero/hero.component';
-import { HeroDetailsComponent } from './components/heroes/hero-details/hero-details.component';
+import { HeroListComponent } from './views/hero/hero-list/hero-list.componenrt';
 import { HeroEditComponent } from './components/heroes/hero-crud/hero-edit';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/InMemoryDbService.service';
 import { HeroFormComponent } from './components/heroes/hero-form/hero-form';
 import { HeroNewComponent } from './components/heroes/hero-crud/hero-new';
 import { WeaponService } from './services/weapon.service';
-import { WeaponListComponent } from './components/weapons/weapon-list/weapon-list.componenrt';
-import { WeaponView } from './views/weapon/weapon.component';
+import { WeaponListComponent } from './views/weapon/weapon-list/weapon-list.componenrt';
+import { WeaponFormComponent } from './components/weapons/weapon-form/weapon-form';
+import { WeaponDetailsComponent } from './views/weapon/weapons-details/weapon-details.component';
+import { HeroDetailsComponent } from './views/hero/hero-details/hero-details.component';
+import { WeaponEditComponent } from './components/weapons/weapon-crud/weapon-edit';
+import { WeaponNewComponent } from './components/weapons/weapon-crud/weapon-new';
 
 const routes = [
+	// ---------------------------------------------------- APP
 	// App : /
 	{ name: 'app', url: '/', component: AppComponent },
-	// --------------------------------------------------------------------------
 	
+	// ---------------------------------------------------- HEROES
 	// HeroHome:  /heroes/list
-	{ name: 'heroes', url: '/heroes', component: HeroView },
+	{ name: 'heroes', url: '/heroes', component: HeroListComponent },
 	
 	// HeroNew:  /heroes/new
 	{ name: 'heroes_new', url: '/heroes/new', component: HeroNewComponent },
@@ -33,23 +36,40 @@ const routes = [
 	
 	// HeroShow:  /heroes/{:id}
 	{ name: 'heroes_show', url: '/heroes/:id/show', component: HeroDetailsComponent },
-	// --------------------------------------------------------------------------
 	
+	// TODO Delete action
+	
+	// ---------------------------------------------------- WEAPONS
 	// WeaponHome: /weapons
-	{ name: 'weapons', url: '/weapons', component: WeaponView }
+	{ name: 'weapons', url: '/weapons', component: WeaponListComponent },
+	
+	// WeaponNew:  /weapons/new
+	{ name: 'weapons_new', url: '/weapons/new', component: WeaponNewComponent },
+	
+	// WeaponEdit:  /weapons/{:id}/edit
+	{ name: 'weapons_edit', url: '/weapons/:id/edit', component: WeaponEditComponent },
+	
+	// WeaponShow:  /weapons/{:id}
+	{ name: 'weapons_show', url: '/weapons/:id/show', component: WeaponDetailsComponent }
+	
+	// TODO Delete action
 ];
 
 @NgModule( {
 	declarations: [
 		AppComponent,
-		HeroView,
+		
 		HeroListComponent,
 		HeroDetailsComponent,
 		HeroEditComponent,
 		HeroNewComponent,
 		HeroFormComponent,
+		
 		WeaponListComponent,
-		WeaponView
+		WeaponFormComponent,
+		WeaponDetailsComponent,
+		WeaponEditComponent,
+		WeaponNewComponent
 	],
 	imports:      [
 		BrowserModule,
