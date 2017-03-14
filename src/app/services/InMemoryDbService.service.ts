@@ -3,6 +3,7 @@
  */
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Hero } from '../components/heroes/hero';
+import { Weapon } from '../components/weapons/weapon';
 export class InMemoryDataService implements InMemoryDbService {
 	public createDb(): {} {
 		let heroes = [
@@ -18,6 +19,14 @@ export class InMemoryDataService implements InMemoryDbService {
 			{ id: Hero.generateUUID(), name: 'Tornado', attack: 0, dodge: 11, damage: 10, hp: 1 }
 		];
 		
-		return { heroes };
+		let weapons = [
+			{ id: Weapon.generateUUID(), name: 'Weap1', attack: 9, dodge: 20, damage: 1, hp: 10 },
+			{ id: Weapon.generateUUID(), name: 'Weap2', attack: 8, dodge: 19, damage: 2, hp: 9 },
+			{ id: Weapon.generateUUID(), name: 'Weap3', attack: 7, dodge: 18, damage: 3, hp: 8 },
+			{ id: Weapon.generateUUID(), name: 'Weap4', attack: 6, dodge: 17, damage: 4, hp: 7 },
+			{ id: Weapon.generateUUID(), name: 'Weap5', attack: 5, dodge: 16, damage: 5, hp: 6 },
+			{ id: Weapon.generateUUID(), name: 'Weap6', attack: 4, dodge: 15, damage: 6, hp: 5 }
+		];
+		return { heroes, weapons };
 	}
 }

@@ -1,24 +1,21 @@
 import { Hero } from '../components/heroes/hero';
-import { Injectable, Injector } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
+import { BaseService } from '../components/commons/base-service';
+import { Http } from '@angular/http';
 
 /**
  * Created by SMITHE on 10-Feb-17.
  */
 
 @Injectable()
-export class HeroService {
-	private static readonly BASE_PATH = 'api/heroes';
+export class HeroService extends BaseService<Hero> {
+	constructor( _http: Http ) {
+		super( _http );
+	}
 	
-	private _headers = new Headers( { 'Content-Type': 'application/json' } );
-	/*private _http;*/
-	
-	/**
-	 *
-	 * @param _http
-	 */
-	constructor( private _http: Http ) {
+	protected BASE_PATH_ENTITY(): string {
+		return super.BASE_PATH_ENTITY() + '/heroes';
 	}
 	
 	/**
@@ -26,10 +23,10 @@ export class HeroService {
 	 * @returns {Promise<Hero[]>}
 	 */
 	public getHeroes(): Promise<Hero[]> {
-		return this._http.get( HeroService.BASE_PATH )
-		           .toPromise()
-		           .then( response => response.json().data as Hero[] )
-		           .catch( this.handleError );
+		const path     = this.BASE_PATH_ENTITY();
+		const callback = response => response.json().data as Hero;
+		
+		return this.get( path, callback );
 	}
 	
 	/**
@@ -38,10 +35,10 @@ export class HeroService {
 	 * @returns {Promise<Hero>}
 	 */
 	public getHero( id: number ): Promise<Hero> {
-		return this._http.get( HeroService.BASE_PATH + '/' + id )
-		           .toPromise()
-		           .then( response => response.json().data as Hero )
-		           .catch( this.handleError );
+		const path     = this.BASE_PATH_ENTITY() + '/' + id;
+		const callback = response => response.json().data as Hero;
+		
+		return this.get( path, callback );
 	}
 	
 	/**
@@ -50,11 +47,10 @@ export class HeroService {
 	 * @returns {Promise<Hero>}
 	 */
 	public putHero( hero: Hero ): Promise<Hero> {
-		console.log( hero.serialize() );
-		return this._http.put( HeroService.BASE_PATH + '/' + hero.id, hero.serialize(), { headers: this._headers } )
-		           .toPromise()
-		           .then( () => hero )
-		           .catch( this.handleError );
+		const path     = this.BASE_PATH_ENTITY() + '/' + hero.id;
+		const callback = () => hero;
+		
+		return this.put( path, hero.serialize(), callback );
 	}
 	
 	/**
@@ -63,10 +59,10 @@ export class HeroService {
 	 * @returns {Promise<Hero>}
 	 */
 	public postHero( hero: Hero ): Promise<Hero> {
-		return this._http.post( HeroService.BASE_PATH + '/' + hero.id, hero.serialize(), { headers: this._headers } )
-		           .toPromise()
-		           .then( res => res.json().data )
-		           .catch( this.handleError );
+		const path     = this.BASE_PATH_ENTITY() + '/' + hero.id;
+		const callback = res => res.json().data;
+		
+		return this.post( path, hero.serialize(), callback );
 	}
 	
 	/**
@@ -75,19 +71,9 @@ export class HeroService {
 	 * @returns {Promise<void>}
 	 */
 	public deleteHero( hero: Hero ): Promise<void> {
-		return this._http.delete( HeroService.BASE_PATH + '/' + hero.id, { headers: this._headers } )
-		           .toPromise()
-		           .then( () => null )
-		           .catch( this.handleError );
-	}
-	
-	/**
-	 *
-	 * @param error
-	 * @returns {Promise<never>}
-	 */
-	private handleError( error: any ): Promise<any> {
-		console.error( 'An error occurred', error ); // for demo purposes only
-		return Promise.reject( error.message || error );
+		const path     = this.BASE_PATH_ENTITY() + '/' + hero.id;
+		const callback = () => null;
+		
+		return this.remove( path, callback );
 	}
 }
