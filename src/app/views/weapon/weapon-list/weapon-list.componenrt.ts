@@ -21,4 +21,16 @@ export class WeaponListComponent {
 			    this.weapons = weapons;
 		    } );
 	}
+	
+	public deleteWeapon( weapon: Weapon ) {
+		this._weaponService
+			.deleteWeapon( weapon )
+			.then( () => {
+				this._weaponService
+					.getWeapons()
+					.then( weapons => {
+						this.weapons = weapons;
+					} );
+			} );
+	}
 }

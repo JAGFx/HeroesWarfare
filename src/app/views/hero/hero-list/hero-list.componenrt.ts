@@ -16,9 +16,21 @@ export class HeroListComponent {
 	
 	constructor( private _heroesService: HeroService ) {
 		this._heroesService
-		    .getHeroes()
-		    .then( heroes => {
-			    this.heroes = heroes;
-		    } );
+			.getHeroes()
+			.then( heroes => {
+				this.heroes = heroes;
+			} );
+	}
+	
+	public deleteHero( hero: Hero ) {
+		this._heroesService
+			.deleteHero( hero )
+			.then( () => {
+				this._heroesService
+					.getHeroes()
+					.then( heroes => {
+						this.heroes = heroes;
+					} );
+			} );
 	}
 }
