@@ -3,21 +3,23 @@
  */
 
 import { Component } from '@angular/core';
-import { Hero } from '../hero';
 import { FormBuilder, Validators } from '@angular/forms';
-import { UnexpectedWarfareEntityProperty as HeroException } from '../../commons/warfareEntities/base-entity-warfare-exception'
-import { BaseFormComponent } from '../../commons/base-form';
+import { BaseFormComponent } from '../../../components/commons/base-form';
+import { Weapon } from '../../../components/weapons/weapon';
+import { BaseEntityWarfare } from '../../../components/commons/warfareEntities/base-entity-warfare';
+import { UnexpectedWarfareEntityProperty as WeaponException } from '../../../components/commons/warfareEntities/base-entity-warfare-exception';
+
 
 @Component( {
-	selector:    'hero-form',
-	templateUrl: '../../commons/warfareEntities/base-warfare-form.component.html',
+	selector:    'weapon-form',
+	templateUrl: '../../../components/commons/warfareEntities/base-warfare-form.component.html',
 } )
 
-export class HeroFormComponent extends BaseFormComponent<Hero> {
-		
+export class WeaponFormComponent extends BaseFormComponent<Weapon> {
+	
 	constructor( fb: FormBuilder ) {
 		super();
-		this.entity = new Hero();
+		this.entity = new Weapon();
 		
 		this.buildForm( fb );
 		this.form
@@ -32,15 +34,19 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 	}
 	
 	public remainingPoints(): number {
-		return Hero.MAX_SUM - this.entity.sumProperties();
+		return ( (( Math.abs( Weapon.MIN_VALUE ) + Math.abs( Weapon.MAX_VALUE ) ) * BaseEntityWarfare.NB_PROPERTIES ) / 2)
+			- Math.abs( this.entity.attack )
+			- Math.abs( this.entity.dodge )
+			- Math.abs( this.entity.damage )
+			- Math.abs( this.entity.hp );
 	}
 	
-	public init( hero: Hero ) {
-		this.entity = new Hero();
-		this.entity.copyFrom( hero );
+	public init( weapon: Weapon ) {
+		this.entity = new Weapon();
+		this.entity.copyFrom( weapon );
 		
-		this.entityBack = new Hero();
-		this.entity.copyFrom( hero );
+		this.entityBack = new Weapon();
+		this.entityBack.copyFrom( weapon );
 		
 		this.updateForm();
 	}
@@ -76,7 +82,7 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 			
 		} catch ( e ) {
 			
-			if ( e instanceof HeroException ) {
+			if ( e instanceof WeaponException ) {
 				this.feedback = {
 					asError: true,
 					type:    'error',

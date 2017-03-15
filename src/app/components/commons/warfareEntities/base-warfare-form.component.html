@@ -6,21 +6,21 @@
 	
 	<div >Remaning points: {{ remainingPoints() }}</div >
 	
-	<label for="hero_name" >Nom: </label >
-	<input type="text" name="name" id="hero_name" formControlName="name" >
+	<label for="entity_name" >Nom: </label >
+	<input type="text" name="name" id="entity_name" formControlName="name" >
 	
-	<label for="hero_attack" ></label >
-	<input type="number" step="1" min="0" name="attack" id="hero_attack" formControlName="attack" >
+	<label for="entity_attack" ></label >
+	<input type="number" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="attack" id="entity_attack" formControlName="attack" >
 	
-	<label for="hero_dodge" ></label >
-	<input type="number" step="1" min="0" name="dodge" id="hero_dodge" formControlName="dodge" >
+	<label for="entity_dodge" ></label >
+	<input type="number" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="dodge" id="entity_dodge" formControlName="dodge" >
 	
-	<label for="hero_damage" ></label >
-	<input type="number" step="1" min="0" name="damage" id="hero_damage" formControlName="damage" >
+	<label for="entity_damage" ></label >
+	<input type="number" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="damage" id="entity_damage" formControlName="damage" >
 	
-	<label for="hero_hp" ></label >
-	<input type="number" step="1" min="0" name="hp" id="hero_hp" formControlName="hp" >
+	<label for="entity_hp" ></label >
+	<input type="number" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="hp" id="entity_hp" formControlName="hp" >
 	
-	<button type="button" (click)="reset()" >Annuler</button >
-	<button type="submit" (click)="validate()" >Valider</button >
+	<button type="button" (click)="reset()" >Cancel</button >
+	<button type="submit" (click)="validate()" >Submit</button >
 </form >

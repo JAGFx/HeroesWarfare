@@ -4,21 +4,20 @@
 
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { UnexpectedWarfareEntityProperty as WeaponException } from '../../commons/warfareEntities/base-entity-warfare-exception'
-import { BaseFormComponent } from '../../commons/base-form';
-import { Weapon } from '../weapon';
-import { BaseEntityWarfare } from '../../commons/warfareEntities/base-entity-warfare';
+import { BaseFormComponent } from '../../../components/commons/base-form';
+import { Hero } from '../../../components/heroes/hero';
+import { UnexpectedWarfareEntityProperty as HeroException } from '../../../components/commons/warfareEntities/base-entity-warfare-exception';
 
 @Component( {
-	selector:    'weapon-form',
-	templateUrl: '../../commons/warfareEntities/base-warfare-form.component.html',
+	selector:    'hero-form',
+	templateUrl: '../../../components/commons/warfareEntities/base-warfare-form.component.html',
 } )
 
-export class WeaponFormComponent extends BaseFormComponent<Weapon> {
-	
+export class HeroFormComponent extends BaseFormComponent<Hero> {
+		
 	constructor( fb: FormBuilder ) {
 		super();
-		this.entity = new Weapon();
+		this.entity = new Hero();
 		
 		this.buildForm( fb );
 		this.form
@@ -32,17 +31,16 @@ export class WeaponFormComponent extends BaseFormComponent<Weapon> {
 		    } );
 	}
 	
-	// FIXME: Get correct remaining point
 	public remainingPoints(): number {
-		return ( Math.abs( Weapon.MIN_VALUE ) + Math.abs( Weapon.MAX_VALUE ) ) * BaseEntityWarfare.NB_PROPERTIES - this.entity.sumProperties();
+		return Hero.MAX_SUM - this.entity.sumProperties();
 	}
 	
-	public init( weapon: Weapon ) {
-		this.entity = new Weapon();
-		this.entity.copyFrom( weapon );
+	public init( hero: Hero ) {
+		this.entity = new Hero();
+		this.entity.copyFrom( hero );
 		
-		this.entityBack = new Weapon();
-		this.entityBack.copyFrom( weapon );
+		this.entityBack = new Hero();
+		this.entity.copyFrom( hero );
 		
 		this.updateForm();
 	}
@@ -78,7 +76,7 @@ export class WeaponFormComponent extends BaseFormComponent<Weapon> {
 			
 		} catch ( e ) {
 			
-			if ( e instanceof WeaponException ) {
+			if ( e instanceof HeroException ) {
 				this.feedback = {
 					asError: true,
 					type:    'error',

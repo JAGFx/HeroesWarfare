@@ -1,4 +1,3 @@
-import { Hero } from '../heroes/hero';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EventEmitter, Output } from '@angular/core';
 /**

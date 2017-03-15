@@ -5,13 +5,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { Transition } from "ui-router-ng2";
 import { BaseFormController } from '../../commons/base-form-controller';
-import { WeaponFormComponent } from '../weapon-form/weapon-form';
+import { WeaponFormComponent } from '../../../views/weapon/weapon-form/weapon-form';
 import { Weapon } from '../weapon';
 import { WeaponService } from '../../../services/weapon.service';
 
 @Component( {
 	selector:    'weapon-edit',
-	templateUrl: '../weapon-form/weapon-form.component.html',
+	templateUrl: '../../../views/weapon/weapon-form/weapon-form.component.html',
 } )
 
 export class WeaponEditComponent implements BaseFormController<Weapon> {

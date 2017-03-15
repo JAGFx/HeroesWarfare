@@ -9,11 +9,11 @@ import { HeroListComponent } from './views/hero/hero-list/hero-list.componenrt';
 import { HeroEditComponent } from './components/heroes/hero-crud/hero-edit';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './services/InMemoryDbService.service';
-import { HeroFormComponent } from './components/heroes/hero-form/hero-form';
+import { HeroFormComponent } from './views/hero/hero-form/hero-form';
 import { HeroNewComponent } from './components/heroes/hero-crud/hero-new';
 import { WeaponService } from './services/weapon.service';
 import { WeaponListComponent } from './views/weapon/weapon-list/weapon-list.componenrt';
-import { WeaponFormComponent } from './components/weapons/weapon-form/weapon-form';
+import { WeaponFormComponent } from './views/weapon/weapon-form/weapon-form';
 import { WeaponDetailsComponent } from './views/weapon/weapons-details/weapon-details.component';
 import { HeroDetailsComponent } from './views/hero/hero-details/hero-details.component';
 import { WeaponEditComponent } from './components/weapons/weapon-crud/weapon-edit';
@@ -37,8 +37,6 @@ const routes = [
 	// HeroShow:  /heroes/{:id}
 	{ name: 'heroes_show', url: '/heroes/:id/show', component: HeroDetailsComponent },
 	
-	// TODO Delete action
-	
 	// ---------------------------------------------------- WEAPONS
 	// WeaponHome: /weapons
 	{ name: 'weapons', url: '/weapons', component: WeaponListComponent },
@@ -51,8 +49,6 @@ const routes = [
 	
 	// WeaponShow:  /weapons/{:id}
 	{ name: 'weapons_show', url: '/weapons/:id/show', component: WeaponDetailsComponent }
-	
-	// TODO Delete action
 ];
 
 @NgModule( {

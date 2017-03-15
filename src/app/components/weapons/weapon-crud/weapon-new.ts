@@ -5,12 +5,12 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { BaseFormController } from '../../commons/base-form-controller';
 import { Weapon } from '../weapon';
-import { WeaponFormComponent } from '../weapon-form/weapon-form';
+import { WeaponFormComponent } from '../../../views/weapon/weapon-form/weapon-form';
 import { WeaponService } from '../../../services/weapon.service';
 
 @Component( {
 	selector:    'weapon-new',
-	templateUrl: '../weapon-form/weapon-form.component.html',
+	templateUrl: '../../../views/weapon/weapon-form/weapon-form.component.html',
 } )
 
 export class WeaponNewComponent implements BaseFormController<Weapon>, AfterViewInit {

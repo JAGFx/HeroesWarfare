@@ -7,11 +7,11 @@ import { Hero } from '../hero';
 import { Transition } from "ui-router-ng2";
 import { HeroService } from '../../../services/hero.service';
 import { BaseFormController } from '../../commons/base-form-controller';
-import { HeroFormComponent } from '../hero-form/hero-form';
+import { HeroFormComponent } from '../../../views/hero/hero-form/hero-form';
 
 @Component( {
 	selector:    'hero-edit',
-	templateUrl: '../hero-form/hero-form.component.html',
+	templateUrl: '../../../views/hero/hero-form/hero-form.component.html',
 } )
 
 export class HeroEditComponent implements BaseFormController<Hero> {
