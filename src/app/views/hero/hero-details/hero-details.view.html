@@ -1,20 +1,30 @@
 <section *ngIf="hero" >
-	<table >
-		<tr >
-			<th >ID</th >
-			<th >Name</th >
-			<th >Attack</th >
-			<th >Dodge</th >
-			<th >Damage</th >
-			<th >HP</th >
-		</tr >
-		<tr >
-			<td >{{ hero.id }}</td >
-			<td >{{ hero.name }}</td >
-			<td >{{ hero.attack }}</td >
-			<td >{{ hero.dodge }}</td >
-			<td >{{ hero.damage }}</td >
-			<td >{{ hero.hp }}</td >
-		</tr >
+	<h2 >
+		{{ hero.name }}
+		<a uiSref="heroes_edit" [uiParams]="{ id: hero.id }" class="btn btn-outline-info btn-xs" >Edit</a >
+		<button (click)="deleteHero( hero )" class="btn btn-outline-danger btn-xs" >Delete</button >
+	</h2 >
+	
+	<table class="table table-striped table-bordered table-hover table-responsive" >
+		<thead class="thead-inverse" >
+			<tr >
+				<th >ID</th >
+				<th >Name</th >
+				<th >Attack</th >
+				<th >Dodge</th >
+				<th >Damage</th >
+				<th >HP</th >
+			</tr >
+		</thead >
+		<tbody >
+			<tr >
+				<td >{{ hero.id }}</td >
+				<td >{{ hero.name }}</td >
+				<td >{{ hero.attack }}</td >
+				<td >{{ hero.dodge }}</td >
+				<td >{{ hero.damage }}</td >
+				<td >{{ hero.hp }}</td >
+			</tr >
+		</tbody >
 	</table >
 </section >

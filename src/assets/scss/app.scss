@@ -1,0 +1,19 @@
+@import "app/variables";
+@import "../../../node_modules/bourbon/app/assets/stylesheets/bourbon";
+@import "app/heroes";
+
+app-root, ui-view {
+	display: block;
+}
+
+app-root {
+	margin-top: 56px;
+	@include calc(height, "100vh -  #{$hNavbar}");
+	
+	> section {
+		height: 100%;
+		
+		.flex-item { width: 100%; padding: 15px; }
+		#uiv-sub-menu { max-width: $wMaxSubMenu; }
+	}
+}

@@ -5,8 +5,9 @@ import { UnexpectedWarfareEntityProperty as HeroException } from '../commons/war
  */
 
 export class Hero extends BaseEntityWarfare {
-	public static readonly MIN_VALUE: number = 1;
 	public static readonly MAX_SUM: number   = 40;
+	public static readonly MIN_VALUE: number = 1;
+	public static readonly MAX_VALUE: number = Hero.MAX_SUM;
 	
 	protected _name: string;
 	protected _attack: number = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
@@ -43,7 +44,7 @@ export class Hero extends BaseEntityWarfare {
 	}
 	
 	public getMaxValue(): number {
-		return null;
+		return Hero.MAX_VALUE;
 	}
 	
 	public getMinValue(): number {

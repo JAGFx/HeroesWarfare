@@ -6,7 +6,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { BaseFormComponent } from '../../../components/commons/base-form';
 import { Hero } from '../../../components/heroes/hero';
-import { UnexpectedWarfareEntityProperty as HeroException } from '../../../components/commons/warfareEntities/base-entity-warfare-exception';
+import {
+	UnexpectedWarfareEntityProperty as HeroException,
+	UnexpectedWarfareEntityProperty
+} from '../../../components/commons/warfareEntities/base-entity-warfare-exception';
 
 @Component( {
 	selector:    'hero-form',
@@ -75,11 +78,10 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 			this.entity.hp     = value.hp;
 			
 		} catch ( e ) {
-			
-			if ( e instanceof HeroException ) {
+			if ( e instanceof UnexpectedWarfareEntityProperty ) {
 				this.feedback = {
 					asError: true,
-					type:    'error',
+					type:    'warning',
 					message: e.message
 				};
 				

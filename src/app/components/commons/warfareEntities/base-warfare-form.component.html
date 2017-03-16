@@ -1,26 +1,38 @@
 <form [formGroup]="form" >
-	<div *ngIf="feedback.asError" >
-		<h5 >{{ feedback.type }}</h5 >
-		<p >{{ feedback.message }}</p >
+	<div class="alert alert-{{ feedback.type }} alert-dismissible fade show" role="alert" *ngIf="feedback.asError" >
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close" >
+			<span aria-hidden="true" >&times;</span >
+		</button >
+		{{ feedback.message }}
 	</div >
 	
 	<div >Remaning points: {{ remainingPoints() }}</div >
 	
-	<label for="entity_name" >Nom: </label >
-	<input type="text" name="name" id="entity_name" formControlName="name" >
+	<div class="form-group" >
+		<label for="entity_name" >Nom: </label >
+		<input type="text" class="form-control" name="name" id="entity_name" formControlName="name" >
+	</div >
 	
-	<label for="entity_attack" ></label >
-	<input type="number" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="attack" id="entity_attack" formControlName="attack" >
+	<div class="form-group" >
+		<label for="entity_attack" >Attack</label >
+		<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="attack" id="entity_attack" formControlName="attack" >
+	</div >
 	
-	<label for="entity_dodge" ></label >
-	<input type="number" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="dodge" id="entity_dodge" formControlName="dodge" >
+	<div class="form-group" >
+		<label for="entity_dodge" >Dodge</label >
+		<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="dodge" id="entity_dodge" formControlName="dodge" >
+	</div >
 	
-	<label for="entity_damage" ></label >
-	<input type="number" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="damage" id="entity_damage" formControlName="damage" >
+	<div class="form-group" >
+		<label for="entity_damage" >Damage</label >
+		<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="damage" id="entity_damage" formControlName="damage" >
+	</div >
 	
-	<label for="entity_hp" ></label >
-	<input type="number" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="hp" id="entity_hp" formControlName="hp" >
+	<div class="form-group" >
+		<label for="entity_hp" >HP</label >
+		<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="hp" id="entity_hp" formControlName="hp" >
+	</div >
 	
-	<button type="button" (click)="reset()" >Cancel</button >
-	<button type="submit" (click)="validate()" >Submit</button >
+	<button type="button" (click)="reset()" class="btn btn-outline-info" >Cancel</button >
+	<button type="submit" (click)="validate()" class="btn btn-outline-primary" >Submit</button >
 </form >

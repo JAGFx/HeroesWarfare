@@ -26,29 +26,75 @@ const routes = [
 	
 	// ---------------------------------------------------- HEROES
 	// HeroHome:  /heroes/list
-	{ name: 'heroes', url: '/heroes', component: HeroListComponent },
+	{
+		name:  'heroes', url: '/heroes',
+		views: {
+			subMenu: { component: HeroListComponent }
+		}
+	},
 	
 	// HeroNew:  /heroes/new
-	{ name: 'heroes_new', url: '/heroes/new', component: HeroNewComponent },
+	{
+		name:  'heroes_new', url: '/heroes/new',
+		views: {
+			subMenu: { component: HeroListComponent },
+			content: { component: HeroNewComponent },
+		}
+	},
 	
 	// HeroEdit:  /heroes/{:id}/edit
-	{ name: 'heroes_edit', url: '/heroes/:id/edit', component: HeroEditComponent },
+	{
+		name:  'heroes_edit', url: '/heroes/:id/edit',
+		views: {
+			subMenu: { component: HeroListComponent },
+			content: { component: HeroEditComponent },
+		}
+	},
 	
 	// HeroShow:  /heroes/{:id}
-	{ name: 'heroes_show', url: '/heroes/:id/show', component: HeroDetailsComponent },
+	{
+		name:  'heroes_show', url: '/heroes/:id/show',
+		views: {
+			subMenu: { component: HeroListComponent },
+			content: { component: HeroDetailsComponent },
+		}
+	},
 	
 	// ---------------------------------------------------- WEAPONS
 	// WeaponHome: /weapons
-	{ name: 'weapons', url: '/weapons', component: WeaponListComponent },
+	{
+		name:  'weapons', url: '/weapons',
+		views: {
+			subMenu: { component: WeaponListComponent }
+		}
+	},
 	
 	// WeaponNew:  /weapons/new
-	{ name: 'weapons_new', url: '/weapons/new', component: WeaponNewComponent },
+	{
+		name:  'weapons_new', url: '/weapons/new',
+		views: {
+			subMenu: { component: WeaponListComponent },
+			content: { component: WeaponNewComponent },
+		}
+	},
 	
 	// WeaponEdit:  /weapons/{:id}/edit
-	{ name: 'weapons_edit', url: '/weapons/:id/edit', component: WeaponEditComponent },
+	{
+		name:  'weapons_edit', url: '/weapons/:id/edit',
+		views: {
+			subMenu: { component: WeaponListComponent },
+			content: { component: WeaponEditComponent },
+		}
+	},
 	
 	// WeaponShow:  /weapons/{:id}
-	{ name: 'weapons_show', url: '/weapons/:id/show', component: WeaponDetailsComponent }
+	{
+		name:  'weapons_show', url: '/weapons/:id/show',
+		views: {
+			subMenu: { component: WeaponListComponent },
+			content: { component: WeaponDetailsComponent },
+		}
+	}
 ];
 
 @NgModule( {

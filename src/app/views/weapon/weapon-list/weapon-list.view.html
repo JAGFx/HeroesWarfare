@@ -1,3 +1,12 @@
+<h2 >Weapons <a uiSref="weapons_new" class="btn btn-outline-primary btn-xs" >New</a ></h2 >
+
+<ul class="nav flex-column" >
+	<li *ngFor="let weapon of weapons" class="nav-item" >
+		<a class="nav-link" uiSref="weapons_show" [uiParams]="{ id: weapon.id }" >{{weapon.name}}</a >
+	</li >
+</ul >
+
+<!--
 <h2 >My Weapons</h2 >
 <a uiSref="weapons_new" >New</a >
 <ul class="weapons" >
@@ -7,4 +16,4 @@
 		<a uiSref="weapons_edit" [uiParams]="{ id: weapon.id }" >Edit</a >
 		<a (click)="deleteWeapon( weapon )" >Delete</a >
 	</li >
-</ul >
+</ul >-->

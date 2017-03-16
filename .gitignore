@@ -31,6 +31,10 @@ npm-debug.log
 testem.log
 /typings
 
+src/vendor/
+src/assets/dist/
+src/assets/scss/.sass-cache/
+
 # e2e
 /e2e/*.js
 /e2e/*.map
