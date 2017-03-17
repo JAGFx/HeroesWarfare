@@ -1,0 +1,13 @@
+{
+	"name" :         "HeroesWarfare",
+	"description" :  "",
+	"main" :         "",
+	"authors" :      [
+		"JAGFx <contact@jagfx.fr>"
+	],
+	"license" :      "MIT",
+	"homepage" :     "https://github.com/JAGFx/HeroesWarfare",
+	"dependencies" : {
+		"bootstrap" : "v4.0.0-alpha.6"
+	}
+}
