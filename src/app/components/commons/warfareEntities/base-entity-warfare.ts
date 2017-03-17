@@ -1,4 +1,6 @@
 import { BaseEntity } from '../base-entity';
+import { Weapon } from '../../weapons/weapon';
+import { Hero } from '../../heroes/hero';
 /**
  * Created by SMITHE on 13-Mar-17.
  */
@@ -12,7 +14,7 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 	protected _damage: number;
 	protected _hp: number;
 	
-	public copyFrom( entity: BaseEntityWarfare ) {
+	public copyFrom( entity: BaseEntityWarfare ): void {
 		this._attack = 0;
 		this._dodge  = 0;
 		this._damage = 0;
@@ -46,13 +48,17 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 			this.hp === entity.hp
 	}
 	
-	protected abstract validateProperties(): boolean;
+	public abstract validateProperties(): boolean;
 	
 	protected abstract checkProperty( nextValue, property: string ): any;
 	
 	public sumProperties(): number {
 		return this._attack + this._dodge + this._damage + this._hp;
 	}
+	
+	public abstract isHero(): boolean;
+	
+	public abstract  isWeapon(): boolean;
 	
 	public abstract getMaxValue(): number;
 	

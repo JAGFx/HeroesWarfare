@@ -1,12 +1,13 @@
 import { BaseEntityWarfare } from '../commons/warfareEntities/base-entity-warfare';
 import { UnexpectedWarfareEntityProperty as WeaponException } from '../commons/warfareEntities/base-entity-warfare-exception';
+import { Hero } from '../heroes/hero';
 /**
  * Created by emsm on 13/03/2017.
  */
 
 export class Weapon extends BaseEntityWarfare {
-	public static readonly MIN_VALUE: number = -5;
-	public static readonly MAX_VALUE: number = 5;
+	public static readonly MIN_VALUE: number      = -5;
+	public static readonly MAX_VALUE: number      = 5;
 	public static readonly MAX_SUM: number        = 40;
 	public static readonly SUM_PROPERTIES: number = 0;
 	
@@ -27,7 +28,7 @@ export class Weapon extends BaseEntityWarfare {
 		this.hp     = hp || (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
 	}
 	
-	protected validateProperties(): boolean {
+	public validateProperties(): boolean {
 		return this.sumProperties() === Weapon.SUM_PROPERTIES;
 	}
 	
@@ -45,11 +46,6 @@ export class Weapon extends BaseEntityWarfare {
 				property,
 				WeaponException.MESSAGES.MAX_VALUE
 			);
-		
-		// FIXME ValidateProperties
-		/*if ( !this.validateProperties() )
-		 throw new WeaponException( this, property );*/
-		
 	}
 	
 	public getMaxValue(): number {
@@ -62,6 +58,14 @@ export class Weapon extends BaseEntityWarfare {
 	
 	public getMaxSum(): number {
 		return Weapon.MAX_SUM;
+	}
+	
+	public isHero(): boolean {
+		return this instanceof Hero;
+	}
+	
+	public isWeapon(): boolean {
+		return this instanceof Weapon;
 	}
 	
 	// ----------------------------------------------------------------------- GETTERS
@@ -85,8 +89,8 @@ export class Weapon extends BaseEntityWarfare {
 	public get hp(): number {
 		return this._hp;
 	}
-	
-	// ----------------------------------------------------------------------- SETTERS
+
+// ----------------------------------------------------------------------- SETTERS
 	
 	public set name( value: string ) {
 		this._name = value;
@@ -98,7 +102,8 @@ export class Weapon extends BaseEntityWarfare {
 		
 		try {
 			this.checkProperty( value, WeaponException.PROPERTIES.ATTACK );
-		} catch ( e ) {
+		}
+		catch ( e ) {
 			this._attack = oldValue;
 			throw e;
 		}
@@ -110,7 +115,8 @@ export class Weapon extends BaseEntityWarfare {
 		
 		try {
 			this.checkProperty( value, WeaponException.PROPERTIES.DODGE );
-		} catch ( e ) {
+		}
+		catch ( e ) {
 			this._dodge = oldValue;
 			throw e;
 		}
@@ -122,7 +128,8 @@ export class Weapon extends BaseEntityWarfare {
 		
 		try {
 			this.checkProperty( value, WeaponException.PROPERTIES.DAMAGE );
-		} catch ( e ) {
+		}
+		catch ( e ) {
 			this._damage = oldValue;
 			throw e;
 		}
@@ -134,7 +141,8 @@ export class Weapon extends BaseEntityWarfare {
 		
 		try {
 			this.checkProperty( value, WeaponException.PROPERTIES.HP );
-		} catch ( e ) {
+		}
+		catch ( e ) {
 			this._hp = oldValue;
 			throw e;
 		}

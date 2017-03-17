@@ -18,6 +18,7 @@ import { WeaponDetailsComponent } from './views/weapon/weapons-details/weapon-de
 import { HeroDetailsComponent } from './views/hero/hero-details/hero-details.component';
 import { WeaponEditComponent } from './components/weapons/weapon-crud/weapon-edit';
 import { WeaponNewComponent } from './components/weapons/weapon-crud/weapon-new';
+import { WeaponSerializedPipe } from './pipes/weapon.serializer.pipe';
 
 const routes = [
 	// ---------------------------------------------------- APP
@@ -111,7 +112,8 @@ const routes = [
 		WeaponFormComponent,
 		WeaponDetailsComponent,
 		WeaponEditComponent,
-		WeaponNewComponent
+		WeaponNewComponent,
+		WeaponSerializedPipe
 	],
 	imports:      [
 		BrowserModule,

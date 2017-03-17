@@ -1,5 +1,6 @@
 import { BaseEntityWarfare } from '../commons/warfareEntities/base-entity-warfare';
 import { UnexpectedWarfareEntityProperty as HeroException } from '../commons/warfareEntities/base-entity-warfare-exception';
+import { Weapon } from '../weapons/weapon';
 /**
  * Created by SMITHE on 10-Feb-17.
  */
@@ -14,8 +15,9 @@ export class Hero extends BaseEntityWarfare {
 	protected _dodge: number  = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
 	protected _damage: number = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
 	protected _hp: number     = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
+	private _weapon: Weapon;
 	
-	constructor( id?: string, name?: string, attack?: number, dodge?: number, damage?: number, hp?: number ) {
+	constructor( id?: string, name?: string, attack?: number, dodge?: number, damage?: number, hp?: number, weapon?: Weapon ) {
 		super();
 		
 		this._id    = id || Hero.generateUUID();
@@ -24,9 +26,10 @@ export class Hero extends BaseEntityWarfare {
 		this.dodge  = dodge || Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
 		this.damage = damage || Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
 		this.hp     = hp || Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
+		this.weapon = weapon || null;
 	}
 	
-	protected validateProperties(): boolean {
+	public validateProperties(): boolean {
 		return ( this.sumProperties() ) <= Hero.MAX_SUM;
 	}
 	
@@ -55,7 +58,33 @@ export class Hero extends BaseEntityWarfare {
 		return Hero.MAX_SUM;
 	}
 	
-	// ----------------------------------------------------------------------- GETTERS
+	public isHero(): boolean {
+		return this instanceof Hero;
+	}
+	
+	public isWeapon(): boolean {
+		return this instanceof Weapon;
+	}
+	
+	
+	public serialize(): any {
+		let superSerialized    = super.serialize();
+		superSerialized.weapon = this.weapon.id;
+		
+		return superSerialized;
+	}
+	
+	public equal( entity: Hero ): boolean {
+		return super.equal( entity ) && entity.weapon === this.weapon;
+	}
+	
+	
+	public copyFrom( entity: Hero ) {
+		super.copyFrom( entity );
+		this.weapon = entity.weapon;
+	}
+
+// ----------------------------------------------------------------------- GETTERS
 	
 	public get name(): string {
 		return this._name;
@@ -77,7 +106,11 @@ export class Hero extends BaseEntityWarfare {
 		return this._hp;
 	}
 	
-	// ----------------------------------------------------------------------- SETTERS
+	public get weapon(): Weapon {
+		return this._weapon;
+	}
+
+// ----------------------------------------------------------------------- SETTERS
 	
 	public set name( value: string ) {
 		this._name = value;
@@ -89,7 +122,8 @@ export class Hero extends BaseEntityWarfare {
 		
 		try {
 			this.checkProperty( value, HeroException.PROPERTIES.ATTACK );
-		} catch ( e ) {
+		}
+		catch ( e ) {
 			this._attack = oldValue;
 			throw e;
 		}
@@ -102,7 +136,8 @@ export class Hero extends BaseEntityWarfare {
 		
 		try {
 			this.checkProperty( value, HeroException.PROPERTIES.DODGE );
-		} catch ( e ) {
+		}
+		catch ( e ) {
 			this._dodge = oldValue;
 			throw e;
 		}
@@ -114,7 +149,8 @@ export class Hero extends BaseEntityWarfare {
 		
 		try {
 			this.checkProperty( value, HeroException.PROPERTIES.DAMAGE );
-		} catch ( e ) {
+		}
+		catch ( e ) {
 			this._damage = oldValue;
 			throw e;
 		}
@@ -126,9 +162,14 @@ export class Hero extends BaseEntityWarfare {
 		
 		try {
 			this.checkProperty( value, HeroException.PROPERTIES.HP );
-		} catch ( e ) {
+		}
+		catch ( e ) {
 			this._hp = oldValue;
 			throw e;
 		}
+	}
+	
+	public set weapon( value: Weapon ) {
+		this._weapon = value;
 	}
 }

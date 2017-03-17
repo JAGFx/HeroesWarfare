@@ -15,7 +15,8 @@ export class UnexpectedWarfareEntityProperty extends Error {
 		ATTACK: 'Attack',
 		DODGE:  'Dodge',
 		DAMAGE: 'Damage',
-		HP:     'HP'
+		HP:     'HP',
+		ANY:    'Any'
 	};
 	
 	constructor( entity: BaseEntityWarfare,

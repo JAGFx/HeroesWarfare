@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import { BaseService } from '../components/commons/base-service';
 import { Http } from '@angular/http';
+import { WeaponService } from './weapon.service';
 
 /**
  * Created by SMITHE on 10-Feb-17.

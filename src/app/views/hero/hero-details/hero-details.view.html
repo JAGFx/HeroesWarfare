@@ -27,4 +27,10 @@
 			</tr >
 		</tbody >
 	</table >
+	
+	<div class="col-xs-12" >
+		<h2 >Weapon</h2 >
+		{{ hero.weapon.name }}
+		<a class="btn btn-outline-primary" uiSref="weapons_show" [uiParams]="{ id: hero.weapon.id }" >Show</a >
+	</div >
 </section >

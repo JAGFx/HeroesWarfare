@@ -13,9 +13,20 @@
 		<input type="text" class="form-control" name="name" id="entity_name" formControlName="name" >
 	</div >
 	
+	<div class="form-group" *ngIf="entity.isHero()" >
+		<label for="entity_type" >Type: </label >
+		<!--<input type="text" class="form-control" name="type" id="entity_type" formControlName="type" >-->
+		<select name="type" id="entity_type" formControlName="weapon" class="form-control" >
+			<option *ngFor="let weapon of weapons" value="{{ weapon | srzWeapon }}" >{{ weapon.name }}</option >
+		</select >
+	</div >
+	
 	<div class="form-group" >
 		<label for="entity_attack" >Attack</label >
-		<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="attack" id="entity_attack" formControlName="attack" >
+		<div class="input-group" >
+			<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="attack" id="entity_attack" formControlName="attack" >
+			<span *ngIf="entity.weapon" class="input-group-addon" id="basic-addon1" >{{ entity.weapon.attack }}</span >
+		</div >
 	</div >
 	
 	<div class="form-group" >
