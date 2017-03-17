@@ -74,4 +74,17 @@ export class WeaponService extends BaseService<Weapon> {
 		
 		return this.remove( path, callback );
 	}
+	
+	public static jsonStringify( weapon?: Weapon ): string {
+		if ( !weapon )
+			return null;
+		
+		let w: Weapon = new Weapon();
+		w.copyFrom( weapon );
+		return JSON.stringify( w.serialize() );
+	}
+	
+	public static jsonParse( weapon: string ): Weapon {
+		return JSON.parse( weapon ) as Weapon;
+	}
 }

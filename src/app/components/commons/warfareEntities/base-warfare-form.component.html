@@ -14,8 +14,7 @@
 	</div >
 	
 	<div class="form-group" *ngIf="entity.isHero()" >
-		<label for="entity_type" >Type: </label >
-		<!--<input type="text" class="form-control" name="type" id="entity_type" formControlName="type" >-->
+		<label for="entity_type" >Weapon: </label >
 		<select name="type" id="entity_type" formControlName="weapon" class="form-control" >
 			<option *ngFor="let weapon of weapons" value="{{ weapon | srzWeapon }}" >{{ weapon.name }}</option >
 		</select >

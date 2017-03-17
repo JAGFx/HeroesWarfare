@@ -16,11 +16,10 @@ import { WeaponSerializedPipe } from '../../../pipes/weapon.serializer.pipe';
 	templateUrl: '../../../components/commons/warfareEntities/base-warfare-form.component.html',
 } )
 
-// FIXME Bug in check properties when weapon are selected
 export class HeroFormComponent extends BaseFormComponent<Hero> {
 	private weapons: Weapon[];
 	
-	constructor( fb: FormBuilder, private _weaponService: WeaponService, private _srzWeapon: WeaponSerializedPipe ) {
+	constructor( fb: FormBuilder, private _weaponService: WeaponService ) {
 		super();
 		this.entity = new Hero();
 		
@@ -57,7 +56,7 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 	protected buildForm( fb: FormBuilder ) {
 		this.form = fb.group( {
 			name:   [ this.entity.name, Validators.required ],
-			weapon: [ this.entity.weapon, Validators.required ],
+			weapon: [ WeaponService.jsonStringify( this.entity.weapon ), Validators.required ],
 			attack: [ this.entity.attack, Validators.required ],
 			dodge:  [ this.entity.dodge, Validators.required ],
 			damage: [ this.entity.damage, Validators.required ],
@@ -66,10 +65,10 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 	}
 	
 	protected updateForm() {
-		//console.log( 'Update', this.entity.attack, this.entity.dodge, this.entity.damage, this.entity.hp, this.entity.weapon );
+		console.log( 'Update', this.entity.attack, this.entity.dodge, this.entity.damage, this.entity.hp, this.entity.weapon );
 		this.form.patchValue( {
 			name:   this.entity.name,
-			weapon: this.entity.weapon,
+			weapon: WeaponService.jsonStringify( this.entity.weapon ),
 			attack: this.entity.attack,
 			dodge:  this.entity.dodge,
 			damage: this.entity.damage,
@@ -80,12 +79,11 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 	protected onChangeEntity( value ) {
 		try {
 			this.entity.name   = value.name;
-			this.entity.weapon = JSON.parse( value.weapon ) as Weapon;
+			this.entity.weapon = WeaponService.jsonParse( value.weapon );
 			this.entity.attack = value.attack;
 			this.entity.dodge  = value.dodge;
 			this.entity.damage = value.damage;
 			this.entity.hp     = value.hp;
-			console.log( 'Update', this.entity.attack, this.entity.dodge, this.entity.damage, this.entity.hp, this.entity.weapon );
 		}
 		catch ( e ) {
 			if ( e instanceof HeroException ) {
