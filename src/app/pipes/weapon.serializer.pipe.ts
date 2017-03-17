@@ -9,7 +9,6 @@ export class WeaponSerializedPipe implements PipeTransform {
 	transform( weapon ): string {
 		let w: Weapon = new Weapon();
 		w.copyFrom( weapon );
-		console.log( w.serialize() );
-		return w.serialize();
+		return JSON.stringify( w.serialize() );
 	}
 }

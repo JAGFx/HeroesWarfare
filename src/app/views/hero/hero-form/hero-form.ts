@@ -9,32 +9,35 @@ import { Hero } from '../../../components/heroes/hero';
 import { UnexpectedWarfareEntityProperty as HeroException } from '../../../components/commons/warfareEntities/base-entity-warfare-exception';
 import { Weapon } from '../../../components/weapons/weapon';
 import { WeaponService } from '../../../services/weapon.service';
+import { WeaponSerializedPipe } from '../../../pipes/weapon.serializer.pipe';
 
 @Component( {
 	selector:    'hero-form',
 	templateUrl: '../../../components/commons/warfareEntities/base-warfare-form.component.html',
 } )
 
+// FIXME Bug in check properties when weapon are selected
 export class HeroFormComponent extends BaseFormComponent<Hero> {
 	private weapons: Weapon[];
 	
-	constructor( fb: FormBuilder, private _weaponService: WeaponService ) {
+	constructor( fb: FormBuilder, private _weaponService: WeaponService, private _srzWeapon: WeaponSerializedPipe ) {
 		super();
 		this.entity = new Hero();
 		
-		this._weaponService.getWeapons()
-			.then( weapons => this.weapons = weapons );
+		this._weaponService
+		    .getWeapons()
+		    .then( weapons => this.weapons = weapons );
 		
 		this.buildForm( fb );
 		this.form
-			.valueChanges
-			.map( ( value ) => {
-				this.onChangeEntity( value );
-				return value;
-			} )
-			.subscribe( ( value ) => {
-				return value;
-			} );
+		    .valueChanges
+		    .map( ( value ) => {
+			    this.onChangeEntity( value );
+			    return value;
+		    } )
+		    .subscribe( ( value ) => {
+			    return value;
+		    } );
 	}
 	
 	public remainingPoints(): number {
@@ -63,7 +66,7 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 	}
 	
 	protected updateForm() {
-		console.log( 'Update', this.entity.attack, this.entity.dodge, this.entity.damage, this.entity.hp, this.entity.weapon.name );
+		//console.log( 'Update', this.entity.attack, this.entity.dodge, this.entity.damage, this.entity.hp, this.entity.weapon );
 		this.form.patchValue( {
 			name:   this.entity.name,
 			weapon: this.entity.weapon,
@@ -77,12 +80,12 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 	protected onChangeEntity( value ) {
 		try {
 			this.entity.name   = value.name;
-			this.entity.weapon = value.weapon;
+			this.entity.weapon = JSON.parse( value.weapon ) as Weapon;
 			this.entity.attack = value.attack;
 			this.entity.dodge  = value.dodge;
 			this.entity.damage = value.damage;
 			this.entity.hp     = value.hp;
-			
+			console.log( 'Update', this.entity.attack, this.entity.dodge, this.entity.damage, this.entity.hp, this.entity.weapon );
 		}
 		catch ( e ) {
 			if ( e instanceof HeroException ) {

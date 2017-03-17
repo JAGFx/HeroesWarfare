@@ -25,23 +25,32 @@
 		<label for="entity_attack" >Attack</label >
 		<div class="input-group" >
 			<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="attack" id="entity_attack" formControlName="attack" >
-			<span *ngIf="entity.weapon" class="input-group-addon" id="basic-addon1" >{{ entity.weapon.attack }}</span >
+			<span *ngIf="entity.weapon" class="input-group-addon" >{{ ( (entity.weapon.attack > 0) ? '+' : '' ) + entity.weapon.attack }}</span >
 		</div >
 	</div >
 	
 	<div class="form-group" >
 		<label for="entity_dodge" >Dodge</label >
-		<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="dodge" id="entity_dodge" formControlName="dodge" >
+		<div class="input-group" >
+			<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="dodge" id="entity_dodge" formControlName="dodge" >
+			<span *ngIf="entity.weapon" class="input-group-addon" >{{ ( (entity.weapon.dodge > 0) ? '+' : '' ) + entity.weapon.dodge }}</span >
+		</div >
 	</div >
 	
 	<div class="form-group" >
 		<label for="entity_damage" >Damage</label >
-		<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="damage" id="entity_damage" formControlName="damage" >
+		<div class="input-group" >
+			<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="damage" id="entity_damage" formControlName="damage" >
+			<span *ngIf="entity.weapon" class="input-group-addon" >{{ ( (entity.weapon.damage > 0) ? '+' : '' ) + entity.weapon.damage }}</span >
+		</div >
 	</div >
 	
 	<div class="form-group" >
 		<label for="entity_hp" >HP</label >
-		<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="hp" id="entity_hp" formControlName="hp" >
+		<div class="input-group" >
+			<input type="number" class="form-control" step="1" min="{{ entity.getMinValue() }}" max="{{ entity.getMaxValue() }}" name="hp" id="entity_hp" formControlName="hp" >
+			<span *ngIf="entity.weapon" class="input-group-addon" >{{ ( (entity.weapon.hp > 0) ? '+' : '' ) + entity.weapon.hp }}</span >
+		</div >
 	</div >
 	
 	<button type="button" (click)="reset()" class="btn btn-outline-info" >Cancel</button >
