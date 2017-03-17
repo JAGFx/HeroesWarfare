@@ -40,8 +40,6 @@ export abstract class BaseService<T> {
 	public put( path, data, callback ): Promise<T> {
 		let ob = this._http.put( path, data, { headers: this._headers } );
 		
-		console.log( path, data );
-		
 		return this.process( ob, callback );
 	}
 	

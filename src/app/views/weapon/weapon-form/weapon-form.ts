@@ -23,14 +23,14 @@ export class WeaponFormComponent extends BaseFormComponent<Weapon> {
 		
 		this.buildForm( fb );
 		this.form
-		    .valueChanges
-		    .map( ( value ) => {
-			    this.onChangeEntity( value );
-			    return value;
-		    } )
-		    .subscribe( ( value ) => {
-			    return value;
-		    } );
+			.valueChanges
+			.map( ( value ) => {
+				this.onChangeEntity( value );
+				return value;
+			} )
+			.subscribe( ( value ) => {
+				return value;
+			} );
 	}
 	
 	public remainingPoints(): number {
@@ -80,12 +80,34 @@ export class WeaponFormComponent extends BaseFormComponent<Weapon> {
 			this.entity.damage = value.damage;
 			this.entity.hp     = value.hp;
 			
-		} catch ( e ) {
+		}
+		catch ( e ) {
 			
 			if ( e instanceof WeaponException ) {
 				this.feedback = {
 					asError: true,
-					type:    'error',
+					type:    'warning',
+					message: e.message
+				};
+				
+				this.updateForm();
+			}
+		}
+	}
+	
+	
+	public validate(): void {
+		try {
+			if ( !this.entity.validateProperties() )
+				throw new WeaponException( this.entity, WeaponException.PROPERTIES.ANY );
+			
+			super.validate();
+		}
+		catch ( e ) {
+			if ( e instanceof WeaponException ) {
+				this.feedback = {
+					asError: true,
+					type:    'warning',
 					message: e.message
 				};
 				

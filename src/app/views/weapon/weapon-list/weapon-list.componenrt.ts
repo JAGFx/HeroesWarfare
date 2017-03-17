@@ -22,6 +22,7 @@ export class WeaponListComponent {
 		    } );
 	}
 	
+	// TODO Pass method in HeroDetails & set EventEmitter
 	public deleteWeapon( weapon: Weapon ) {
 		this._weaponService
 			.deleteWeapon( weapon )
