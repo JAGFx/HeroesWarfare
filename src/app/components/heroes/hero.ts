@@ -84,7 +84,7 @@ export class Hero extends BaseEntityWarfare {
 		this.weapon = entity.weapon;
 	}
 
-// ----------------------------------------------------------------------- GETTERS
+// ----------------------------------------------------------------------- GETTERS - Relative
 	
 	public get name(): string {
 		return this._name;
@@ -108,6 +108,30 @@ export class Hero extends BaseEntityWarfare {
 	
 	public get weapon(): Weapon {
 		return this._weapon;
+	}
+
+// ----------------------------------------------------------------------- GETTERS - Absolute
+	
+	
+	public getAbsoluteAttack( de?: number ): number {
+		let coef: number = de || BaseEntityWarfare.COEF_RELATIVE_TO_ABSOLUTE.ANY.MIN;
+		return this.attack * coef;
+	}
+	
+	public getAbsoluteDodge( de?: number ): number {
+		let coef: number = de || BaseEntityWarfare.COEF_RELATIVE_TO_ABSOLUTE.ANY.MIN;
+		
+		return this.dodge * coef;
+	}
+	
+	public getAbsoluteDamage( de?: number ): number {
+		let coef: number = de || BaseEntityWarfare.COEF_RELATIVE_TO_ABSOLUTE.ANY.MIN;
+		
+		return this.damage * coef;
+	}
+	
+	public getAbsoluteHp(): number {
+		return this.hp * BaseEntityWarfare.COEF_RELATIVE_TO_ABSOLUTE.HP;
 	}
 
 // ----------------------------------------------------------------------- SETTERS

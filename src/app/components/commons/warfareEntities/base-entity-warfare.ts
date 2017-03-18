@@ -7,6 +7,13 @@ import { Hero } from '../../heroes/hero';
 
 export abstract class BaseEntityWarfare extends BaseEntity {
 	public static readonly NB_PROPERTIES: number = 4;
+	public static readonly COEF_RELATIVE_TO_ABSOLUTE = {
+		ANY: {
+			MIN: 1,
+			MAX: 3
+		},
+		HP:  10
+	};
 	
 	protected _name: string;
 	protected _attack: number;
@@ -66,7 +73,7 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 	
 	public abstract getMaxSum(): number;
 	
-	// ----------------------------------------------------------------------- GETTERS
+	// ----------------------------------------------------------------------- GETTERS - Relative
 	
 	public abstract get name(): string ;
 	
@@ -77,6 +84,16 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 	public abstract get damage(): number ;
 	
 	public abstract get hp(): number;
+	
+	// ----------------------------------------------------------------------- GETTERS - Absolute
+	
+	public abstract getAbsoluteAttack( de?: number ): number;
+	
+	public abstract getAbsoluteDodge( de?: number ): number;
+	
+	public abstract getAbsoluteDamage( de?: number ): number;
+	
+	public abstract getAbsoluteHp(): number;
 	
 	// ----------------------------------------------------------------------- SETTERS
 	

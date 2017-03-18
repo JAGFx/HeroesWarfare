@@ -45,9 +45,10 @@ hero-details {
 	.properties {
 		background: $gray-lighter;
 		color:      $gray-dark;
+		position:   relative;
 		
-		.hero-property {
-			border-left: 1px solid darken($gray-lighter, 10%);
+		.hero-property:not( .btn-change ) {
+			border-right: 1px solid darken($gray-lighter, 10%);
 			color:       $gray-dark;
 			
 			&.attack { color: #842D00; }
@@ -55,7 +56,7 @@ hero-details {
 			&.damage { color: #010101; }
 			&.hp { color: #F40000; }
 			
-			&:first-child { border: none; }
+			&:last-child { border: none; }
 			
 			> img {
 				@include size($hHeroPropertyImg);
@@ -65,6 +66,11 @@ hero-details {
 				font-size:   .9rem;
 				font-family: rolandbeckerlight, $font-family-sans-serif;
 			}
+		}
+		
+		.hero-property.btn-change {
+			position: absolute;
+			left:     0;
 		}
 	}
 }

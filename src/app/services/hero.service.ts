@@ -4,12 +4,15 @@ import 'rxjs/add/operator/toPromise';
 import { BaseService } from '../components/commons/base-service';
 import { Http } from '@angular/http';
 import { WeaponService } from './weapon.service';
+import { Weapon } from '../components/weapons/weapon';
+import { forEach } from '@angular/router/src/utils/collection';
 
 /**
  * Created by SMITHE on 10-Feb-17.
  */
 
 @Injectable()
+/* FIXME: Bug add hero & weapon. Invalid properties */
 export class HeroService extends BaseService<Hero> {
 	constructor( _http: Http ) {
 		super( _http );
@@ -25,7 +28,20 @@ export class HeroService extends BaseService<Hero> {
 	 */
 	public getHeroes(): Promise<Hero[]> {
 		const path     = this.BASE_PATH_ENTITY();
-		const callback = response => response.json().data as Hero;
+		const callback = response => {
+			/*let hSResponse : Hero[] = response.json().data as Hero[];
+			 let hS : Hero[] = [];
+			 
+			 console.log( hSResponse );
+			 
+			 for( let h of hSResponse ){
+			 hS.push( this.makeObject( h ) );
+			 }
+			 
+			 
+			 return hS;*/
+			return response.json().data as Hero;
+		};
 		
 		return this.get( path, callback );
 	}
@@ -37,8 +53,7 @@ export class HeroService extends BaseService<Hero> {
 	 */
 	public getHero( id: number ): Promise<Hero> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + id;
-		const callback = response => response.json().data as Hero;
-		
+		const callback = response => this.makeObject( response.json().data as Hero );
 		return this.get( path, callback );
 	}
 	
@@ -76,5 +91,18 @@ export class HeroService extends BaseService<Hero> {
 		const callback = () => null;
 		
 		return this.remove( path, callback );
+	}
+	
+	public makeObject( hero: Hero ): Hero {
+		let h: Hero = new Hero();
+		h.copyFrom( hero );
+		
+		if ( h.weapon ) {
+			let w: Weapon = new Weapon();
+			w.copyFrom( h.weapon );
+			h.weapon = w;
+		}
+		
+		return h;
 	}
 }

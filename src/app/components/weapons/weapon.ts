@@ -12,10 +12,10 @@ export class Weapon extends BaseEntityWarfare {
 	public static readonly SUM_PROPERTIES: number = 0;
 	
 	protected _name: string;
-	protected _attack: number                     = (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
-	protected _dodge: number                      = (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
-	protected _damage: number                     = (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
-	protected _hp: number                         = (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
+	protected _attack: number = (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
+	protected _dodge: number  = (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
+	protected _damage: number = (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
+	protected _hp: number     = (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
 	
 	constructor( id?: string, name?: string, attack?: number, dodge?: number, damage?: number, hp?: number ) {
 		super();
@@ -68,7 +68,7 @@ export class Weapon extends BaseEntityWarfare {
 		return this instanceof Weapon;
 	}
 	
-	// ----------------------------------------------------------------------- GETTERS
+	// ----------------------------------------------------------------------- GETTERS - Relative
 	
 	public get name(): string {
 		return this._name;
@@ -88,6 +88,31 @@ export class Weapon extends BaseEntityWarfare {
 	
 	public get hp(): number {
 		return this._hp;
+	}
+	
+	// ----------------------------------------------------------------------- GETTERS - Absolute
+	
+	
+	public getAbsoluteAttack( de?: number ): number {
+		let coef: number = de || BaseEntityWarfare.COEF_RELATIVE_TO_ABSOLUTE.ANY.MIN;
+		
+		return this.attack * coef;
+	}
+	
+	public getAbsoluteDodge( de?: number ): number {
+		let coef: number = de || BaseEntityWarfare.COEF_RELATIVE_TO_ABSOLUTE.ANY.MIN;
+		
+		return this.dodge * coef;
+	}
+	
+	public getAbsoluteDamage( de?: number ): number {
+		let coef: number = de || BaseEntityWarfare.COEF_RELATIVE_TO_ABSOLUTE.ANY.MIN;
+		
+		return this.damage * coef;
+	}
+	
+	public getAbsoluteHp(): number {
+		return this.hp * BaseEntityWarfare.COEF_RELATIVE_TO_ABSOLUTE.HP;
 	}
 
 // ----------------------------------------------------------------------- SETTERS

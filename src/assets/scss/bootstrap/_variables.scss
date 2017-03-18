@@ -17,5 +17,5 @@ $card-bg: lighten($cAccentDark, 7%);
 
 @import "../../../vendor/bootstrap/scss/variables";
 
-$tooltip-bg: transparentize(darken($white, 30%), .5);
+$tooltip-bg: $cAccentColor;
 $tooltip-arrow-color: $cAccentColor;
