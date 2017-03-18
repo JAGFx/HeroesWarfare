@@ -19,6 +19,7 @@ import { HeroDetailsComponent } from './views/hero/hero-details/hero-details.com
 import { WeaponEditComponent } from './components/weapons/weapon-crud/weapon-edit';
 import { WeaponNewComponent } from './components/weapons/weapon-crud/weapon-new';
 import { WeaponSerializedPipe } from './pipes/weapon.serializer.pipe';
+import { TooltipModule } from 'ng2-bootstrap/tooltip';
 
 const routes = [
 	// ---------------------------------------------------- APP
@@ -120,6 +121,7 @@ const routes = [
 		FormsModule,
 		ReactiveFormsModule,
 		HttpModule,
+		TooltipModule.forRoot(),
 		UIRouterModule.forRoot( { states: routes, useHash: true } ),
 		InMemoryWebApiModule.forRoot( InMemoryDataService )
 	],

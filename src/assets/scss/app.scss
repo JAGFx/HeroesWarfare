@@ -1,6 +1,15 @@
 @import "app/variables";
+@import "app/fonts";
+@import "bootstrap/variables";
+@import "app/inputs";
 @import "../../../node_modules/bourbon/app/assets/stylesheets/bourbon";
 @import "app/heroes";
+
+
+html, body {
+	background: $cAccentDark;
+	color:      $gray-lightest;
+}
 
 app-root, ui-view {
 	display: block;
@@ -14,6 +23,7 @@ app-root {
 		height: 100%;
 		
 		.flex-item { width: 100%; padding: 15px; }
-		#uiv-sub-menu { max-width: $wMaxSubMenu; }
+		#uiv-content { overflow-y: auto; }
+		#uiv-sub-menu { max-width: $wMaxSubMenu; background: lighten($cAccentDark, 7%); }
 	}
 }

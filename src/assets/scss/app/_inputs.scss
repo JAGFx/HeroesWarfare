@@ -1,0 +1,47 @@
+.form-group {
+	
+	label {
+		padding:        5px 15px;
+		text-transform: uppercase;
+		letter-spacing: 0.3em;
+		margin:         0;
+		color:          $white;
+		transform:      translateY(30px);
+		transition:     all 0.3s ease-in-out;
+		
+		&.moving { transform: translateY(10px); transition: all 0.3s ease-in-out; }
+		&.focused { color: $cAccentColor; }
+	}
+	
+	input, textarea, select {
+		box-shadow:    none;
+		border:        0;
+		border-bottom: 1px darken($white, 10%) solid;
+		background:    transparent;
+		color:         darken($white, 10%);
+		z-index:       1;
+		position:      relative;
+		resize:        vertical;
+		
+		&:hover {
+			color:        $gray-lightest;
+			border-color: $gray-lightest;
+		}
+		
+		&:focus {
+			color:        $cAccentColor;
+			border-color: $cAccentColor;
+		}
+	}
+	
+	textarea { min-height: 130px; }
+	
+	.input-group-addon { background: #4E5D6C; color: $white; }
+}
+
+
+.form-control {
+	&:focus {
+		background: none;
+	}
+}
