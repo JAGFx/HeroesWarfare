@@ -20,6 +20,8 @@ import { WeaponEditComponent } from './components/weapons/weapon-crud/weapon-edi
 import { WeaponNewComponent } from './components/weapons/weapon-crud/weapon-new';
 import { WeaponSerializedPipe } from './pipes/weapon.serializer.pipe';
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
+import { WarfareEntityHeaderComponent } from './components/commons/warfareEntities/warfare-entity-header/warfare-entity-header';
+import { FlatizerLabelFormDirective } from './directives/flatizer-label-form.directive';
 
 const routes = [
 	// ---------------------------------------------------- APP
@@ -102,6 +104,8 @@ const routes = [
 @NgModule( {
 	declarations: [
 		AppComponent,
+		WarfareEntityHeaderComponent,
+		FlatizerLabelFormDirective,
 		
 		HeroListComponent,
 		HeroDetailsComponent,

@@ -8,6 +8,7 @@
 		color:          $white;
 		transform:      translateY(30px);
 		transition:     all 0.3s ease-in-out;
+		font-size:      .8rem;
 		
 		&.moving { transform: translateY(10px); transition: all 0.3s ease-in-out; }
 		&.focused { color: $cAccentColor; }

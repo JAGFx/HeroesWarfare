@@ -1,9 +1,11 @@
+@import "../../../node_modules/bourbon/app/assets/stylesheets/bourbon";
+
 @import "app/variables";
 @import "app/fonts";
 @import "bootstrap/variables";
 @import "app/inputs";
-@import "../../../node_modules/bourbon/app/assets/stylesheets/bourbon";
 @import "app/heroes";
+@import "app/warfare-entity";
 
 
 html, body {
@@ -27,4 +29,3 @@ app-root {
 		#uiv-sub-menu { max-width: $wMaxSubMenu; background: lighten($cAccentDark, 7%); }
 	}
 }
-

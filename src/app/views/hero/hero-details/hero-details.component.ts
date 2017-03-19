@@ -14,7 +14,6 @@ import { Transition } from "ui-router-ng2";
 
 export class HeroDetailsComponent {
 	public hero: Hero;
-	public showAbsolutValueProperties: boolean = false;
 	
 	@Output()
 	onDeleteHero: EventEmitter<Hero> = new EventEmitter();

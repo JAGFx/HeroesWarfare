@@ -79,11 +79,11 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 	protected onChangeEntity( value ) {
 		try {
 			this.entity.name   = value.name;
-			this.entity.weapon = WeaponService.jsonParse( value.weapon );
 			this.entity.attack = value.attack;
 			this.entity.dodge  = value.dodge;
 			this.entity.damage = value.damage;
 			this.entity.hp     = value.hp;
+			this.entity.weapon = this._weaponService.makeObject( WeaponService.jsonParse( value.weapon ) );
 		}
 		catch ( e ) {
 			if ( e instanceof HeroException ) {

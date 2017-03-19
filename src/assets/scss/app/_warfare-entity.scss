@@ -1,0 +1,73 @@
+warfare-entity-header {
+	display: block;
+	
+	.head {
+		background: url('../../../assets/img/motif.png') center center repeat;
+		max-height: $hHeroDetailHead;
+		
+		h2 {
+			font-family:    antipastoextralight, $font-family-sans-serif;
+			letter-spacing: 0.6rem;
+			font-size:      2.3rem;
+			position:       relative;
+			
+			> .action {
+				opacity:    0;
+				@include transition(all .1s ease-in-out);
+				position:   absolute;
+				top:        0;
+				left:       0;
+				width:      100%;
+				height:     100%;
+				background: transparentize($white, .3);
+				text-align: center;
+				
+				> * {
+					width:  38px;
+					height: 38px;
+				}
+			}
+			
+			&:hover > .action {
+				opacity: 1;
+				@include transition(all .2s ease-in-out);
+			}
+		}
+		
+		> div {
+			&.d-flex { width: 100%; }
+		}
+	}
+	
+	.properties {
+		background: $gray-lighter;
+		color:      $gray-dark;
+		position:   relative;
+		
+		.entity-property:not( .btn-change ) {
+			border-right: 1px solid darken($gray-lighter, 10%);
+			color:        $gray-dark;
+			
+			&.attack { color: #842D00; }
+			&.dodge { color: #FE7700; }
+			&.damage { color: #010101; }
+			&.hp { color: #F40000; }
+			
+			&:last-child { border: none; }
+			
+			> img {
+				@include size($hHeroPropertyImg);
+			}
+			
+			> span {
+				font-size:   .9rem;
+				font-family: rolandbeckerlight, $font-family-sans-serif;
+			}
+		}
+		
+		.entity-property.btn-change {
+			position: absolute;
+			left:     0;
+		}
+	}
+}
