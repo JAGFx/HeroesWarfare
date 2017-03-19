@@ -14,7 +14,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 @Injectable()
 /* FIXME: Bug add hero & weapon. Invalid properties */
 export class HeroService extends BaseService<Hero> {
-	constructor( _http: Http ) {
+	constructor( _http: Http, private _weaponService: WeaponService ) {
 		super( _http );
 	}
 	
@@ -28,20 +28,7 @@ export class HeroService extends BaseService<Hero> {
 	 */
 	public getHeroes(): Promise<Hero[]> {
 		const path     = this.BASE_PATH_ENTITY();
-		const callback = response => {
-			/*let hSResponse : Hero[] = response.json().data as Hero[];
-			 let hS : Hero[] = [];
-			 
-			 console.log( hSResponse );
-			 
-			 for( let h of hSResponse ){
-			 hS.push( this.makeObject( h ) );
-			 }
-			 
-			 
-			 return hS;*/
-			return response.json().data as Hero;
-		};
+		const callback = response => response.json().data as Hero;
 		
 		return this.get( path, callback );
 	}
@@ -51,9 +38,10 @@ export class HeroService extends BaseService<Hero> {
 	 * @param id
 	 * @returns {Promise<Hero>}
 	 */
-	public getHero( id: number ): Promise<Hero> {
+	public getHero( id: string ): Promise<Hero> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + id;
-		const callback = response => this.makeObject( response.json().data as Hero );
+		const callback = response => this.makeObject( response.json().data );
+		
 		return this.get( path, callback );
 	}
 	
@@ -64,7 +52,7 @@ export class HeroService extends BaseService<Hero> {
 	 */
 	public putHero( hero: Hero ): Promise<Hero> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + hero.id;
-		const callback = () => hero;
+		const callback = () => this.makeObject( hero );
 		
 		return this.put( path, hero.serialize(), callback );
 	}
@@ -76,7 +64,7 @@ export class HeroService extends BaseService<Hero> {
 	 */
 	public postHero( hero: Hero ): Promise<Hero> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + hero.id;
-		const callback = res => res.json().data;
+		const callback = res => this.makeObject( res.json().data );
 		
 		return this.post( path, hero.serialize(), callback );
 	}
@@ -97,11 +85,9 @@ export class HeroService extends BaseService<Hero> {
 		let h: Hero = new Hero();
 		h.copyFrom( hero );
 		
-		if ( h.weapon ) {
-			let w: Weapon = new Weapon();
-			w.copyFrom( h.weapon );
-			h.weapon = w;
-		}
+		if ( h.weapon )
+			h.weapon = this._weaponService.makeObject( h.weapon );
+		
 		
 		return h;
 	}

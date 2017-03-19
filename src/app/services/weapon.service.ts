@@ -32,9 +32,9 @@ export class WeaponService extends BaseService<Weapon> {
 	 * @param id
 	 * @returns {Promise<Weapon>}
 	 */
-	public getWeapon( id: number ): Promise<Weapon> {
+	public getWeapon( id: string ): Promise<Weapon> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + id;
-		const callback = response => response.json().data as Weapon;
+		const callback = response => this.makeObject( response.json().data );
 		
 		return this.get( path, callback );
 	}
@@ -46,7 +46,7 @@ export class WeaponService extends BaseService<Weapon> {
 	 */
 	public putWeapon( weapon: Weapon ): Promise<Weapon> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + weapon.id;
-		const callback = () => weapon;
+		const callback = () => this.makeObject( weapon );
 		
 		return this.put( path, weapon.serialize(), callback );
 	}
@@ -58,7 +58,7 @@ export class WeaponService extends BaseService<Weapon> {
 	 */
 	public postWeapon( weapon: Weapon ): Promise<Weapon> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + weapon.id;
-		const callback = res => res.json().data;
+		const callback = res => this.makeObject( res.json().data );
 		
 		return this.post( path, weapon.serialize(), callback );
 	}
@@ -73,6 +73,18 @@ export class WeaponService extends BaseService<Weapon> {
 		const callback = () => null;
 		
 		return this.remove( path, callback );
+	}
+	
+	/**
+	 *
+	 * @param weapon
+	 * @returns {Weapon}
+	 */
+	public makeObject( weapon: Weapon ): Weapon {
+		let w: Weapon = new Weapon();
+		w.copyFrom( weapon );
+		
+		return w;
 	}
 	
 	public static jsonStringify( weapon?: Weapon ): string {

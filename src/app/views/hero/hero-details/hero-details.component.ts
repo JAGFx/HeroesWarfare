@@ -23,8 +23,6 @@ export class HeroDetailsComponent {
 		this._heroService
 		    .getHero( trans.params().id )
 		    .then( hero => {
-			    /*this.hero = new Hero();
-			     this.hero.copyFrom( hero )*/
 			    this.hero = hero;
 		    } );
 	}

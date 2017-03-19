@@ -69,13 +69,18 @@ export class Hero extends BaseEntityWarfare {
 	
 	public serialize(): any {
 		let superSerialized    = super.serialize();
-		superSerialized.weapon = this.weapon.id;
+		let w: Weapon = new Weapon();
+		
+		if ( this.weapon )
+			w.copyFrom( this.weapon );
+		
+		superSerialized.weapon = w.serialize();
 		
 		return superSerialized;
 	}
 	
 	public equal( entity: Hero ): boolean {
-		return super.equal( entity ) && entity.weapon === this.weapon;
+		return super.equal( entity ) && entity.weapon.equal( this.weapon );
 	}
 	
 	
