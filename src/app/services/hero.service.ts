@@ -12,7 +12,6 @@ import { forEach } from '@angular/router/src/utils/collection';
  */
 
 @Injectable()
-/* FIXME: Bug add hero & weapon. Invalid properties */
 export class HeroService extends BaseService<Hero> {
 	constructor( _http: Http, private _weaponService: WeaponService ) {
 		super( _http );
