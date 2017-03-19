@@ -12,9 +12,9 @@ export abstract class BaseEntity {
 	
 	public abstract equal( entity: any ): boolean;
 	
-	public static generateUUID(): string {
-		return Math.random().toString( 16 ).substring( 2, 15 ) +
-			Math.random().toString( 16 ).substring( 2, 15 );
+	public static generateUUID(): any {
+		return Math.round( Math.random().valueOf() * ( 10 ** 16 ) )
+			+ Math.round( Math.random().valueOf() * ( 10 ** 16 ) );
 	}
 	
 	public get id(): string {

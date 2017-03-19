@@ -26,25 +26,23 @@ export class HeroNewComponent implements BaseFormController<Hero>, AfterViewInit
 	
 	public validate( hero: Hero ) {
 		this._heroesService
-			.postHero( hero )
-			.then( _hero => {
-				console.log( _hero, hero );
+		    .postHero( hero )
+		    .then( _hero => {
+			    if ( this.form.entity.equal( _hero ) ) {
+				    this.form.feedback = {
+					    asError: true,
+					    type:    'success',
+					    message: 'Ajout effectuée avec succès'
+				    };
+				    this.form.init( _hero );
 				
-				if ( this.form.entity.equal( _hero ) ) {
-					this.form.feedback = {
-						asError: true,
-						type:    'success',
-						message: 'Ajout effectuée avec succès'
-					};
-					this.form.init( _hero );
-					
-				} else {
-					this.form.feedback = {
-						asError: true,
-						type:    'error',
-						message: 'Impossible d\'ajouter'
-					};
-				}
-			} );
+			    } else {
+				    this.form.feedback = {
+					    asError: true,
+					    type:    'error',
+					    message: 'Impossible d\'ajouter'
+				    };
+			    }
+		    } );
 	}
 }

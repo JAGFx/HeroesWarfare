@@ -44,18 +44,18 @@ const routes = [
 		}
 	},
 	
-	// HeroEdit:  /heroes/{:id}/edit
+	// HeroEdit:  /heroes/{id:string}/edit
 	{
-		name:  'heroes_edit', url: '/heroes/:id/edit',
+		name:  'heroes_edit', url: '/heroes/{id:string}/edit',
 		views: {
 			subMenu: { component: HeroListComponent },
 			content: { component: HeroEditComponent },
 		}
 	},
 	
-	// HeroShow:  /heroes/{:id}
+	// HeroShow:  /heroes/{id:string}
 	{
-		name:  'heroes_show', url: '/heroes/:id/show',
+		name:  'heroes_show', url: '/heroes/{id:string}/',
 		views: {
 			subMenu: { component: HeroListComponent },
 			content: { component: HeroDetailsComponent },
@@ -80,18 +80,18 @@ const routes = [
 		}
 	},
 	
-	// WeaponEdit:  /weapons/{:id}/edit
+	// WeaponEdit:  /weapons/{id:string}/edit
 	{
-		name:  'weapons_edit', url: '/weapons/:id/edit',
+		name:  'weapons_edit', url: '/weapons/{id:string}/edit',
 		views: {
 			subMenu: { component: WeaponListComponent },
 			content: { component: WeaponEditComponent },
 		}
 	},
 	
-	// WeaponShow:  /weapons/{:id}
+	// WeaponShow:  /weapons/{id:string}
 	{
-		name:  'weapons_show', url: '/weapons/:id/show',
+		name:  'weapons_show', url: '/weapons/{id:string}/',
 		views: {
 			subMenu: { component: WeaponListComponent },
 			content: { component: WeaponDetailsComponent },
