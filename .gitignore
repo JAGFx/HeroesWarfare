@@ -35,6 +35,8 @@ src/vendor/
 src/assets/dist/
 src/assets/scss/.sass-cache/
 
+documentation/
+
 # e2e
 /e2e/*.js
 /e2e/*.map
