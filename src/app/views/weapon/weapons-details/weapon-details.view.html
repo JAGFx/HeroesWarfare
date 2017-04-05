@@ -1,5 +1,39 @@
 <section *ngIf="weapon" >
-	<h2 >
+	
+	<warfare-entity-header [entity]="weapon" ></warfare-entity-header >
+	
+	<div class="card-columns col-xs-12 p-3" >
+		<div class="card card-inverse" >
+			<div class="card-block" >
+				<h4 class="card-title" >History</h4 >
+				<p class="card-text" >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda dicta eos
+					error est fuga fugit ipsa iure omnis quidem voluptatum. Aut, autem beatae consectetur consequatur
+					dicta dolorem hic incidunt inventore iure mollitia provident rem suscipit tempora. Autem corporis
+					dolorum ex, in nihil saepe sint tempora temporibus vel vero. Dolore harum id quasi voluptas? Ab
+					alias assumenda at ea incidunt, magni natus nemo nesciunt nisi officia omnis, possimus quaerat quam
+					rem tenetur veritatis voluptates. Adipisci, eveniet, ipsa. Accusamus ad alias aliquam architecto
+					consequatur cum dolor doloribus eos esse, expedita explicabo facilis fuga, fugit illum impedit iste
+					iure laudantium modi neque nobis odio officia perferendis perspiciatis quae quidem quisquam quos
+					tempora ullam unde voluptatibus? Ad enim eum laborum. Aliquid aperiam aut cumque deleniti dolor
+					dolorum eaque earum, eius explicabo fugit labore odit quaerat, quia quibusdam tenetur ullam, unde!
+					Architecto culpa enim ex harum incidunt, nam quas qui unde velit voluptatum! Architecto,
+					inventore.</p >
+			</div >
+		</div >
+		<div class="card card-inverse" >
+			<img class="card-img-top img-fluid" src="../../../../assets/img/motif.png" />
+			<div class="card-block" >
+				<h4 class="card-title" >Card title</h4 >
+				<p class="card-text" >This card has supporting text below as a natural lead-in to additional
+					content.</p >
+				<p class="card-text" >
+					<small class="text-muted" >Last updated 3 mins ago</small >
+				</p >
+			</div >
+		</div >
+	</div >
+	
+	<!--<h2 >
 		{{ weapon.name }}
 		<a uiSref="weapons_edit" [uiParams]="{ id: weapon.id }" class="btn btn-outline-info btn-xs" >Edit</a >
 		<button (click)="deleteWeapon( weapon )" class="btn btn-outline-danger btn-xs" >Delete</button >
@@ -26,5 +60,5 @@
 				<td >{{ weapon.hp }}</td >
 			</tr >
 		</tbody >
-	</table >
+	</table >-->
 </section >

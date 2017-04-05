@@ -4,7 +4,7 @@
 		<h2 >
 			{{ entity.name }}
 			<div class="action" *ngIf="options.actionBtn" >
-				<a uiSref="entityes_edit" [uiParams]="{ id: entity.id }" class="btn btn-info btn-xs rounded-circle p-2" title="Edit entity" ><i class="fa fa-pencil" aria-hidden="true" ></i ></a >
+				<a uiSref="{{ ( entity.isHero() ) ? 'heroes_edit' : 'weapons_edit' }}" [uiParams]="{ id: entity.id }" class="btn btn-info btn-xs rounded-circle p-2" title="Edit entity" ><i class="fa fa-pencil" aria-hidden="true" ></i ></a >
 				<!--TODO Delete actions-->
 				<button (click)="deleteHero( entity )" class="btn btn-danger btn-xs rounded-circle p-1" title="Delete entity" >
 					<i class="fa fa-trash-o" aria-hidden="true" ></i ></button >
