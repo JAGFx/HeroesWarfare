@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, Injectable } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { Weapon } from '../components/weapons/weapon';
 import { WeaponService } from '../services/weapon.service';
 /**

@@ -14,6 +14,7 @@ import { Subscription }   from 'rxjs/Subscription';
 export class HeroListComponent implements OnDestroy {
 	public heroes: Hero[];
 	public subscription: Subscription;
+	public search: string;
 	
 	constructor( private _heroesService: HeroService ) {
 		this._heroesService

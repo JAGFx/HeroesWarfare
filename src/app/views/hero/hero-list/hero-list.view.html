@@ -1,7 +1,11 @@
-<h2 >My Heroes <a uiSref="heroes_new" class="btn btn-outline-primary btn-xs" >New</a ></h2 >
-
+<h2 >Heroes <a uiSref="heroes_new" class="btn btn-outline-primary btn-xs" >New</a ></h2 >
+<form >
+	<div class="form-group" >
+		<input type="search" name="search" id="search" class="form-control" placeholder="Researching ..." [(ngModel)]="search" >
+	</div >
+</form >
 <ul class="nav flex-column" >
-	<li *ngFor="let hero of heroes" class="nav-item" >
+	<li *ngFor="let hero of heroes | searchFilter : 'name' : search" class="nav-item" >
 		<a class="nav-link" uiSref="heroes_show" [uiParams]="{ id: hero.id }" >{{hero.name}}</a >
 	</li >
 </ul >

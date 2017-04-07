@@ -22,11 +22,20 @@ import { WeaponSerializedPipe } from './pipes/weapon.serializer.pipe';
 import { TooltipModule } from 'ng2-bootstrap/tooltip';
 import { WarfareEntityHeaderComponent } from './components/commons/warfareEntities/warfare-entity-header/warfare-entity-header';
 import { FlatizerLabelFormDirective } from './directives/flatizer-label-form.directive';
+import { SearchFilterPipe } from './pipes/searchFilter.pipe';
+import { FilteringComponent } from './views/filtering/filtering.component';
 
 const routes = [
 	// ---------------------------------------------------- APP
 	// App : /
 	{ name: 'app', url: '/', component: AppComponent },
+	
+	// ---------------------------------------------------- FILTERING
+	{
+		name: 'filtering', url: '/filtering', views: {
+		content: { component: FilteringComponent },
+	}
+	},
 	
 	// ---------------------------------------------------- HEROES
 	// HeroHome:  /heroes/list
@@ -106,6 +115,7 @@ const routes = [
 		AppComponent,
 		WarfareEntityHeaderComponent,
 		FlatizerLabelFormDirective,
+		SearchFilterPipe,
 		
 		HeroListComponent,
 		HeroDetailsComponent,
@@ -118,7 +128,9 @@ const routes = [
 		WeaponDetailsComponent,
 		WeaponEditComponent,
 		WeaponNewComponent,
-		WeaponSerializedPipe
+		WeaponSerializedPipe,
+		
+		FilteringComponent
 	],
 	imports:      [
 		BrowserModule,

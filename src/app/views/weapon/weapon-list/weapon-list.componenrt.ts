@@ -14,6 +14,7 @@ import { Subscription }   from 'rxjs/Subscription';
 export class WeaponListComponent implements OnDestroy {
 	public weapons: Weapon[];
 	public subscription: Subscription;
+	public search: string;
 	
 	constructor( private _weaponService: WeaponService ) {
 		this._weaponService
