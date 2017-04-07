@@ -5,15 +5,9 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Weapon } from '../components/weapons/weapon';
 import { BaseService } from '../components/commons/base-service';
-import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class WeaponService extends BaseService<Weapon> {
-	private _addWeaponEvent    = new Subject<Weapon>();
-	private _deleteWeaponEvent = new Subject<Weapon>();
-	
-	public addWeaponEvent$    = this._addWeaponEvent.asObservable();
-	public deleteWeaponEvent$ = this._deleteWeaponEvent.asObservable();
 	
 	constructor( _http: Http ) {
 		super( _http );
@@ -54,7 +48,7 @@ export class WeaponService extends BaseService<Weapon> {
 	public putWeapon( weapon: Weapon ): Promise<Weapon> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + weapon.id;
 		const callback = () => {
-			this.announceNewWeapon( weapon );
+			this.announceNewEntity( weapon );
 			return this.makeObject( weapon );
 		};
 		
@@ -69,7 +63,7 @@ export class WeaponService extends BaseService<Weapon> {
 	public postWeapon( weapon: Weapon ): Promise<Weapon> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + weapon.id;
 		const callback = res => {
-			this.announceNewWeapon( weapon );
+			this.announceNewEntity( weapon );
 			return this.makeObject( res.json().data );
 		};
 		
@@ -83,17 +77,9 @@ export class WeaponService extends BaseService<Weapon> {
 	 */
 	public deleteWeapon( weapon: Weapon ): Promise<void> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + weapon.id;
-		const callback = () => this.announceDeleteWeapon( weapon );
+		const callback = () => this.announceDeleteEntity( weapon );
 		
 		return this.remove( path, callback );
-	}
-	
-	public announceNewWeapon( weapon: Weapon ) {
-		this._addWeaponEvent.next( weapon );
-	}
-	
-	public announceDeleteWeapon( weapon: Weapon ) {
-		this._deleteWeaponEvent.next( weapon );
 	}
 	
 	/**

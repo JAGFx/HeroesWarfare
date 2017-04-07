@@ -34,6 +34,9 @@ export class HeroEditComponent implements BaseFormController<Hero> {
 	
 	public validate( hero: Hero ) {
 		this._heroesService
+			.announceDeleteEntity( this.form.entityBack );
+		
+		this._heroesService
 			.putHero( hero )
 			.then( _hero => {
 				if ( this.form.entity.equal( _hero ) ) {

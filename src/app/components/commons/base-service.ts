@@ -4,10 +4,17 @@
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 
 export abstract class BaseService<T> {
 	protected static readonly BASE_PATH = 'api';
 	protected _headers                  = new Headers( { 'Content-Type': 'application/json' } );
+	
+	protected _addEntityEvent    = new Subject<T>();
+	protected _deleteEntityEvent = new Subject<T>();
+	
+	public addEntityEvent$    = this._addEntityEvent.asObservable();
+	public deleteEntityEvent$ = this._deleteEntityEvent.asObservable();
 	
 	/**
 	 *
@@ -70,6 +77,21 @@ export abstract class BaseService<T> {
 	
 	
 	// ----------------------------------------------------------------------- CLASS METHODS
+	/**
+	 *
+	 * @param entity
+	 */
+	public announceNewEntity( entity: T ) {
+		this._addEntityEvent.next( entity );
+	}
+	
+	/**
+	 *
+	 * @param entity
+	 */
+	public announceDeleteEntity( entity: T ) {
+		this._deleteEntityEvent.next( entity );
+	}
 	
 	/**
 	 *

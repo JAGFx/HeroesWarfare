@@ -4,8 +4,6 @@ import 'rxjs/add/operator/toPromise';
 import { BaseService } from '../components/commons/base-service';
 import { Http } from '@angular/http';
 import { WeaponService } from './weapon.service';
-import { Weapon } from '../components/weapons/weapon';
-import { forEach } from '@angular/router/src/utils/collection';
 
 /**
  * Created by SMITHE on 10-Feb-17.
@@ -13,6 +11,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 
 @Injectable()
 export class HeroService extends BaseService<Hero> {
+	
 	constructor( _http: Http, private _weaponService: WeaponService ) {
 		super( _http );
 	}
@@ -51,7 +50,10 @@ export class HeroService extends BaseService<Hero> {
 	 */
 	public putHero( hero: Hero ): Promise<Hero> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + hero.id;
-		const callback = () => this.makeObject( hero );
+		const callback = () => {
+			this.announceNewEntity( hero );
+			return this.makeObject( hero );
+		};
 		
 		return this.put( path, hero.serialize(), callback );
 	}
@@ -63,7 +65,10 @@ export class HeroService extends BaseService<Hero> {
 	 */
 	public postHero( hero: Hero ): Promise<Hero> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + hero.id;
-		const callback = res => this.makeObject( res.json().data );
+		const callback = res => {
+			this.announceNewEntity( hero );
+			return this.makeObject( res.json().data );
+		};
 		
 		return this.post( path, hero.serialize(), callback );
 	}
@@ -75,7 +80,7 @@ export class HeroService extends BaseService<Hero> {
 	 */
 	public deleteHero( hero: Hero ): Promise<void> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + hero.id;
-		const callback = () => null;
+		const callback = () => this.announceDeleteEntity( hero );
 		
 		return this.remove( path, callback );
 	}
@@ -86,7 +91,6 @@ export class HeroService extends BaseService<Hero> {
 		
 		if ( h.weapon )
 			h.weapon = this._weaponService.makeObject( h.weapon );
-		
 		
 		return h;
 	}

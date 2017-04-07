@@ -48,7 +48,7 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 		this.entity.copyFrom( hero );
 		
 		this.entityBack = new Hero();
-		this.entity.copyFrom( hero );
+		this.entityBack.copyFrom( hero );
 		
 		this.updateForm();
 	}
