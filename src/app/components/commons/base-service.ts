@@ -13,7 +13,7 @@ export abstract class BaseService<T> {
 	 *
 	 * @param _http
 	 */
-	constructor( private _http: Http ) {
+	constructor( protected _http: Http ) {
 	}
 	
 	// ----------------------------------------------------------------------- REST METHODS

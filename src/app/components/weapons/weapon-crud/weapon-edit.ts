@@ -34,6 +34,9 @@ export class WeaponEditComponent implements BaseFormController<Weapon> {
 	
 	public validate( weapon: Weapon ) {
 		this._weaponService
+			.announceDeleteWeapon( this.form.entityBack );
+		
+		this._weaponService
 		    .putWeapon( weapon )
 		    .then( _weapon => {
 			    if ( this.form.entity.equal( _weapon ) ) {

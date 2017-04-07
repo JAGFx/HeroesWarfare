@@ -15,7 +15,7 @@ export abstract class BaseFormComponent<T> {
 	@Output()
 	public onValidate: EventEmitter<T> = new EventEmitter();
 	
-	protected entityBack: T;
+	public entityBack: T;
 	protected form: FormGroup;
 	
 	public abstract init( entity: T ): void;
