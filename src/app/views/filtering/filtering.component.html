@@ -1,3 +1,29 @@
-<p >
-	filtering works!
-</p >
+<section class="p-3" >
+	<h3 >Filtering heroes or weapons</h3 >
+	<pre >{{ filterForm | json }}</pre >
+	<pre >{{ form | json }}</pre >
+	<form (submit)="validate()" flatizer-label-form >
+		<div class="form-group" >
+			<label for="term" >Term</label >
+			<input type="search" name="term" id="term" class="form-control" [(ngModel)]="filterForm.term" required >
+		</div >
+		<div class="form-group" >
+			<label for="term" >Entity</label >
+			<select name="entity" id="entity" class="form-control" [(ngModel)]="filterForm.entity" required >
+				<option value="Hero" >Hero</option >
+				<option value="Weapon" >Weapon</option >
+			</select >
+		</div >
+		<div class="form-group" [hidden]="!filterForm.entity" >
+			<label for="term" >Property</label >
+			<select name="property" id="property" class="form-control" [(ngModel)]="filterForm.property" >
+				<option value="name" >Name</option >
+				<option value="attack" >Attack</option >
+				<option value="dodge" >Dodge</option >
+				<option value="damage" >Damage</option >
+				<option value="hp" >HP</option >
+			</select >
+		</div >
+		<button type="submit" class="btn btn-primary" >Filter</button >
+	</form >
+</section >
