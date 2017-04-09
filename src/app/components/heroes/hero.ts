@@ -6,9 +6,10 @@ import { Weapon } from '../weapons/weapon';
  */
 
 export class Hero extends BaseEntityWarfare {
-	public static readonly MAX_SUM: number   = 40;
-	public static readonly MIN_VALUE: number = 1;
-	public static readonly MAX_VALUE: number = Hero.MAX_SUM;
+	public static readonly MAX_SUM: number                        = 40;
+	public static readonly MIN_VALUE: number                      = 1;
+	public static readonly MAX_VALUE: number                      = Hero.MAX_SUM;
+	public static readonly RATIO_IMPACT_WEAPON_PERF_INDEX: number = 0.3;
 	
 	protected _name: string;
 	protected _attack: number = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
@@ -68,8 +69,8 @@ export class Hero extends BaseEntityWarfare {
 	
 	
 	public serialize(): any {
-		let superSerialized    = super.serialize();
-		let w: Weapon = new Weapon();
+		let superSerialized = super.serialize();
+		let w: Weapon       = new Weapon();
 		
 		if ( this.weapon )
 			w.copyFrom( this.weapon );
@@ -87,6 +88,12 @@ export class Hero extends BaseEntityWarfare {
 	public copyFrom( entity: Hero ) {
 		super.copyFrom( entity );
 		this.weapon = entity.weapon;
+	}
+	
+	public getPerformanceIndex(): number {
+		return ( this.weapon )
+			? super.getPerformanceIndex() - this.weapon.getPerformanceIndex() * Hero.RATIO_IMPACT_WEAPON_PERF_INDEX
+			: super.getPerformanceIndex();
 	}
 
 // ----------------------------------------------------------------------- GETTERS - Relative
@@ -147,7 +154,7 @@ export class Hero extends BaseEntityWarfare {
 	
 	public set attack( value: number ) {
 		const oldValue: number = this._attack;
-		this._attack = value;
+		this._attack           = value;
 		
 		try {
 			this.checkProperty( value, HeroException.PROPERTIES.ATTACK );

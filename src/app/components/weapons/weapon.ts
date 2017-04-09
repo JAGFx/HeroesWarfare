@@ -68,7 +68,11 @@ export class Weapon extends BaseEntityWarfare {
 		return this instanceof Weapon;
 	}
 	
-	// ----------------------------------------------------------------------- GETTERS - Relative
+	public getPerformanceIndex(): number {
+		return ( Math.abs( this.getAbsoluteAttack() ) + Math.abs( this.getAbsoluteDodge() ) + Math.abs( this.getAbsoluteDamage() ) + Math.abs( this.getAbsoluteHp() ) );
+	}
+
+// ----------------------------------------------------------------------- GETTERS - Relative
 	
 	public get name(): string {
 		return this._name;

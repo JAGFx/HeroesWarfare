@@ -63,6 +63,10 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 		return this._attack + this._dodge + this._damage + this._hp;
 	}
 	
+	public getPerformanceIndex(): number {
+		return ( this.getAbsoluteAttack() + this.getAbsoluteDodge() + this.getAbsoluteDamage() + this.getAbsoluteHp() ) / BaseEntityWarfare.NB_PROPERTIES;
+	}
+	
 	public abstract isHero(): boolean;
 	
 	public abstract  isWeapon(): boolean;
