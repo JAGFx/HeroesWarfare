@@ -1,29 +1,44 @@
-<section class="p-3" >
-	<h3 >Filtering heroes or weapons</h3 >
-	<pre >{{ filterForm | json }}</pre >
-	<pre >{{ form | json }}</pre >
-	<form (submit)="validate()" flatizer-label-form >
-		<div class="form-group" >
-			<label for="term" >Term</label >
-			<input type="search" name="term" id="term" class="form-control" [(ngModel)]="filterForm.term" required >
-		</div >
-		<div class="form-group" >
-			<label for="term" >Entity</label >
-			<select name="entity" id="entity" class="form-control" [(ngModel)]="filterForm.entity" required >
-				<option value="Hero" >Hero</option >
-				<option value="Weapon" >Weapon</option >
-			</select >
-		</div >
-		<div class="form-group" [hidden]="!filterForm.entity" >
-			<label for="term" >Property</label >
-			<select name="property" id="property" class="form-control" [(ngModel)]="filterForm.property" >
-				<option value="name" >Name</option >
-				<option value="attack" >Attack</option >
-				<option value="dodge" >Dodge</option >
-				<option value="damage" >Damage</option >
-				<option value="hp" >HP</option >
-			</select >
-		</div >
-		<button type="submit" class="btn btn-primary" >Filter</button >
-	</form >
-</section >
+<section class="p-3">
+	<pre style="background: #FFF; color: #000;">{{ filterForm | json }}</pre>
+	
+	<h1 class="text-center">Heroes Warfare</h1>
+	<p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusamus, alias aperiam architecto
+			       assumenda atque commodi, consequuntur corporis cum cupiditate distinctio eaque expedita hic id
+			       illum ipsam iure iusto labore minima molestias neque non nostrum pariatur quibusdam rem saepe
+			       sit tenetur ullam velit vero? Accusantium ad adipisci alias architecto blanditiis consequuntur debitis
+			       deleniti deserunt distinctio dolorem eum excepturi incidunt inventore ipsa molestias natus necessitatibus
+			       neque obcaecati omnis reprehenderit, sed, sequi ut vel veniam vitae voluptate voluptatibus voluptatum!
+			       Aliquid atque deserunt earum incidunt iste itaque molestiae nihil nisi quis reiciendis. Adipisci dignissimos
+			       ex, ipsa iste iusto laborum officia quo recusandae vel.</p>
+	
+	<div class="text-center">
+		<button class="btn btn-outline-primary active" (click)="hideForm()">Top Heroes</button>
+		<button class="btn btn-outline-info" (click)="hideForm()">Top Weapons</button>
+		<button class="btn btn-outline-success" (click)="showForm()">Research</button>
+	</div>
+	
+	<form (submit)="validate()" flatizer-label-form [hidden]="!formIsShown">
+		<div class="form-group">
+			<label for="term">Term</label>
+			<input type="search" name="term" id="term" class="form-control" [(ngModel)]="filterForm.term" required>
+		</div>
+		<div class="form-group">
+			<label for="term">Entity</label>
+			<select name="entity" id="entity" class="form-control" [(ngModel)]="filterForm.entity" required>
+				<option value="Hero">Hero</option>
+				<option value="Weapon">Weapon</option>
+			</select>
+		</div>
+		<div class="form-group" [hidden]="!filterForm.entity">
+			<label for="term">Property</label>
+			<select name="property" id="property" class="form-control" [(ngModel)]="filterForm.property">
+				<option value="name">Name</option>
+				<option value="attack">Attack</option>
+				<option value="dodge">Dodge</option>
+				<option value="damage">Damage</option>
+				<option value="hp">HP</option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-primary" [hidden]="!filterForm.entity">Filter</button>
+	</form>
+</section>
