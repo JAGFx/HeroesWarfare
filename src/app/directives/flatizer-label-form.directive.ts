@@ -2,7 +2,7 @@
  * Created by emsm on 19/03/2017.
  */
 
-import { Directive, ElementRef, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 
 @Directive( { selector: '[flatizer-label-form]' } )
 
@@ -21,11 +21,11 @@ export class FlatizerLabelFormDirective implements AfterViewInit {
 					.addClass( 'moving focused' );
 			} )
 			.blur( function () {
-				let label = $( this )
+				const label = $( this )
 					.parents( '.form-group' )
 					.find( 'label' );
 				
-				if ( $( this ).val() == '' )
+				if ( $( this ).val() === '' )
 					label.removeClass( 'moving focused' );
 				else
 					label.removeClass( 'focused' );
@@ -33,7 +33,7 @@ export class FlatizerLabelFormDirective implements AfterViewInit {
 			.each( labelToInitialPosition );
 		
 		function labelToInitialPosition( index, value ) {
-			console.log( index, $( this ).val(), $( this ).is( ":empty" ) );
+			console.log( index, $( this ).val(), $( this ).is( ':empty' ) );
 			
 			if ( $( this ).val() )
 				$( this )

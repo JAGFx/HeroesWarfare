@@ -10,28 +10,6 @@ warfare-entity-header {
 			letter-spacing: 0.6rem;
 			font-size:      2.3rem;
 			position:       relative;
-			
-			> .action {
-				opacity:    0;
-				@include transition(all .1s ease-in-out);
-				position:   absolute;
-				top:        0;
-				left:       0;
-				width:      100%;
-				height:     100%;
-				background: transparentize($white, .3);
-				text-align: center;
-				
-				> * {
-					width:  38px;
-					height: 38px;
-				}
-			}
-			
-			&:hover > .action {
-				opacity: 1;
-				@include transition(all .2s ease-in-out);
-			}
 		}
 		
 		> div {
@@ -55,11 +33,11 @@ warfare-entity-header {
 			
 			&:last-child { border: none; }
 			
-			> img {
+			img {
 				@include size($hHeroPropertyImg);
 			}
 			
-			> span {
+			span {
 				font-size:   .9rem;
 				font-family: rolandbeckerlight, $font-family-sans-serif;
 			}
