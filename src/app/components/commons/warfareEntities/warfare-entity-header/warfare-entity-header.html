@@ -3,6 +3,8 @@
 	<div class="align-items-center d-flex justify-content-center">
 		<h2 class="my-2">
 			{{ entity.name }}
+			<a *ngIf="options.cardView && entity.isHero()" uiSref="heroes_show" [uiParams]="{ id: entity.id }" title="See"><i class="fa fa-eye"></i></a>
+			<a *ngIf="options.cardView && entity.isWeapon()" uiSref="weapons_show" [uiParams]="{ id: entity.id }" title="See"><i class="fa fa-eye"></i></a>
 		</h2>
 	</div>
 </div>
