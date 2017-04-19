@@ -1,5 +1,4 @@
 @import "../../../node_modules/bourbon/app/assets/stylesheets/bourbon";
-
 @import "app/variables";
 @import "app/fonts";
 @import "bootstrap/variables";
@@ -13,9 +12,12 @@ html, body {
 	color:      $gray-lightest;
 }
 
-app-root, ui-view, app-filtering {
-	display: block;
-}
+
+hr { border-color: rgba($gray-lightest, .3) }
+
+
+app-root, ui-view, app-filtering { display: block; }
+
 
 app-root {
 	margin-top: 56px;

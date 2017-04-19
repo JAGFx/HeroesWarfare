@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { BaseEntityWarfare } from '../../components/commons/warfareEntities/base-entity-warfare';
+import { Hero } from '../../components/heroes/hero';
+import { Weapon } from '../../components/weapons/weapon';
 import { HeroService } from '../../services/hero.service';
 import { WeaponService } from '../../services/weapon.service';
 
@@ -16,7 +18,7 @@ export class FilteringComponent {
 	
 	public readonly MAX_TOP_ENTITIES: number = 4;
 	
-	public filterForm                           = {};
+	public filterForm                           = { entity: '', property: '', term: '' };
 	public warfareEntities: BaseEntityWarfare[] = [];
 	
 	public formIsShown: boolean = false;
@@ -24,10 +26,19 @@ export class FilteringComponent {
 	
 	
 	constructor( private _heroesService: HeroService, private _weaponsService: WeaponService ) {
+		this.onClickTopHeroes();
 	}
 	
 	public validate() {
-		console.log( this.filterForm );
+		if ( this.filterForm.entity === Hero.name )
+			this._heroesService
+			    .search( this.filterForm.property, this.filterForm.term )
+			    .then( heroes => this.prepareHeroEntities( heroes ) );
+		
+		else if ( this.filterForm.entity === Weapon.name )
+			this._weaponsService
+			    .search( this.filterForm.property, this.filterForm.term )
+			    .then( weapons => this.prepareWeaponEntities( weapons ) );
 	}
 	
 	public showForm() {
@@ -50,18 +61,28 @@ export class FilteringComponent {
 		} );
 	}
 	
+	private prepareHeroEntities( heroes: any[] ) {
+		this.warfareEntities = [];
+		for ( let hero of heroes )
+			this.warfareEntities.push( this._heroesService.makeObject( hero ) );
+		
+		this.sortWarfareEntities();
+	}
+	
+	private prepareWeaponEntities( weapons: any[] ) {
+		this.warfareEntities = [];
+		for ( let weapon of weapons )
+			this.warfareEntities.push( this._weaponsService.makeObject( weapon ) );
+		
+		this.sortWarfareEntities();
+	}
+	
 	public onClickTopHeroes() {
 		this.hideForm();
 		this.currentView = this.FILTERING_VIEWS.HERO;
 		this._heroesService
 		    .getHeroes()
-		    .then( heroes => {
-			    this.warfareEntities = [];
-			    for ( let hero of heroes )
-				    this.warfareEntities.push( this._heroesService.makeObject( hero ) );
-			
-			    this.sortWarfareEntities();
-		    } )
+		    .then( heroes => this.prepareHeroEntities( heroes ) );
 	}
 	
 	public onClickTopWeapon() {
@@ -69,13 +90,7 @@ export class FilteringComponent {
 		this.currentView = this.FILTERING_VIEWS.WEAPON;
 		this._weaponsService
 		    .getWeapons()
-		    .then( weapons => {
-			    this.warfareEntities = [];
-			    for ( let weapon of weapons )
-				    this.warfareEntities.push( this._weaponsService.makeObject( weapon ) );
-			
-			    this.sortWarfareEntities();
-		    } );
+		    .then( weapons => this.prepareWeaponEntities( weapons ) );
 	}
 	
 	public onClickResaerch() {

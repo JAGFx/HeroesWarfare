@@ -3,8 +3,8 @@
  */
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Weapon } from '../components/weapons/weapon';
 import { BaseService } from '../components/commons/base-service';
+import { Weapon } from '../components/weapons/weapon';
 
 @Injectable()
 export class WeaponService extends BaseService<Weapon> {
@@ -80,6 +80,13 @@ export class WeaponService extends BaseService<Weapon> {
 		const callback = () => this.announceDeleteEntity( weapon );
 		
 		return this.remove( path, callback );
+	}
+	
+	public search( property: string, value: any ): Promise<Weapon[]> {
+		const path     = this.BASE_PATH_ENTITY() + '/?' + property + '=^' + Number( value );
+		const callback = response => response.json().data as Weapon;
+		
+		return this.get( path, callback );
 	}
 	
 	/**

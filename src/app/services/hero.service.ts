@@ -1,8 +1,8 @@
-import { Hero } from '../components/heroes/hero';
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { BaseService } from '../components/commons/base-service';
-import { Http } from '@angular/http';
+import { Hero } from '../components/heroes/hero';
 import { WeaponService } from './weapon.service';
 
 /**
@@ -93,5 +93,12 @@ export class HeroService extends BaseService<Hero> {
 			h.weapon = this._weaponService.makeObject( h.weapon );
 		
 		return h;
+	}
+	
+	public search( property: string, value: any ): Promise<Hero[]> {
+		const path     = this.BASE_PATH_ENTITY() + '/?' + property + '=^' + Number( value );
+		const callback = response => response.json().data as Hero;
+		
+		return this.get( path, callback );
 	}
 }
