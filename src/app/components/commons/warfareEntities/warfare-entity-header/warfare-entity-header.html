@@ -1,13 +1,14 @@
-<div class="d-flex head">
-	<img src="../../../../assets/img/leek.png" class="img-fluid rounded p-3"/>
+<div class="d-flex head" [ngClass]="{'cardView': options.cardView}">
+	<img src="../../../../assets/img/leek.png" class="img-fluid rounded" [ngClass]="{ 'p-3' :  !options.cardView, 'p-1' : options.cardView }"/>
 	<div class="align-items-center d-flex justify-content-center">
-		<h2>
+		<h2 class="my-2">
 			{{ entity.name }}
 		</h2>
 	</div>
 </div>
 <div class="d-flex justify-content-center properties p-0" *ngIf="entity">
 	<div class="entity-property px-3 py-2 btn-change"
+		*ngIf="!options.cardView"
 		placement="top" tooltip="Absolute value it's the value was effective in game"
 	>
 		<label class="custom-control custom-checkbox entity-property m-0">
@@ -16,7 +17,7 @@
 			<span class="custom-control-description">Absolute values <i class="fa fa-question-circle text-primary" aria-hidden="true"></i></span>
 		</label>
 	</div>
-	<div class="entity-property px-3 py-2 attack">
+	<div class="entity-property px-3 attack" [ngClass]="{ 'py-2' :  !options.cardView, 'py-1' : options.cardView }">
 		<img src="../../../../assets/img/attack.png" class="mr-1"
 			placement="top" tooltip="Points assigned to Attack property"/>
 		<span *ngIf="!showAbsoluteValueProperties">{{ entity.attack }}</span>
@@ -35,7 +36,7 @@
 				{{ ( (entity.weapon.getAbsoluteAttack(3)  > 0) ? '+' : '' ) + entity.weapon.getAbsoluteAttack(3) }}
 			</span>
 	</div>
-	<div class="entity-property px-3 py-2 dodge">
+	<div class="entity-property px-3 dodge" [ngClass]="{ 'py-2' :  !options.cardView, 'py-1' : options.cardView }">
 		<img src="../../../../assets/img/dodge.png" class="mr-1"
 			placement="top" tooltip="Points assigned to Dodge property"/>
 		<span *ngIf="!showAbsoluteValueProperties">{{ entity.dodge }}</span>
@@ -55,7 +56,7 @@
 				{{ ( (entity.weapon.getAbsoluteDodge(3)  > 0) ? '+' : '' ) + entity.weapon.getAbsoluteDodge(3) }}
 			</span>
 	</div>
-	<div class="entity-property px-3 py-2 damage">
+	<div class="entity-property px-3 damage" [ngClass]="{ 'py-2' :  !options.cardView, 'py-1' : options.cardView }">
 		<img src="../../../../assets/img/damage.png" class="mr-1"
 			placement="top" tooltip="Points assigned to Damage property"/>
 		<span *ngIf="!showAbsoluteValueProperties">{{ entity.damage }}</span>
@@ -75,7 +76,7 @@
 				{{ ( (entity.weapon.getAbsoluteDamage(3)  > 0) ? '+' : '' ) + entity.weapon.getAbsoluteDamage(3) }}
 			</span>
 	</div>
-	<div class="entity-property px-3 py-2 hp">
+	<div class="entity-property px-3 hp" [ngClass]="{ 'py-2' :  !options.cardView, 'py-1' : options.cardView }">
 		<img src="../../../../assets/img/hp.png" class="mr-1"
 			placement="top" tooltip="Points assigned to HP property"/>
 		<span *ngIf="!showAbsoluteValueProperties">{{ entity.hp }}</span>
@@ -95,7 +96,7 @@
 			</span>
 	</div>
 	
-	<div class="entity-property px-3 py-2 dodge">
+	<div class="entity-property px-3 dodge" [ngClass]="{ 'py-2' :  !options.cardView, 'py-1' : options.cardView }">
 		<img src="../../../../assets/img/perf_index.png" alt="" class="mr-1"
 			placement="top" tooltip="Number to evaluate the performance of {{ entity.isHero() ? 'hero' : 'weapon' }}"
 		/>

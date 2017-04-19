@@ -2,8 +2,6 @@
  * Created by emsm on 12/03/2017.
  */
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { Hero } from '../components/heroes/hero';
-import { Weapon } from '../components/weapons/weapon';
 export class InMemoryDataService implements InMemoryDbService {
 	public createDb(): {} {
 		let heroes = [
@@ -19,7 +17,7 @@ export class InMemoryDataService implements InMemoryDbService {
 			{ id: 7, name: 'Bolt', attack: 3, dodge: 14, damage: 7, hp: 4 },
 			{ id: 8, name: 'Blue Falcon', attack: 2, dodge: 13, damage: 8, hp: 3 },
 			{ id: 9, name: 'Scarlet Monarch', attack: 1, dodge: 12, damage: 9, hp: 2 },
-			{ id: 10, name: 'Starlight', attack: 0, dodge: 11, damage: 10, hp: 1 }
+			{ id: 10, name: 'Starlight', attack: 1, dodge: 11, damage: 10, hp: 1 }
 		];
 		
 		let weapons = [

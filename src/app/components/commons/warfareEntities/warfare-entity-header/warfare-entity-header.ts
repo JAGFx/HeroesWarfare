@@ -2,9 +2,8 @@
  * Created by emsm on 19/03/2017.
  */
 
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { BaseEntityWarfare } from '../base-entity-warfare';
-import { Hero } from '../../../heroes/hero';
 
 @Component( {
 	selector:    'warfare-entity-header',
@@ -17,7 +16,8 @@ export class WarfareEntityHeaderComponent implements OnInit, OnChanges {
 	
 	@Input()
 	public options: any = {
-		actionBtn: true
+		actionBtn: true,
+		cardView:  false
 	};
 	
 	public showAbsoluteValueProperties: boolean = false;

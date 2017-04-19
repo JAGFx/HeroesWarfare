@@ -15,6 +15,11 @@ warfare-entity-header {
 		> div {
 			&.d-flex { width: 100%; }
 		}
+		
+		&.cardView {
+			> img { height: 50px !important; }
+			h2 { font-size: 1.5rem; }
+		}
 	}
 	
 	.properties {

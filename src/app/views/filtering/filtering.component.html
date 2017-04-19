@@ -11,11 +11,20 @@
 			       Aliquid atque deserunt earum incidunt iste itaque molestiae nihil nisi quis reiciendis. Adipisci dignissimos
 			       ex, ipsa iste iusto laborum officia quo recusandae vel.</p>
 	
-	<div class="text-center">
-		<button class="btn btn-outline-primary active" (click)="hideForm()">Top Heroes</button>
-		<button class="btn btn-outline-info" (click)="hideForm()">Top Weapons</button>
-		<button class="btn btn-outline-success" (click)="showForm()">Research</button>
-	</div>
+	<p class="text-center">
+		<button class="btn btn-outline-primary "
+			[ngClass]="{ 'active' : currentView === FILTERING_VIEWS.HERO }"
+			(click)="onClickTopHeroes()">Top Heroes
+		</button>
+		<button class="btn btn-outline-info"
+			[ngClass]="{ 'active' : currentView === FILTERING_VIEWS.WEAPON }"
+			(click)="onClickTopWeapon()">Top Weapons
+		</button>
+		<button class="btn btn-outline-success"
+			[ngClass]="{ 'active' : currentView === FILTERING_VIEWS.SEARCH }"
+			(click)="onClickResaerch()">Research
+		</button>
+	</p>
 	
 	<form (submit)="validate()" flatizer-label-form [hidden]="!formIsShown">
 		<div class="form-group">
@@ -41,4 +50,8 @@
 		</div>
 		<button type="submit" class="btn btn-primary" [hidden]="!filterForm.entity">Filter</button>
 	</form>
+	
+	<div class="row">
+		<warfare-entity-header *ngFor="let entity of warfareEntities | limit : MAX_TOP_ENTITIES" [entity]="entity" [options]="{ actionBtn: false, cardView: true }" class="col-6 my-2"></warfare-entity-header>
+	</div>
 </section>
