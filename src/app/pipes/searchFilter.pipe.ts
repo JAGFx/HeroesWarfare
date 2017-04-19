@@ -7,7 +7,7 @@ import { BaseEntityWarfare } from '../components/commons/warfareEntities/base-en
 export class SearchFilterPipe implements PipeTransform {
 	
 	transform( list: BaseEntityWarfare[], key: string, search ): BaseEntityWarfare[] {
-		return ( list)
+		return ( list )
 			? list.filter( ( item ) => {
 				if ( item.hasOwnProperty( key ) ) {
 					if ( search ) {

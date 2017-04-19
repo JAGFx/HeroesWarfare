@@ -12,6 +12,7 @@ import { HeroNewComponent } from './components/heroes/hero-crud/hero-new';
 import { WeaponEditComponent } from './components/weapons/weapon-crud/weapon-edit';
 import { WeaponNewComponent } from './components/weapons/weapon-crud/weapon-new';
 import { FlatizerLabelFormDirective } from './directives/flatizer-label-form.directive';
+import { LimitPipe } from './pipes/limit.pipe';
 import { SearchFilterPipe } from './pipes/searchFilter.pipe';
 import { WeaponSerializedPipe } from './pipes/weapon.serializer.pipe';
 import { HeroService } from './services/hero.service';
@@ -126,7 +127,9 @@ const routes = [
 		WeaponNewComponent,
 		WeaponSerializedPipe,
 		
-		FilteringComponent
+		FilteringComponent,
+		
+		LimitPipe
 	],
 	imports:      [
 		BrowserModule,
