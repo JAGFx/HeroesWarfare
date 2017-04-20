@@ -16,10 +16,11 @@ export class Hero extends BaseEntityWarfare {
 	protected _dodge: number  = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
 	protected _damage: number = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
 	protected _hp: number     = Hero.MAX_SUM / BaseEntityWarfare.NB_PROPERTIES;
+	protected _pic: string;
 	private _weapon: Weapon;
 	
 	constructor( id?: string, name?: string, attack?: number, dodge?: number, damage?: number, hp?: number, weapon?: Weapon ) {
-		super();
+		super( name || '' );
 		
 		this._id    = id || Hero.generateUUID();
 		this._name  = name || '';
@@ -121,6 +122,10 @@ export class Hero extends BaseEntityWarfare {
 	public get weapon(): Weapon {
 		return this._weapon;
 	}
+	
+	public get pic(): string {
+		return Hero.BASE_PATH_BIN + 'hero/' + ( this._pic || 'Alley_Cat' ) + '.png';
+	}
 
 // ----------------------------------------------------------------------- GETTERS - Absolute
 	
@@ -150,6 +155,7 @@ export class Hero extends BaseEntityWarfare {
 	
 	public set name( value: string ) {
 		this._name = value;
+		this.updatePic();
 	}
 	
 	public set attack( value: number ) {

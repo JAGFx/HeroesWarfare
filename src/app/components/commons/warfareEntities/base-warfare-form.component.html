@@ -15,6 +15,11 @@
 		<input type="text" class="form-control" name="name" id="entity_name" formControlName="name" >
 	</div >
 	
+	<div class="form-group">
+		<label for="entity_name">Pic</label>
+		<input type="file" class="form-control" name="pic" id="entity_pic" formControlName="pic" disabled>
+	</div>
+	
 	<div class="form-group" *ngIf="entity.isHero()" >
 		<label for="entity_type" >Weapon</label >
 		<select name="type" id="entity_type" formControlName="weapon" class="form-control" >

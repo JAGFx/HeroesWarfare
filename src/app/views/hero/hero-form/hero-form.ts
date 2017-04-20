@@ -5,11 +5,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { BaseFormComponent } from '../../../components/commons/base-form';
-import { Hero } from '../../../components/heroes/hero';
 import { UnexpectedWarfareEntityProperty as HeroException } from '../../../components/commons/warfareEntities/base-entity-warfare-exception';
+import { Hero } from '../../../components/heroes/hero';
 import { Weapon } from '../../../components/weapons/weapon';
 import { WeaponService } from '../../../services/weapon.service';
-import { WeaponSerializedPipe } from '../../../pipes/weapon.serializer.pipe';
 
 @Component( {
 	selector:    'hero-form',
@@ -56,6 +55,7 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 	protected buildForm( fb: FormBuilder ) {
 		this.form = fb.group( {
 			name:   [ this.entity.name, Validators.required ],
+			pic:    [],
 			weapon: [ WeaponService.jsonStringify( this.entity.weapon ), Validators.required ],
 			attack: [ this.entity.attack, Validators.required ],
 			dodge:  [ this.entity.dodge, Validators.required ],

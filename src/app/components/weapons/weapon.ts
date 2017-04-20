@@ -16,9 +16,10 @@ export class Weapon extends BaseEntityWarfare {
 	protected _dodge: number  = (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
 	protected _damage: number = (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
 	protected _hp: number     = (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
+	protected _pic: string;
 	
 	constructor( id?: string, name?: string, attack?: number, dodge?: number, damage?: number, hp?: number ) {
-		super();
+		super( name || '' );
 		
 		this._id    = id || Weapon.generateUUID();
 		this._name  = name || '';
@@ -94,7 +95,11 @@ export class Weapon extends BaseEntityWarfare {
 		return this._hp;
 	}
 	
-	// ----------------------------------------------------------------------- GETTERS - Absolute
+	public get pic(): string {
+		return Hero.BASE_PATH_BIN + 'weapon/' + ( this._pic || 'Apostle' ) + '.png';
+	}
+
+// ----------------------------------------------------------------------- GETTERS - Absolute
 	
 	
 	public getAbsoluteAttack( de?: number ): number {
@@ -123,11 +128,12 @@ export class Weapon extends BaseEntityWarfare {
 	
 	public set name( value: string ) {
 		this._name = value;
+		this.updatePic();
 	}
 	
 	public set attack( value: number ) {
 		const oldValue: number = this._attack;
-		this._attack = value;
+		this._attack           = value;
 		
 		try {
 			this.checkProperty( value, WeaponException.PROPERTIES.ATTACK );

@@ -26,7 +26,7 @@
 		</div >
 		<div class="card card-inverse card-primary text-center" >
 			<div class="card-header" >Weapon carried</div >
-			<img class="card-img-top img-fluid pt-3" src="../../../../bin/weapon/destroyer.png" *ngIf="hero.weapon" />
+			<img class="card-img-top img-fluid pt-3" src="{{ hero.weapon.pic }}" *ngIf="hero.weapon"/>
 			<div class="card-block" *ngIf="hero.weapon" >
 				<h4 class="card-title" >{{ hero.weapon.name }}</h4 >
 				<blockquote class="card-blockquote" >

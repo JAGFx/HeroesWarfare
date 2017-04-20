@@ -1,12 +1,11 @@
 import { BaseEntity } from '../base-entity';
-import { Weapon } from '../../weapons/weapon';
-import { Hero } from '../../heroes/hero';
 /**
  * Created by SMITHE on 13-Mar-17.
  */
 
 export abstract class BaseEntityWarfare extends BaseEntity {
-	public static readonly NB_PROPERTIES: number = 4;
+	public static readonly NB_PROPERTIES: number     = 4;
+	public static readonly BASE_PATH_BIN             = '../bin/';
 	public static readonly COEF_RELATIVE_TO_ABSOLUTE = {
 		ANY: {
 			MIN: 1,
@@ -20,6 +19,12 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 	protected _dodge: number;
 	protected _damage: number;
 	protected _hp: number;
+	protected _pic: string;
+	
+	constructor( name: string ) {
+		super();
+		this.name = name;
+	}
 	
 	public copyFrom( entity: BaseEntityWarfare ): void {
 		this._attack = 0;
@@ -42,7 +47,8 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 			attack: this.attack,
 			dodge:  this.dodge,
 			damage: this.damage,
-			hp:     this.hp
+			hp:     this.hp,
+			pic:    this.pic
 		};
 	}
 	
@@ -52,7 +58,8 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 			this.attack === entity.attack &&
 			this.dodge === entity.dodge &&
 			this.damage === entity.damage &&
-			this.hp === entity.hp
+			this.hp === entity.hp &&
+			this.pic === entity.pic
 	}
 	
 	public abstract validateProperties(): boolean;
@@ -65,6 +72,10 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 	
 	public getPerformanceIndex(): number {
 		return ( this.getAbsoluteAttack() + this.getAbsoluteDodge() + this.getAbsoluteDamage() + this.getAbsoluteHp() ) / BaseEntityWarfare.NB_PROPERTIES;
+	}
+	
+	public updatePic() {
+		this._pic = this.name.replace( /\s/g, '_' );
 	}
 	
 	public abstract isHero(): boolean;
@@ -89,7 +100,9 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 	
 	public abstract get hp(): number;
 	
-	// ----------------------------------------------------------------------- GETTERS - Absolute
+	public abstract get pic(): string;
+
+// ----------------------------------------------------------------------- GETTERS - Absolute
 	
 	public abstract getAbsoluteAttack( de?: number ): number;
 	

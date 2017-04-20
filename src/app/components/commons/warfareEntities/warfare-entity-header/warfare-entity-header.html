@@ -1,5 +1,5 @@
 <div class="d-flex head" [ngClass]="{'cardView': options.cardView}">
-	<img src="../../../../assets/img/leek.png" class="img-fluid rounded" [ngClass]="{ 'p-3' :  !options.cardView, 'p-1' : options.cardView }"/>
+	<img src="{{ entity.pic }}" class="align-items-center justify-content-center img-fluid rounded" [ngClass]="{ 'm-3' :  !options.cardView, 'm-1' : options.cardView }"/>
 	<div class="align-items-center d-flex justify-content-center">
 		<h2 class="my-2">
 			{{ entity.name }}

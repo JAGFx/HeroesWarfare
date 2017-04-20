@@ -3,6 +3,7 @@ warfare-entity-header {
 	
 	.head {
 		background: url('../../../assets/img/motif.png') center center repeat;
+		min-height: $hHeroDetailHead / 2;
 		max-height: $hHeroDetailHead;
 		
 		h2 {

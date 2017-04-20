@@ -5,9 +5,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { BaseFormComponent } from '../../../components/commons/base-form';
-import { Weapon } from '../../../components/weapons/weapon';
 import { BaseEntityWarfare } from '../../../components/commons/warfareEntities/base-entity-warfare';
 import { UnexpectedWarfareEntityProperty as WeaponException } from '../../../components/commons/warfareEntities/base-entity-warfare-exception';
+import { Weapon } from '../../../components/weapons/weapon';
 
 
 @Component( {
@@ -23,14 +23,14 @@ export class WeaponFormComponent extends BaseFormComponent<Weapon> {
 		
 		this.buildForm( fb );
 		this.form
-			.valueChanges
-			.map( ( value ) => {
-				this.onChangeEntity( value );
-				return value;
-			} )
-			.subscribe( ( value ) => {
-				return value;
-			} );
+		    .valueChanges
+		    .map( ( value ) => {
+			    this.onChangeEntity( value );
+			    return value;
+		    } )
+		    .subscribe( ( value ) => {
+			    return value;
+		    } );
 	}
 	
 	public remainingPoints(): number {
@@ -54,6 +54,7 @@ export class WeaponFormComponent extends BaseFormComponent<Weapon> {
 	protected buildForm( fb: FormBuilder ) {
 		this.form = fb.group( {
 			name:   [ this.entity.name, Validators.required ],
+			pic:    [],
 			attack: [ this.entity.attack, Validators.required ],
 			dodge:  [ this.entity.dodge, Validators.required ],
 			damage: [ this.entity.damage, Validators.required ],
