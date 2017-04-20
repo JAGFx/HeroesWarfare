@@ -83,7 +83,7 @@ export class WeaponService extends BaseService<Weapon> {
 	}
 	
 	public search( property: string, value: any ): Promise<Weapon[]> {
-		const path     = this.BASE_PATH_ENTITY() + '/?' + property + '=^' + Number( value );
+		const path     = this.BASE_PATH_ENTITY() + '/?' + property + '=^' + ( Number( value ) || value );
 		const callback = response => response.json().data as Weapon;
 		
 		return this.get( path, callback );

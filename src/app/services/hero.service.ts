@@ -96,7 +96,7 @@ export class HeroService extends BaseService<Hero> {
 	}
 	
 	public search( property: string, value: any ): Promise<Hero[]> {
-		const path     = this.BASE_PATH_ENTITY() + '/?' + property + '=^' + Number( value );
+		const path     = this.BASE_PATH_ENTITY() + '/?' + property + '=^' + ( Number( value ) || value );
 		const callback = response => response.json().data as Hero;
 		
 		return this.get( path, callback );
