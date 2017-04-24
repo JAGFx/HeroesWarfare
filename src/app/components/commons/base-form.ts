@@ -4,17 +4,25 @@ import { FormBuilder, FormGroup } from '@angular/forms';
  * Created by SMITHE on 13-Mar-17.
  */
 
+/**
+ *  Class fto manage form of entity with check inside (Throw exception)
+ */
 export abstract class BaseFormComponent<T> {
 	/**
 	 * Class entity
+	 *
 	 * @type {T}
 	 */
 	public entity: T;
 	
 	/**
+	 * Old entity set with init method
 	 *
+	 * @type {T}
 	 */
 	public entityBack: T;
+	
+	
 	public feedback = {
 		asError: false,
 		type:    'error',

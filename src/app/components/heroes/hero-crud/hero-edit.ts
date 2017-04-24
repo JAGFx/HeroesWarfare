@@ -14,14 +14,21 @@ import { HeroFormComponent } from '../../../views/hero/hero-form/hero-form';
 	templateUrl: '../../../views/hero/hero-form/hero-form.component.html',
 } )
 
+/**
+ * Component for hero editing
+ */
 export class HeroEditComponent implements BaseFormController<Hero> {
+	/**
+	 * Sub view of form component
+	 */
 	@ViewChild( HeroFormComponent )
 	public form: HeroFormComponent;
 	
 	/**
+	 * Constructor
 	 *
 	 * @param _heroesService
-	 * @param trans
+	 * @param trans Params pass in URL (See ui-router Angular2)
 	 */
 	constructor( private _heroesService: HeroService, trans: Transition ) {
 		this._heroesService
@@ -32,6 +39,11 @@ export class HeroEditComponent implements BaseFormController<Hero> {
 			} );
 	}
 	
+	/**
+	 *  Processing after submitted form
+	 *
+	 * @param hero Entity submitted
+	 */
 	public validate( hero: Hero ) {
 		this._heroesService
 			.announceDeleteEntity( this.form.entityBack );

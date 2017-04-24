@@ -14,14 +14,21 @@ import { WeaponService } from '../../../services/weapon.service';
 	templateUrl: '../../../views/weapon/weapon-form/weapon-form.component.html',
 } )
 
+/**
+ * Component for weapon editing
+ */
 export class WeaponEditComponent implements BaseFormController<Weapon> {
+	/**
+	 * Sub view of form component
+	 */
 	@ViewChild( WeaponFormComponent )
 	public form: WeaponFormComponent;
 	
 	/**
+	 * Constructor
 	 *
 	 * @param _weaponService
-	 * @param trans
+	 * @param trans Params pass in URL (See ui-router Angular2)
 	 */
 	constructor( private _weaponService: WeaponService, trans: Transition ) {
 		this._weaponService
@@ -32,6 +39,11 @@ export class WeaponEditComponent implements BaseFormController<Weapon> {
 		    } );
 	}
 	
+	/**
+	 *  Processing after submitted form
+	 *
+	 * @param weapon Entity submitted
+	 */
 	public validate( weapon: Weapon ) {
 		this._weaponService
 			.announceDeleteEntity( this.form.entityBack );

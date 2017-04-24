@@ -13,17 +13,31 @@ import { WeaponService } from '../../../services/weapon.service';
 	templateUrl: '../../../views/weapon/weapon-form/weapon-form.component.html',
 } )
 
+/**
+ * Component for weapon creating
+ */
 export class WeaponNewComponent implements BaseFormController<Weapon>, AfterViewInit {
+	/**
+	 * Sub view of form component
+	 */
 	@ViewChild( WeaponFormComponent )
 	public form: WeaponFormComponent;
 	
 	constructor( private _weaponService: WeaponService ) {
 	}
 	
+	/**
+	 * Initialize wub view form with entity
+	 */
 	public ngAfterViewInit(): void {
 		this.form.init( new Weapon() );
 	}
 	
+	/**
+	 *  Processing after submitted form
+	 *
+	 * @param weapon Entity submitted
+	 */
 	public validate( weapon: Weapon ) {
 		this._weaponService
 		    .postWeapon( weapon )

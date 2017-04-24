@@ -6,14 +6,40 @@ import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 
+/**
+ * Class use by all services. Provide commons method to interact with an REST API
+ */
 export abstract class BaseService<T> {
+	
+	/**
+	 * Base URL of APUI
+	 *
+	 * @type {string}
+	 */
 	protected static readonly BASE_PATH = 'api';
+	
+	/**
+	 *  Common header sent in each request
+	 *
+	 * @type {Headers}
+	 */
 	protected _headers                  = new Headers( { 'Content-Type': 'application/json' } );
 	
 	protected _addEntityEvent    = new Subject<T>();
 	protected _deleteEntityEvent = new Subject<T>();
 	
+	/**
+	 * Observable to announce new entity added
+	 *
+	 * @type {Observable<T>}
+	 */
 	public addEntityEvent$    = this._addEntityEvent.asObservable();
+	
+	/**
+	 * Observable to announce new entity removing
+	 *
+	 * @type {Observable<T>}
+	 */
 	public deleteEntityEvent$ = this._deleteEntityEvent.asObservable();
 	
 	/**
@@ -26,10 +52,11 @@ export abstract class BaseService<T> {
 	// ----------------------------------------------------------------------- REST METHODS
 	
 	/**
+	 * Method to execute GET request
 	 *
-	 * @param path
-	 * @param callback
-	 * @returns {Promise<TResult|T>}
+	 * @param {string} path Resource URL
+	 * @param callback Function call after the request processing
+	 * @returns {Promise<T>}
 	 */
 	public get( path, callback ) {
 		let ob = this._http.get( path );
@@ -38,11 +65,12 @@ export abstract class BaseService<T> {
 	}
 	
 	/**
+	 * Method to execute PUT request
 	 *
-	 * @param path
-	 * @param data
-	 * @param callback
-	 * @returns {Promise<TResult|T>}
+	 * @param {string} path Resource URL
+	 * @param data Datas to pass with request
+	 * @param callback Function call after the request processing
+	 * @returns {Promise<T>}
 	 */
 	public put( path, data, callback ): Promise<T> {
 		let ob = this._http.put( path, data, { headers: this._headers } );
@@ -51,11 +79,12 @@ export abstract class BaseService<T> {
 	}
 	
 	/**
+	 * Method to execute POST request
 	 *
-	 * @param path
-	 * @param data
-	 * @param callback
-	 * @returns {Promise<TResult|T>}
+	 * @param {string} path Resource URL
+	 * @param data Datas to pass with request
+	 * @param callback Function call after the request processing
+	 * @returns {Promise<T>}
 	 */
 	public post( path, data, callback ): Promise<T> {
 		let ob = this._http.post( path, data, { headers: this._headers } );
@@ -64,10 +93,11 @@ export abstract class BaseService<T> {
 	}
 	
 	/**
+	 * Method to execute DELETE request
 	 *
-	 * @param path
-	 * @param callback
-	 * @returns {Promise<TResult|T>}
+	 * @param {string} path Resource URL
+	 * @param callback Function call after the request processing
+	 * @returns {Promise<void>}
 	 */
 	public remove( path, callback ): Promise<void> {
 		let ob = this._http.delete( path, { headers: this._headers } );
@@ -78,24 +108,27 @@ export abstract class BaseService<T> {
 	
 	// ----------------------------------------------------------------------- CLASS METHODS
 	/**
+	 * Emit new event for announce adding Entity
 	 *
-	 * @param entity
+	 * @param {T} entity Entity added
 	 */
 	public announceNewEntity( entity: T ) {
 		this._addEntityEvent.next( entity );
 	}
 	
 	/**
+	 * Emit new event for announce removing Entity
 	 *
-	 * @param entity
+	 * @param {T} entity Entity removed
 	 */
 	public announceDeleteEntity( entity: T ) {
 		this._deleteEntityEvent.next( entity );
 	}
 	
 	/**
+	 * Get the relative path of current service
 	 *
-	 * @returns {string}
+	 * @returns {string} Relative path
 	 * @constructor
 	 */
 	protected BASE_PATH_ENTITY(): string {
@@ -103,10 +136,11 @@ export abstract class BaseService<T> {
 	}
 	
 	/**
+	 * Convert observable & call callback
 	 *
-	 * @param observable
-	 * @param callback
-	 * @returns {Promise<TResult|T>}
+	 * @param observable Observable of request
+	 * @param callback Function call after the request processing
+	 * @returns {Promise<T|void>}
 	 */
 	protected process( observable: Observable<Response>, callback ) {
 		return observable
@@ -116,8 +150,9 @@ export abstract class BaseService<T> {
 	}
 	
 	/**
+	 * Handle error in request
 	 *
-	 * @param error
+	 * @param error Error handled
 	 * @returns {Promise<never>}
 	 */
 	protected handleError( error: any ): Promise<any> {

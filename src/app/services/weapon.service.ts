@@ -6,6 +6,9 @@ import { Http } from '@angular/http';
 import { BaseService } from '../components/commons/base-service';
 import { Weapon } from '../components/weapons/weapon';
 
+/**
+ *  Weapon service
+ */
 @Injectable()
 export class WeaponService extends BaseService<Weapon> {
 	
@@ -17,9 +20,11 @@ export class WeaponService extends BaseService<Weapon> {
 		return super.BASE_PATH_ENTITY() + '/weapons';
 	}
 	
+	// ----------------------------------------------------------------------- REST Method
 	/**
+	 * Get weapons
 	 *
-	 * @returns {Promise<Weapon[]>}
+	 * @returns {Promise<Weapon[]>} List of Weapon
 	 */
 	public getWeapons(): Promise<Weapon[]> {
 		const path     = this.BASE_PATH_ENTITY();
@@ -29,9 +34,10 @@ export class WeaponService extends BaseService<Weapon> {
 	}
 	
 	/**
+	 * Get specific weapon
 	 *
-	 * @param id
-	 * @returns {Promise<Weapon>}
+	 * @param id ID of weapon
+	 * @returns {Promise<Weapon>} Weapon
 	 */
 	public getWeapon( id: string ): Promise<Weapon> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + id;
@@ -41,9 +47,10 @@ export class WeaponService extends BaseService<Weapon> {
 	}
 	
 	/**
+	 * Update weapon
 	 *
-	 * @param weapon
-	 * @returns {Promise<Weapon>}
+	 * @param weapon Weapon to update
+	 * @returns {Promise<Weapon>} Weapon updated
 	 */
 	public putWeapon( weapon: Weapon ): Promise<Weapon> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + weapon.id;
@@ -56,9 +63,10 @@ export class WeaponService extends BaseService<Weapon> {
 	}
 	
 	/**
+	 * Add weapon
 	 *
-	 * @param weapon
-	 * @returns {Promise<Weapon>}
+	 * @param weapon Weapon to add
+	 * @returns {Promise<Weapon>} Weapon added
 	 */
 	public postWeapon( weapon: Weapon ): Promise<Weapon> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + weapon.id;
@@ -71,8 +79,9 @@ export class WeaponService extends BaseService<Weapon> {
 	}
 	
 	/**
+	 *  Weapon to remove
 	 *
-	 * @param weapon
+	 * @param weapon Weapon to remove
 	 * @returns {Promise<void>}
 	 */
 	public deleteWeapon( weapon: Weapon ): Promise<void> {
@@ -82,6 +91,13 @@ export class WeaponService extends BaseService<Weapon> {
 		return this.remove( path, callback );
 	}
 	
+	/**
+	 *  Search weapon with params
+	 *
+	 * @param property Property  where do the search
+	 * @param value Term to search
+	 * @returns {Promise<any>} List of Heroes corresponding to the search
+	 */
 	public search( property: string, value: any ): Promise<Weapon[]> {
 		const path     = this.BASE_PATH_ENTITY() + '/?' + property + '=^' + ( Number( value ) || value );
 		const callback = response => response.json().data as Weapon;
@@ -89,10 +105,13 @@ export class WeaponService extends BaseService<Weapon> {
 		return this.get( path, callback );
 	}
 	
+	// ----------------------------------------------------------------------- SERVICE Method
+	
 	/**
+	 * Create a TRUE Hero object
 	 *
-	 * @param weapon
-	 * @returns {Weapon}
+	 * @param weapon Object to convert
+	 * @returns {Weapon} TRUE Hero object
 	 */
 	public makeObject( weapon: Weapon ): Weapon {
 		let w: Weapon = new Weapon();
@@ -101,6 +120,12 @@ export class WeaponService extends BaseService<Weapon> {
 		return w;
 	}
 	
+	/**
+	 *  Stringify weapon
+	 *
+	 * @param weapon Weapon to stringify
+	 * @returns {any} Weapon stringified
+	 */
 	public static jsonStringify( weapon?: Weapon ): string {
 		if ( !weapon )
 			return null;
@@ -110,6 +135,12 @@ export class WeaponService extends BaseService<Weapon> {
 		return JSON.stringify( w.serialize() );
 	}
 	
+	/**
+	 *  Parse string of weapon to object
+	 *
+	 * @param weapon String of weapon
+	 * @returns {Weapon} Object weapon
+	 */
 	public static jsonParse( weapon: string ): Weapon {
 		return JSON.parse( weapon ) as Weapon;
 	}

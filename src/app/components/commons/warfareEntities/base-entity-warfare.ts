@@ -3,9 +3,24 @@ import { BaseEntity } from '../base-entity';
  * Created by SMITHE on 13-Mar-17.
  */
 
+/**
+ * Base use for warfare entities
+ */
 export abstract class BaseEntityWarfare extends BaseEntity {
+	
+	/**
+	 * @type {number} Number of properties
+	 */
 	public static readonly NB_PROPERTIES: number     = 4;
+	
+	/**
+	 * @type {string} Path to binaries (Warfare pictures)
+	 */
 	public static readonly BASE_PATH_BIN             = '../bin/';
+	
+	/**
+	 * @type {any} Coef use for process performance index
+	 */
 	public static readonly COEF_RELATIVE_TO_ABSOLUTE = {
 		ANY: {
 			MIN: 1,
@@ -21,6 +36,7 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 	protected _hp: number;
 	protected _pic: string;
 	
+	// ----------------------------------------------------------------------- BaseEntity implementation
 	constructor( name: string ) {
 		super();
 		this.name = name;
@@ -62,21 +78,48 @@ export abstract class BaseEntityWarfare extends BaseEntity {
 			this.pic === entity.pic
 	}
 	
+	// ----------------------------------------------------------------------- Class methods
+	
+	/**
+	 * Return if the entity have a correct properties
+	 *
+	 *  @return {boolean} True if correct
+	 */
 	public abstract validateProperties(): boolean;
 	
+	/**
+	 *  Check if all properties of entity are correct
+	 *
+	 * @param nextValue the new value to set in property
+	 * @param property Name of property to assign value
+	 */
 	protected abstract checkProperty( nextValue, property: string ): any;
 	
+	/**
+	 * Get sum of properties
+	 *
+	 * @returns {number} Sum of properties
+	 */
 	public sumProperties(): number {
 		return this._attack + this._dodge + this._damage + this._hp;
 	}
 	
+	/**
+	 *  Get performance index of entity ( Number to evaluate the performance of entity )
+	 *
+	 * @returns {number} Performance index
+	 */
 	public getPerformanceIndex(): number {
 		return ( this.getAbsoluteAttack() + this.getAbsoluteDodge() + this.getAbsoluteDamage() + this.getAbsoluteHp() ) / BaseEntityWarfare.NB_PROPERTIES;
 	}
 	
+	/**
+	 * Update pic with the current name of entity
+	 */
 	public updatePic() {
 		this._pic = this.name.replace( /\s/g, '_' );
 	}
+	
 	
 	public abstract isHero(): boolean;
 	

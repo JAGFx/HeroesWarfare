@@ -2,8 +2,14 @@
  * Created by emsm on 12/03/2017.
  */
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+
+/**
+ * In memory service
+ */
 export class InMemoryDataService implements InMemoryDbService {
 	public createDb(): {} {
+		
+		// --------------------------------------------------------------------- Heroes
 		let heroes = [
 			{
 				id:     1, name: 'Snow Raven', attack: 9, dodge: 20, damage: 1, hp: 10,
@@ -20,6 +26,7 @@ export class InMemoryDataService implements InMemoryDbService {
 			{ id: 10, name: 'Starlight', attack: 1, dodge: 11, damage: 10, hp: 1 }
 		];
 		
+		// --------------------------------------------------------------------- Weapons
 		let weapons = [
 			{ id: 1, name: 'Glinting Vessel', attack: -5, dodge: 5, damage: 1, hp: -1 },
 			{ id: 2, name: 'Nightkiss', attack: 4, dodge: -4, damage: -2, hp: 2 },
@@ -28,6 +35,7 @@ export class InMemoryDataService implements InMemoryDbService {
 			{ id: 5, name: 'Nexus', attack: -1, dodge: 1, damage: 5, hp: -5 },
 			{ id: 6, name: 'Enigma', attack: 5, dodge: 5, damage: -5, hp: -5 }
 		];
+		
 		return { heroes, weapons };
 	}
 }

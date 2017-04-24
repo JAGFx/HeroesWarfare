@@ -6,12 +6,18 @@ import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 
 @Directive( { selector: '[flatizer-label-form]' } )
 
+/**
+ * Directive to custom form UI
+ */
 export class FlatizerLabelFormDirective implements AfterViewInit {
 	
 	constructor( private _el: ElementRef ) {
 		console.log( this._el );
 	}
 	
+	/**
+	 * Code to execute when app are ready
+	 */
 	ngAfterViewInit(): void {
 		$( '.form-control' )
 			.focus( function () {

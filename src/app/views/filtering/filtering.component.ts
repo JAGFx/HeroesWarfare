@@ -9,6 +9,10 @@ import { WeaponService } from '../../services/weapon.service';
 	selector:    'app-filtering',
 	templateUrl: 'filtering.component.html'
 } )
+
+/**
+ * Filtering component
+ */
 export class FilteringComponent {
 	public readonly FILTERING_VIEWS = {
 		HERO:   'hero',
@@ -29,6 +33,19 @@ export class FilteringComponent {
 		this.onClickTopHeroes();
 	}
 	
+	public showForm() {
+		this.formIsShown = true;
+	}
+	
+	public hideForm() {
+		this.formIsShown = false;
+	}
+	
+	// ----------------------------------------------------------------------- PROCESSING
+	
+	/**
+	 * Process to the search after submited form
+	 */
 	public validate() {
 		if ( this.filterForm.entity === Hero.name )
 			this._heroesService
@@ -41,14 +58,9 @@ export class FilteringComponent {
 			    .then( weapons => this.prepareWeaponEntities( weapons ) );
 	}
 	
-	public showForm() {
-		this.formIsShown = true;
-	}
-	
-	public hideForm() {
-		this.formIsShown = false;
-	}
-	
+	/**
+	 *  Sort result entity by name DESC
+	 */
 	public sortWarfareEntities() {
 		this.warfareEntities.sort( ( a: BaseEntityWarfare, b: BaseEntityWarfare ): any => {
 			if ( a.getPerformanceIndex() > b.getPerformanceIndex() )
@@ -61,6 +73,11 @@ export class FilteringComponent {
 		} );
 	}
 	
+	/**
+	 * Convert all items of list to TRUE Hero object
+	 *
+	 * @param heroes List to convert
+	 */
 	private prepareHeroEntities( heroes: any[] ) {
 		this.warfareEntities = [];
 		for ( let hero of heroes )
@@ -69,6 +86,11 @@ export class FilteringComponent {
 		this.sortWarfareEntities();
 	}
 	
+	/**
+	 *  Convert all items of list to TRUE Weapon object
+	 *
+	 * @param weapons List to convert
+	 */
 	private prepareWeaponEntities( weapons: any[] ) {
 		this.warfareEntities = [];
 		for ( let weapon of weapons )
@@ -77,6 +99,11 @@ export class FilteringComponent {
 		this.sortWarfareEntities();
 	}
 	
+	// ----------------------------------------------------------------------- METHOD On event
+	
+	/**
+	 * Change current view to Top of heroes
+	 */
 	public onClickTopHeroes() {
 		this.hideForm();
 		this.currentView = this.FILTERING_VIEWS.HERO;
@@ -85,6 +112,9 @@ export class FilteringComponent {
 		    .then( heroes => this.prepareHeroEntities( heroes ) );
 	}
 	
+	/**
+	 * Change current view to Top of weapons
+	 */
 	public onClickTopWeapon() {
 		this.hideForm();
 		this.currentView = this.FILTERING_VIEWS.WEAPON;
@@ -93,6 +123,9 @@ export class FilteringComponent {
 		    .then( weapons => this.prepareWeaponEntities( weapons ) );
 	}
 	
+	/**
+	 *  Change current view to Search
+	 */
 	public onClickResaerch() {
 		this.showForm();
 		this.warfareEntities = [];

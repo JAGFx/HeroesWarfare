@@ -13,17 +13,31 @@ import { HeroFormComponent } from '../../../views/hero/hero-form/hero-form';
 	templateUrl: '../../../views/hero/hero-form/hero-form.component.html',
 } )
 
+/**
+ * Component for hero creating
+ */
 export class HeroNewComponent implements BaseFormController<Hero>, AfterViewInit {
+	/**
+	 * Sub view of form component
+	 */
 	@ViewChild( HeroFormComponent )
 	public form: HeroFormComponent;
 	
 	constructor( private _heroesService: HeroService ) {
 	}
 	
+	/**
+	 * Initialize wub view form with entity
+	 */
 	public ngAfterViewInit(): void {
 		this.form.init( new Hero() );
 	}
 	
+	/**
+	 *  Processing after submitted form
+	 *
+	 * @param hero Entity submitted
+	 */
 	public validate( hero: Hero ) {
 		this._heroesService
 		    .postHero( hero )

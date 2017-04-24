@@ -5,6 +5,9 @@ import { Hero } from '../heroes/hero';
  * Created by emsm on 13/03/2017.
  */
 
+/**
+ * Weapon entity
+ */
 export class Weapon extends BaseEntityWarfare {
 	public static readonly MIN_VALUE: number      = -5;
 	public static readonly MAX_VALUE: number      = 5;
@@ -29,6 +32,7 @@ export class Weapon extends BaseEntityWarfare {
 		this.hp     = hp || (Weapon.MIN_VALUE + Weapon.MAX_VALUE) / 2;
 	}
 	
+	// ----------------------------------------------------------------------- BaseEntityWarfare implementation
 	public validateProperties(): boolean {
 		return this.sumProperties() === Weapon.SUM_PROPERTIES;
 	}

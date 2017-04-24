@@ -9,6 +9,9 @@ import { WeaponService } from './weapon.service';
  * Created by SMITHE on 10-Feb-17.
  */
 
+/**
+ * Hero service
+ */
 @Injectable()
 export class HeroService extends BaseService<Hero> {
 	
@@ -20,9 +23,11 @@ export class HeroService extends BaseService<Hero> {
 		return super.BASE_PATH_ENTITY() + '/heroes';
 	}
 	
+	// ----------------------------------------------------------------------- REST Method
+	
 	/**
-	 *
-	 * @returns {Promise<Hero[]>}
+	 * Get all heroes
+	 * @returns {Promise<Hero[]>} List of Heroes
 	 */
 	public getHeroes(): Promise<Hero[]> {
 		const path     = this.BASE_PATH_ENTITY();
@@ -32,9 +37,10 @@ export class HeroService extends BaseService<Hero> {
 	}
 	
 	/**
+	 * Get specific hero
 	 *
-	 * @param id
-	 * @returns {Promise<Hero>}
+	 * @param id ID of Hero
+	 * @returns {Promise<Hero>} Hero
 	 */
 	public getHero( id: string ): Promise<Hero> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + id;
@@ -44,9 +50,10 @@ export class HeroService extends BaseService<Hero> {
 	}
 	
 	/**
+	 * Update new hero
 	 *
-	 * @param hero
-	 * @returns {Promise<Hero>}
+	 * @param hero Hero to update
+	 * @returns {Promise<Hero>} Hero updated
 	 */
 	public putHero( hero: Hero ): Promise<Hero> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + hero.id;
@@ -59,9 +66,10 @@ export class HeroService extends BaseService<Hero> {
 	}
 	
 	/**
+	 * Add new hero
 	 *
-	 * @param hero
-	 * @returns {Promise<Hero>}
+	 * @param hero Hero to add
+	 * @returns {Promise<Hero>} Hero added
 	 */
 	public postHero( hero: Hero ): Promise<Hero> {
 		const path     = this.BASE_PATH_ENTITY() + '/' + hero.id;
@@ -74,8 +82,9 @@ export class HeroService extends BaseService<Hero> {
 	}
 	
 	/**
+	 *  Delete heroe
 	 *
-	 * @param hero
+	 * @param hero Hero to delete
 	 * @returns {Promise<void>}
 	 */
 	public deleteHero( hero: Hero ): Promise<void> {
@@ -85,6 +94,28 @@ export class HeroService extends BaseService<Hero> {
 		return this.remove( path, callback );
 	}
 	
+	/**
+	 *  Search hero with params
+	 *
+	 * @param property Property  where do the search
+	 * @param value Term to search
+	 * @returns {Promise<any>} List of Heroes corresponding to the search
+	 */
+	public search( property: string, value: any ): Promise<Hero[]> {
+		const path     = this.BASE_PATH_ENTITY() + '/?' + property + '=^' + ( Number( value ) || value );
+		const callback = response => response.json().data as Hero;
+		
+		return this.get( path, callback );
+	}
+	
+	
+	// ----------------------------------------------------------------------- SERVICE Method
+	/**
+	 * Create a TRUE Hero object
+	 *
+	 * @param hero Object to convert
+	 * @returns {Hero} TRUE Hero object
+	 */
 	public makeObject( hero: Hero ): Hero {
 		let h: Hero = new Hero();
 		h.copyFrom( hero );
@@ -93,12 +124,5 @@ export class HeroService extends BaseService<Hero> {
 			h.weapon = this._weaponService.makeObject( h.weapon );
 		
 		return h;
-	}
-	
-	public search( property: string, value: any ): Promise<Hero[]> {
-		const path     = this.BASE_PATH_ENTITY() + '/?' + property + '=^' + ( Number( value ) || value );
-		const callback = response => response.json().data as Hero;
-		
-		return this.get( path, callback );
 	}
 }
