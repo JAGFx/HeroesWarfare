@@ -31,7 +31,7 @@ Development server
 $ npm start
 ````
 
-Documentation
+Generate documentation
 
 ````bash
 $ npm compodoc
@@ -64,4 +64,4 @@ Folders:
 
 * `assets/` : Regroupe tous les fichiers de style (CSS et JavaScript) + image servant uniquement à ces fichiers.
 
-* `bin/`: Regroup all resources use in app such as Hero pic
+* `bin/`: Resources use in app such as Hero pic
