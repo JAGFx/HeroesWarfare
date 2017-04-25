@@ -27,11 +27,13 @@ import { WeaponListComponent } from './views/weapon/weapon-list/weapon-list.comp
 import { WeaponDetailsComponent } from './views/weapon/weapons-details/weapon-details.component';
 
 const routes = [
+	
 	// ---------------------------------------------------- FILTERING
 	{
-		name: 'filtering', url: '/', views: {
-		content: { component: FilteringComponent },
-	}
+		name:  'filtering', url: '/',
+		views: {
+			content: { component: FilteringComponent },
+		}
 	},
 	
 	// ---------------------------------------------------- HEROES

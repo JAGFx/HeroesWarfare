@@ -113,6 +113,7 @@ export abstract class BaseService<T> {
 	 * @param {T} entity Entity added
 	 */
 	public announceNewEntity( entity: T ) {
+		console.warn( entity );
 		this._addEntityEvent.next( entity );
 	}
 	

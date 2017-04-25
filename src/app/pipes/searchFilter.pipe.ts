@@ -20,7 +20,7 @@ export class SearchFilterPipe implements PipeTransform {
 	transform( list: BaseEntityWarfare[], key: string, search ): BaseEntityWarfare[] {
 		return ( list )
 			? list.filter( ( item ) => {
-				if ( item.hasOwnProperty( key ) ) {
+				if ( item.hasOwnProperty( key ) || item.hasOwnProperty( '_' + key ) ) {
 					if ( search ) {
 						let regExp = new RegExp( '\\b' + search, 'gi' );
 						return regExp.test( item[ key ] );
