@@ -1,10 +1,4 @@
 <section *ngIf="hero" >
-	<!--<h2 >
-		{{ hero.name }}
-		<a uiSref="heroes_edit" [uiParams]="{ id: hero.id }" class="btn btn-outline-info btn-xs" >Edit</a >
-		<button (click)="deleteHero( hero )" class="btn btn-outline-danger btn-xs" >Delete</button >
-	</h2 >-->
-	
 	<warfare-entity-header [entity]="hero" ></warfare-entity-header >
 	
 	<div class="card-columns col-xs-12 p-3" >
@@ -37,42 +31,5 @@
 				No carried weapon yet
 			</p >
 		</div >
-		<!--
-		<div class="card card-inverse text-center" >
-			<div class="card-block" >
-				<h4 class="card-title" >Card title</h4 >
-				<p class="card-text" >This card has supporting text below as a natural lead-in to additional content.</p >
-				<p class="card-text" >
-					<small class="text-muted" >Last updated 3 mins ago</small >
-				</p >
-			</div >
-		</div >
-		<div class="card card-inverse" >
-			<img class="card-img img-fluid" src="..." alt="Card image" >
-		</div >
-		<div class="card card-inverse p-3 text-right" >
-			<blockquote class="card-blockquote" >
-				<p >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p >
-				<footer >
-					<small class="text-muted" >
-						Someone famous in <cite title="Source Title" >Source Title</cite >
-					</small >
-				</footer >
-			</blockquote >
-		</div >
-		<div class="card card-inverse" >
-			<div class="card-block" >
-				<h4 class="card-title" >Card title</h4 >
-				<p class="card-text" >This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p >
-				<p class="card-text" >
-					<small class="text-muted" >Last updated 3 mins ago</small >
-				</p >
-			</div >
-		</div >-->
 	</div >
-	<!--<div class="col-xs-12" *ngIf="hero.weapon" >
-		<h2 >Weapon</h2 >
-		{{ hero.weapon.name }}
-		<a class="btn btn-outline-primary" uiSref="weapons_show" [uiParams]="{ id: hero.weapon.id }" >Show</a >
-	</div >-->
 </section >

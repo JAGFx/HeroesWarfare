@@ -12,11 +12,11 @@ import { Transition } from "ui-router-ng2";
 	templateUrl: 'hero-details.view.html',
 } )
 
+/**
+ * Hero detail component
+ */
 export class HeroDetailsComponent {
 	public hero: Hero;
-	
-	@Output()
-	onDeleteHero: EventEmitter<Hero> = new EventEmitter();
 	
 	constructor( private _heroService: HeroService, trans: Transition ) {
 		this._heroService
@@ -24,9 +24,5 @@ export class HeroDetailsComponent {
 		    .then( hero => {
 			    this.hero = hero;
 		    } );
-	}
-	
-	public deleteHero( hero: Hero ) {
-		this.onDeleteHero.emit( hero );
 	}
 }
