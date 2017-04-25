@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
  */
 
 /**
- *  Class fto manage form of entity with check inside (Throw exception)
+ *  Class for manage form of entity with check inside (Throw exception)
  */
 export abstract class BaseFormComponent<T> {
 	/**

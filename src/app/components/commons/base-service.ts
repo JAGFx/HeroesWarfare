@@ -2,17 +2,17 @@
  * Created by SMITHE on 14-Mar-17.
  */
 import { Headers, Http, Response } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs';
+import 'rxjs/add/operator/toPromise';
 import { Subject } from 'rxjs/Subject';
 
 /**
- * Class use by all services. Provide commons method to interact with an REST API
+ * Class use by all services. Provide commons method to interact with a REST API
  */
 export abstract class BaseService<T> {
 	
 	/**
-	 * Base URL of APUI
+	 * Base URL of API
 	 *
 	 * @type {string}
 	 */

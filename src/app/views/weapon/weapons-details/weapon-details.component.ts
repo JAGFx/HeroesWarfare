@@ -3,7 +3,7 @@
  */
 
 import { Component } from '@angular/core';
-import { Transition } from "ui-router-ng2";
+import { Transition } from 'ui-router-ng2';
 import { Weapon } from '../../../components/weapons/weapon';
 import { WeaponService } from '../../../services/weapon.service';
 
@@ -12,6 +12,9 @@ import { WeaponService } from '../../../services/weapon.service';
 	templateUrl: 'weapon-details.view.html',
 } )
 
+/**
+ * Weapon details components
+ */
 export class WeaponDetailsComponent {
 	public weapon: Weapon;
 	

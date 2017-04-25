@@ -18,6 +18,7 @@ import { WeaponService } from '../../../services/weapon.service';
 export class HeroFormComponent extends BaseFormComponent<Hero> {
 	private weapons: Weapon[];
 	
+	// ----------------------------------------------------------------------- BaseEntityWarfare implementation
 	constructor( fb: FormBuilder, private _weaponService: WeaponService ) {
 		super();
 		this.entity = new Hero();
@@ -36,10 +37,6 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 		    .subscribe( ( value ) => {
 			    return value;
 		    } );
-	}
-	
-	public remainingPoints(): number {
-		return Hero.MAX_SUM - this.entity.sumProperties();
 	}
 	
 	public init( hero: Hero ) {
@@ -96,5 +93,17 @@ export class HeroFormComponent extends BaseFormComponent<Hero> {
 				this.updateForm();
 			}
 		}
+	}
+	
+	
+	// ----------------------------------------------------------------------- HeroFormComponent methods
+	
+	/**
+	 * Calculate remaining points to assign to hero
+	 *
+	 * @returns {number} Remaining points to assign
+	 */
+	public remainingPoints(): number {
+		return Hero.MAX_SUM - this.entity.sumProperties();
 	}
 }

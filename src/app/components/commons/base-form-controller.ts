@@ -4,7 +4,7 @@ import { BaseFormComponent } from './base-form';
  */
 
 /**
- *  Interface  for controller of BaseFormComponent
+ *  Interface for controller of BaseFormComponent
  */
 export interface BaseFormController<T> {
 	

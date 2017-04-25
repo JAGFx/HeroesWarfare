@@ -17,6 +17,7 @@ import { Weapon } from '../../../components/weapons/weapon';
 
 export class WeaponFormComponent extends BaseFormComponent<Weapon> {
 	
+	// ----------------------------------------------------------------------- BaseEntityWarfare implementation
 	constructor( fb: FormBuilder ) {
 		super();
 		this.entity = new Weapon();
@@ -31,14 +32,6 @@ export class WeaponFormComponent extends BaseFormComponent<Weapon> {
 		    .subscribe( ( value ) => {
 			    return value;
 		    } );
-	}
-	
-	public remainingPoints(): number {
-		return ( (( Math.abs( Weapon.MIN_VALUE ) + Math.abs( Weapon.MAX_VALUE ) ) * BaseEntityWarfare.NB_PROPERTIES ) / 2)
-			- Math.abs( this.entity.attack )
-			- Math.abs( this.entity.dodge )
-			- Math.abs( this.entity.damage )
-			- Math.abs( this.entity.hp );
 	}
 	
 	public init( weapon: Weapon ) {
@@ -96,7 +89,6 @@ export class WeaponFormComponent extends BaseFormComponent<Weapon> {
 		}
 	}
 	
-	
 	public validate(): void {
 		try {
 			if ( !this.entity.validateProperties() )
@@ -115,5 +107,20 @@ export class WeaponFormComponent extends BaseFormComponent<Weapon> {
 				this.updateForm();
 			}
 		}
+	}
+	
+	// ----------------------------------------------------------------------- HeroFormComponent methods
+	
+	/**
+	 * Calculate remaining points to assign to weapon
+	 *
+	 * @returns {number} Remaining points to assign
+	 */
+	public remainingPoints(): number {
+		return ( (( Math.abs( Weapon.MIN_VALUE ) + Math.abs( Weapon.MAX_VALUE ) ) * BaseEntityWarfare.NB_PROPERTIES ) / 2)
+			- Math.abs( this.entity.attack )
+			- Math.abs( this.entity.dodge )
+			- Math.abs( this.entity.damage )
+			- Math.abs( this.entity.hp );
 	}
 }

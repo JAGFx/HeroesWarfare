@@ -26,6 +26,15 @@ import { WeaponFormComponent } from './views/weapon/weapon-form/weapon-form';
 import { WeaponListComponent } from './views/weapon/weapon-list/weapon-list.componenrt';
 import { WeaponDetailsComponent } from './views/weapon/weapons-details/weapon-details.component';
 
+/**
+ *  ROUTING
+ *  2 views:
+ *    - Left menu : List of entity + filtering by name
+ *    - Content: Main view
+ *
+ *  Each views use one component
+ */
+
 const routes = [
 	
 	// ---------------------------------------------------- FILTERING
