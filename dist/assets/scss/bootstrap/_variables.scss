@@ -1,0 +1,21 @@
+@import "../app/variables";
+
+
+$blue: $cAccentColor;
+$gray-lightest: #F5F5F5;
+
+$enable-rounded: true;
+
+$border-radius: 0;
+$border-radius-lg: $border-radius;
+$border-radius-sm: $border-radius;
+
+$font-family-sans-serif: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-base: rolandbeckerlight, $font-family-sans-serif;
+
+$card-bg: lighten($cAccentDark, 7%);
+
+@import "../../../vendor/bootstrap/scss/variables";
+
+$tooltip-bg: $cAccentColor;
+$tooltip-arrow-color: $cAccentColor;

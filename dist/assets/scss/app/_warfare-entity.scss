@@ -1,0 +1,57 @@
+warfare-entity-header {
+	display: block;
+	
+	.head {
+		background: url('../../../assets/img/motif.png') center center repeat;
+		min-height: $hHeroDetailHead / 2;
+		max-height: $hHeroDetailHead;
+		
+		h2 {
+			font-family:    antipastoextralight, $font-family-sans-serif;
+			letter-spacing: 0.6rem;
+			font-size:      2.3rem;
+			position:       relative;
+		}
+		
+		> div {
+			&.d-flex { width: 100%; }
+		}
+		
+		&.cardView {
+			> img { height: 50px !important; }
+			h2 { font-size: 1.5rem; }
+		}
+	}
+	
+	.properties {
+		background: $gray-lighter;
+		color:      $gray-dark;
+		position:   relative;
+		
+		.entity-property:not( .btn-change ) {
+			border-right: 1px solid darken($gray-lighter, 10%);
+			color:        $gray-dark;
+			
+			&.attack { color: #842D00; }
+			&.dodge { color: #FE7700; }
+			&.damage { color: #010101; }
+			&.hp { color: #F40000; }
+			
+			&:last-child { border: none; }
+			
+			img {
+				@include size($hHeroPropertyImg);
+			}
+			
+			span {
+				font-size:   .9rem;
+				font-family: rolandbeckerlight, $font-family-sans-serif;
+			}
+		}
+		
+		.entity-property.btn-change {
+			position: absolute;
+			left:     0;
+		}
+	}
+}

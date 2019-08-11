@@ -1,0 +1,33 @@
+@import "../../../node_modules/bourbon/app/assets/stylesheets/bourbon";
+@import "app/variables";
+@import "app/fonts";
+@import "bootstrap/variables";
+@import "app/inputs";
+@import "app/heroes";
+@import "app/warfare-entity";
+
+
+html, body {
+	background: $cAccentDark;
+	color:      $gray-lightest;
+}
+
+
+hr { border-color: rgba($gray-lightest, .3) }
+
+
+app-root, ui-view, app-filtering { display: block; }
+
+
+app-root {
+	margin-top: 56px;
+	@include calc(height, "100vh -  #{$hNavbar}");
+	
+	> section {
+		height: 100%;
+		
+		.flex-item { width: 100%; padding: 15px; }
+		#uiv-content { overflow-y: auto; }
+		#uiv-sub-menu { max-width: $wMaxSubMenu; background: lighten($cAccentDark, 7%); }
+	}
+}
